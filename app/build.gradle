@@ -22,8 +22,9 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = kotlin_version
-        targetCompatibility = kotlin_version
+        def java_version = '1.8'
+        sourceCompatibility = java_version
+        targetCompatibility = java_version
     }
 }
 
