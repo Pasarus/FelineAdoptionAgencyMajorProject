@@ -1,0 +1,117 @@
+\documentclass[11pt,fleqn,twoside]{article}
+\usepackage{makeidx}
+\makeindex
+\usepackage{palatino} %or {times} etc
+\usepackage{plain} %bibliography style
+\usepackage{amsmath} %math fonts - just in case
+\usepackage{amsfonts} %math fonts
+\usepackage{amssymb} %math fonts
+\usepackage{lastpage} %for footer page numbers
+\usepackage{fancyhdr} %header and footer package
+\usepackage{mmpv2}
+%\usepackage{url}
+\usepackage{hyperref}
+
+% the following packages are used for citations - You only need to include one.
+%
+% Use the cite package if you are using the numeric style (e.g. IEEEannot).
+% Use the natbib package if you are using the author-date style (e.g. authordate2annot).
+% Only use one of these and comment out the other one.
+\usepackage{cite}
+%\usepackage{natbib}
+
+\begin{document}
+
+\name{Samuel Robert Jones}
+\userid{srj12}
+\projecttitle{Complete the Feline Adoption Agency App}
+\projecttitlememoir{Complete the Feline Adoption Agency App} %same as the project title or abridged version for page header
+\reporttitle{Project Outline}
+\version{1.0}
+\docstatus{Release} % change to Release when you are ready to submit your document
+\modulecode{CS39440}
+\degreeschemecode{G600}
+\degreeschemename{Software Engineering (with integrated year in industry)}
+\supervisor{Chris Loftus} % e.g. Neil Taylor
+\supervisorid{cwl} % e.g. nst
+
+%optional - comment out next line to use current date for the document
+%\documentdate{8th February 2019}
+\mmp
+
+%\setcounter{tocdepth}{3} %set required number of level in table of contents
+
+
+%==============================================================================
+\section{Project description}
+%==============================================================================
+
+This project is centred around the creation of an android mobile application (app), the main areas of work are based around the process by which the application is designed and how it is developed, as well as the final product being of high quality.
+
+The app should follow a basic process for adopting or fostering cats, the adoption process inside of the app should take place in line with a current charity, such as Cats Protection \cite{CATSPROTECTION}, therefore it could easily be adapted for use by a cat (or pet) adoption charity. The app will be open-source and free to use under an Apache License 2.0\cite{APACHE2LICENSE}, for anyone to use for almost any purpose as long as copyright ownership is maintained.
+
+% The project should result in a well made app that allows for users to login as either a fosterer or a user looking to adopt, there is a third less used option for administrators to perform some light admin duties inside of the app. A fosterer should be able to view when a meeting has been requested between themselves and a user, they should be able to accept a meeting request or re-arrange for a different time.
+
+This project entails the construction of a development tool-chain, mobile application prototyping, following good mobile design principles, utilising software engineering processes to provide a robust, stable and useful product. The tool-chain should include a fully automated testing, for unit tests, UI integration testing, and automatic code linting for errors, this tool-chain should use continuous integration software to allow for automated testing based on pushing to a GitHub\cite{GITHUB} repository, some examples include, Jenkins\cite{JENKINS}, Travis\cite{TRAVIS}, and Bitrise\cite{BITRISE}.
+
+I have previously seen some code and an app from the Mobile Development: Android module, that was also focused around adopting cats and how it can be achieved. I do not feel that this other app will be useful to me.
+
+% Add scenarios of how it would be used - Maybe just for the report?
+
+%==============================================================================
+\section{Proposed tasks}
+%==============================================================================
+
+\begin{enumerate}
+    \item Continuously write up notes and summarise how the interactions/meetings between myself and my supervisor progress. This would allow me to maintain a form of diary for recanting my progress during my final report.
+    \item Follow a light version of Scrumban, this is a combination of Kanban and Scrum, throughout the production of the app.
+    
+        \begin{enumerate}
+            \item The aspects of scrum that would be useful in an individual process is the sprints and planning when necessary approach, it will allow me to focus on producing and delivering items of value on a regular basis. A sprint will consist of a 2 week block of time, where the next sprint will be planned at the end of the last sprint and processes will be improved as time continues.
+            \item The aspects of Kanban that will be employed is to utilise the Kanban board and the regular review process. The Kanban board will allow me to produce a list of tasks and ensure that I do not get overwhelmed by sticking to a Work in Progress (WiP) point limit for tasks, of 1 in progress, so only 1 task may be worked on at a time. Kanban also lends itself to a regular review process that allows for continuous process improvement.
+        \end{enumerate}
+    
+    \item Produce a fashionable unique logo for the app. The logo will allow the app to be recognised as for a specific purpose and I believe that a well made and designed logo can be used in many places and expand upon the quality of the app.
+    
+    \item Create a defined process for which a user will adopt a cat, and add into the design and prototype this process. This may require contact with agencies that perform cat adoption, such as Cats Protection \cite{CATSPROTECTION}, should the websites provide too poor of a guidance.
+    
+    \item Research how to ensure that the app has a back-end database that ensures information syncs across devices for a specific user that has logged into the app over an authentication service (O-AUTH\cite{OAUTH} using Google or Facebook as an example). The data stored here has to be compliant with EU law and GDPR\cite{GDPRARTICLE1}.
+    
+    \item Create a Working prototype of the app utilising prototyping software designed to be used with android, at worst case utilising presentation software with links based on buttons. This design should be heavily reliant on Material Design\cite{MATERIALDESIGNGUIDELINES} principles and guidelines, however should the need arise I will differ from these guidelines if a justification can be made.
+    
+    \item Work with user feedback to improve and upgrade the design and prototype. User feedback can be gathered in multiple ways including questionnaire and via interview, to be decided at a later date.
+    
+    \item Create the app using the upgraded prototype in the form of an Android only native design. The app should be fully tested and built with continuous integration to perform Unit Testing, UI Integration Testing, and Code Linting built specifically for Android. The Tests should be delivered inside of the source code project alongside the actual application's source code.
+    
+    \item The application should aim for a set test that covers everything. Creating tests that cover everything is unrealistic and too ambitious, however the tests should cover a vast majority of interactions between icons using specific workflows for every Activity.
+    
+    \item Preparation for the mid-project demo should be completed, at this point a basic app must be created and the original prototype design and user feedback should have been gathered.
+    
+    \item Preparation for the final project demo is one of the final tasks that needs to be completed, the app should be complete and stable, all features should be fully implemented for all users and a example database should be completed.
+        
+\end{enumerate}
+
+%==============================================================================
+\section{Project deliverables}
+%==============================================================================
+
+The main deliverable that should be delivered is the feline adoption agency mobile application for Android. The app should be fully capable of accessing a remote server to ensure sync-ability of data across multiple devices based on OAUTH authentication. The app should allow a user to adopt a cat, potential from a foster-er or a centre, and an admin to do some basic administrative abilities such as remove a cat, reserving a cat or adding a cat. The delivered app should be stable, and feature complete. The app will be delivered as a apk that a user can install on their phone.
+
+A complete and open source code base with a build system that will ensure every commit is built and ensure that any form of regression to the open source code base's functionality that is properly tested will be traceable.
+
+I will deliver a final report which consists of the project process, detailed information on the tool chain, the design process, the app implementation, and any issues that came with all of these processes. The report should be complete and contain all information required in the final report brief.
+
+\nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
+
+% the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography.
+\addcontentsline{toc}{section}{Initial Annotated Bibliography}
+\newpage
+
+%
+% example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run.
+% \bibliographystyle{authordate2annot}
+\bibliographystyle{IEEEannotU}
+\renewcommand{\refname}{Annotated Bibliography}  % if you put text into the final {} on this line, you will get an extra title, e.g. References. This isn't necessary for the outline project specification.
+\bibliography{mmp} % References file
+
+\end{document}
