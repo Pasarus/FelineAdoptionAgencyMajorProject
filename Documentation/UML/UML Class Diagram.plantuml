@@ -1,0 +1,59 @@
+@startuml FelineAdoptionAgency
+
+class MainActivity {
+    - Pager m_pager
+    - HomeFragment m_homeFragment
+    - CatFinderFragment m_finderFragment
+    - SavedFragment m_savedFragment
+    - NavigationDraw m_navDraw
+    - NavigationController m_navController
+    - NavHost m_mainNavHost
+}
+
+class HomeFragment {
+    - CatCard m_randomCat
+    - AdoptionStatusCard m_statusCard
+}
+
+class CatFinderFragment {
+    - RecyclerView m_cards
+    - LineEdit m_search
+    - Spinner m_sortBy
+    - Spinner m_filter
+}
+
+class SavedFragment {
+    - RecyclerView m_cards
+}
+
+class CatCard {
+    - ImageView m_catImage
+    - TextView m_catName
+    - TextView m_catCentre
+    - TextView m_age
+}
+
+class HelpActivity {
+    - View m_expandedView
+}
+
+class FeedbackActivity {
+    - LineEdit m_nameEdit
+    - LineEdit m_emailEdit
+    - ParagraphEdit m_feedbackEdit
+}
+
+MainActivity --> HomeFragment
+MainActivity --> CatFinderFragment
+CatFinderFragment --> CatCard
+CatCard --> CatDetailActivity
+MainActivity --> SavedFragment
+SavedFragment --> CatCard
+MainActivity --> LoginDialog
+MainActivity --> MyAccountDetails
+MainActivity --> SettingsActivity
+MainActivity --> AboutActivity
+MainActivity --> HelpActivity
+MainActivity --> FeedbackActivity
+
+@enduml

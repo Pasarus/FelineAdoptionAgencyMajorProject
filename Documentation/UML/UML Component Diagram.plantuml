@@ -1,0 +1,28 @@
+@startuml ComponentDiagram
+
+database ServerContainer {
+    RESTfulAPI --> [SQLServer]
+    [SQLServer] --> RESTfulAPI
+}
+
+[RandomCatImageRESTfulAPI]
+package FelineAdoptionAgencyApp {
+    node VisualAppFunctionality {
+    }
+    node DataProviderFunctionality {
+       HTTPSGetRequest ..> RESTfulAPI
+       RESTfulAPI ..> HTTPSGetRequest
+       RandomCatImageRequester - [RandomCatImageRESTfulAPI]
+    }
+    package DataService {
+
+    }
+}
+
+
+VisualAppFunctionality --> DataService
+DataService --> DataProviderFunctionality
+DataProviderFunctionality --> DataService
+DataService --> VisualAppFunctionality
+
+@enduml
