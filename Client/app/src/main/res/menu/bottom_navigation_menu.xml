@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeFragment"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_black_24dp" />
+    <item android:id="@+id/findCatFragment"
+        android:title="@string/cat_finder"
+        android:icon="@drawable/ic_cat" />
+    <item android:id="@+id/savedFragment"
+        android:title="@string/saved_cats"
+        android:icon="@drawable/ic_favorite_black_24dp" />
+</menu>

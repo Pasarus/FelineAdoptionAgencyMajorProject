@@ -1,5 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.account.MyAccountFragment"
+        android:label="my_account_fragment"
+        tools:layout="@layout/my_account_fragment" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.help.HelpFragment"
+        android:label="help_fragment"
+        tools:layout="@layout/help_fragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.feedback.FeedbackFragment"
+        android:label="feedback_fragment"
+        tools:layout="@layout/feedback_fragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myAccountFragment"
+            app:destination="@id/myAccountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_findCatFragment"
+            app:destination="@id/findCatFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adoptionStatusInfoViewFragment"
+            app:destination="@id/adoptionStatusInfoViewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_catCardInfoFragment"
+            app:destination="@id/catCardInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.saved.SavedFragment"
+        android:label="saved_fragment"
+        tools:layout="@layout/saved_fragment" />
+    <fragment
+        android:id="@+id/findCatFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.findcat.FindCatFragment"
+        android:label="find_cat_fragment"
+        tools:layout="@layout/find_cat_fragment" />
+    <fragment
+        android:id="@+id/adoptionStatusInfoViewFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoptionstatus.AdoptionStatusInfoViewFragment"
+        android:label="adoption_status_info_view_fragment"
+        tools:layout="@layout/adoption_status_info_view_fragment" />
+    <fragment
+        android:id="@+id/catCardInfoFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCardInfoFragment"
+        android:label="cat_card_info_fragment"
+        tools:layout="@layout/cat_card_info_fragment" />
 </navigation>
