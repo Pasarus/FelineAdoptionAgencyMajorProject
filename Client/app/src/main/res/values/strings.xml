@@ -6,4 +6,5 @@
     <string name="home">Home</string>
     <string name="cat_finder">Cat Finder</string>
     <string name="saved_cats">Saved Cats</string>
+    <string name="settings">Settings</string>
 </resources>

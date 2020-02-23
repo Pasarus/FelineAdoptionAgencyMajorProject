@@ -22,9 +22,11 @@ android {
         }
     }
     compileOptions {
-        def java_version = '1.8'
-        sourceCompatibility = java_version
-        targetCompatibility = java_version
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     apply plugin: "androidx.navigation.safeargs.kotlin"
 }
