@@ -26,13 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        navController = nav_host_fragment.findNavController()
+        navController = navHostFragment.findNavController()
 
         NavigationUI.setupWithNavController(bottomNavigationBar, navController)
 
+        // Setup AppBar
         val startDestinations = setOf(R.id.homeFragment, R.id.savedFragment, R.id.findCatFragment)
-        val appBarConfiguration = AppBarConfiguration(startDestinations, null)
+        val appBarConfiguration = AppBarConfiguration(startDestinations, drawerLayout)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(navDrawer, navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     override fun onSupportNavigateUp(): Boolean {
-        NavigationUI.navigateUp(navController, null)
+        NavigationUI.navigateUp(navController, drawerLayout)
         return super.onSupportNavigateUp()
     }
 }

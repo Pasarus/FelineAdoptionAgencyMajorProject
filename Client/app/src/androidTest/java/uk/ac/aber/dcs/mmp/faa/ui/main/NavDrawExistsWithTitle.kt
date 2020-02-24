@@ -20,53 +20,19 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import uk.ac.aber.dcs.mmp.faa.R
 
-/**
- * This is a generated file using Espresso Test Recorder
- */
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class SettingsOpenAndUpNavigateToPrevious {
+class NavDrawExistsWithTitle {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun settingsOpenAndUpNavigateToPrevious() {
-        val actionMenuItemView = onView(
-            allOf(
-                withId(R.id.actionSettingsButton), withContentDescription("Settings"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.toolbar),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        actionMenuItemView.perform(click())
-
-        val textView = onView(
-            allOf(
-                withText("settingsFragment"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.navHostFragment),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("settingsFragment")))
-
+    fun navDrawExistsWithTitle() {
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                withContentDescription("Open navigation drawer"),
                 childAtPosition(
                     allOf(
                         withId(R.id.toolbar),
@@ -75,27 +41,30 @@ class SettingsOpenAndUpNavigateToPrevious {
                             0
                         )
                     ),
-                    2
+                    1
                 ),
                 isDisplayed()
             )
         )
         appCompatImageButton.perform(click())
 
-        val textView2 = onView(
+        val textView = onView(
             allOf(
-                withText("homeFragment"),
+                withText("Feline Adoption Agency"),
                 childAtPosition(
-                    childAtPosition(
-                        withId(R.id.navHostFragment),
-                        0
+                    allOf(
+                        withId(R.id.backgroundNavigationLayout),
+                        childAtPosition(
+                            withId(R.id.navDrawer),
+                            2
+                        )
                     ),
-                    0
+                    1
                 ),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("homeFragment")))
+        textView.check(matches(withText("Feline Adoption Agency")))
     }
 
     private fun childAtPosition(

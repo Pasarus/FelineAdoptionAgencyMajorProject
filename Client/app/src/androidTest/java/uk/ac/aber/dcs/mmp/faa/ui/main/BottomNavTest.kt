@@ -52,7 +52,7 @@ class BottomNavTest {
                 withText("findCatFragment"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.nav_host_fragment),
+                        withId(R.id.navHostFragment),
                         0
                     ),
                     0
@@ -82,7 +82,7 @@ class BottomNavTest {
                 withText("savedCatFragment"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.nav_host_fragment),
+                        withId(R.id.navHostFragment),
                         0
                     ),
                     0
@@ -112,7 +112,7 @@ class BottomNavTest {
                 withText("homeFragment"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.nav_host_fragment),
+                        withId(R.id.navHostFragment),
                         0
                     ),
                     0
