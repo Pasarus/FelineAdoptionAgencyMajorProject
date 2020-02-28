@@ -12,7 +12,6 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
@@ -22,49 +21,43 @@ import uk.ac.aber.dcs.mmp.faa.R
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class NavDrawExistsWithTitle {
+class TestNavigationFromHomeFragmentToSettingsFragment {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun navDrawExistsWithTitle() {
-        val appCompatImageButton = onView(
+    fun testNavigationFromHomeFragmentToSettingsFragment() {
+        val actionMenuItemView = onView(
             allOf(
-                withContentDescription("Open navigation drawer"),
+                withId(R.id.actionSettingsButton), withContentDescription("Settings"),
                 childAtPosition(
-                    allOf(
+                    childAtPosition(
                         withId(R.id.toolbar),
-                        childAtPosition(
-                            withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                            0
-                        )
+                        2
                     ),
-                    1
+                    0
                 ),
                 isDisplayed()
             )
         )
-        appCompatImageButton.perform(click())
+        actionMenuItemView.perform(click())
 
         val textView = onView(
             allOf(
-                withText("Feline Adoption Agency"),
+                withText("settingsFragment"),
                 childAtPosition(
-                    allOf(
-                        withId(R.id.backgroundNavigationLayout),
-                        childAtPosition(
-                            withId(R.id.navDrawer),
-                            2
-                        )
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
                     ),
-                    1
+                    0
                 ),
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Feline Adoption Agency")))
+        textView.check(matches(withText("settingsFragment")))
     }
 
     private fun childAtPosition(

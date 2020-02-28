@@ -12,7 +12,6 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
@@ -20,27 +19,23 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import uk.ac.aber.dcs.mmp.faa.R
 
-/**
- * This is a generated file using Espresso Test Recorder
- */
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class SettingsOpenAndUpNavigateToPrevious {
+class SettingsOpenAndUpNavigateToHome {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun settingsOpenAndUpNavigateToPrevious() {
+    fun settingsOpenAndUpNavigateToHome() {
         val actionMenuItemView = onView(
             allOf(
                 withId(R.id.actionSettingsButton), withContentDescription("Settings"),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.toolbar),
-                        1
+                        2
                     ),
                     0
                 ),
@@ -49,53 +44,29 @@ class SettingsOpenAndUpNavigateToPrevious {
         )
         actionMenuItemView.perform(click())
 
-        val textView = onView(
+        val imageButton = onView(
             allOf(
-                withText("settingsFragment"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.navHostFragment),
-                        0
-                    ),
-                    0
-                ),
+                withContentDescription("Navigate up"),
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("settingsFragment")))
+        imageButton.check(matches(isDisplayed()))
 
         val appCompatImageButton = onView(
             allOf(
                 withContentDescription("Navigate up"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.toolbar),
-                        childAtPosition(
-                            withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                            0
-                        )
-                    ),
-                    2
-                ),
                 isDisplayed()
             )
         )
         appCompatImageButton.perform(click())
 
-        val textView2 = onView(
+        val imageButton2 = onView(
             allOf(
-                withText("homeFragment"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.navHostFragment),
-                        0
-                    ),
-                    0
-                ),
+                withContentDescription("Open navigation drawer"),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("homeFragment")))
+        imageButton2.check(matches(isDisplayed()))
     }
 
     private fun childAtPosition(
