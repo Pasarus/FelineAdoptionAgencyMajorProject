@@ -3,7 +3,6 @@ package uk.ac.aber.dcs.mmp.faa.ui.main
 
 import android.content.res.Configuration
 import android.os.Build
-import android.provider.Settings.System.getConfiguration
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -96,7 +95,7 @@ class NavDrawIsCreated {
                 withText("Settings"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.navDrawer),
+                        withId(R.id.navDrawerNavView),
                         1
                     ),
                     1
@@ -111,7 +110,7 @@ class NavDrawIsCreated {
                 withText("Login"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.navDrawer),
+                        withId(R.id.navDrawerNavView),
                         1
                     ),
                     3
@@ -126,7 +125,7 @@ class NavDrawIsCreated {
                 withText("About"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.navDrawer),
+                        withId(R.id.navDrawerNavView),
                         1
                     ),
                     5
@@ -141,7 +140,7 @@ class NavDrawIsCreated {
                 withText("Help"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.navDrawer),
+                        withId(R.id.navDrawerNavView),
                         1
                     ),
                     7
@@ -156,7 +155,7 @@ class NavDrawIsCreated {
                 withText("Feedback"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.navDrawer),
+                        withId(R.id.navDrawerNavView),
                         1
                     ),
                     9

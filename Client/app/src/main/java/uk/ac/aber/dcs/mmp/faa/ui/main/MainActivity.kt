@@ -3,17 +3,14 @@ package uk.ac.aber.dcs.mmp.faa.ui.main
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentContainerView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.ac.aber.dcs.mmp.faa.R
-import java.lang.reflect.Array.set
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         // Setup AppBar
         val appBarConfiguration = AppBarConfiguration(startDestinations, drawerLayout)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
-        NavigationUI.setupWithNavController(navDrawer, navController)
+        NavigationUI.setupWithNavController(navDrawerNavView, navController)
 
         defineWhereBottomNavShows()
     }
@@ -70,11 +67,32 @@ class MainActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    fun onClick(view: View) {
+    fun navDrawOptionOnClick(view: View) {
         when (view.id) {
-            R.id.navDrawLogin -> {}
-            R.id.navDraw
+            R.id.navDrawSettings -> {
+                navController.navigate(R.id.settingsFragment)
+            }
+            R.id.navDrawLogin -> {
+                // Do login
+                doLogin()
+            }
+            R.id.navDrawFeedback -> {
+                navController.navigate(R.id.feedbackFragment)
+            }
+            R.id.navDrawAbout -> {
+                navController.navigate(R.id.aboutFragment)
+            }
+            R.id.navDrawHelp -> {
+                navController.navigate(R.id.helpFragment)
+            }
         }
+
+        // Close NavDraw
+        drawerLayout.closeDrawers()
+    }
+
+    private fun doLogin() {
+
     }
 }
 
