@@ -63,7 +63,11 @@ class MainActivity : AppCompatActivity() {
         }
 
     override fun onSupportNavigateUp(): Boolean {
-        NavigationUI.navigateUp(navController, drawerLayout)
+        if (navController.currentDestination?.id in startDestinations){
+            drawerLayout.openDrawer(navDrawerNavView)
+        } else {
+            NavigationUI.navigateUp(navController, drawerLayout)
+        }
         return super.onSupportNavigateUp()
     }
 
