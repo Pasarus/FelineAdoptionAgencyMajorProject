@@ -33,9 +33,6 @@ class NavDrawIsCreated {
 
     @Test
     fun navDrawIsCreated() {
-        if (Build.MANUFACTURER == "unknown" && Build.MODEL == "GCE x86 phone" && mActivityTestRule.activity.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            return
-        }
         val appCompatImageButton = onView(
             allOf(
                 withContentDescription("Open navigation drawer"),
