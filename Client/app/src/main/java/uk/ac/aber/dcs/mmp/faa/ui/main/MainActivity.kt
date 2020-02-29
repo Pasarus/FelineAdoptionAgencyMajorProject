@@ -69,5 +69,12 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.navigateUp(navController, drawerLayout)
         return super.onSupportNavigateUp()
     }
+
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.navDrawLogin -> {}
+            R.id.navDraw
+        }
+    }
 }
 

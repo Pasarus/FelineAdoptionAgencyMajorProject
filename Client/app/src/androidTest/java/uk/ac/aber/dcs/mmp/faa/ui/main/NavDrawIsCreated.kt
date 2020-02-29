@@ -1,6 +1,9 @@
 package uk.ac.aber.dcs.mmp.faa.ui.main
 
 
+import android.content.res.Configuration
+import android.os.Build
+import android.provider.Settings.System.getConfiguration
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -31,6 +34,9 @@ class NavDrawIsCreated {
 
     @Test
     fun navDrawIsCreated() {
+        if (Build.MANUFACTURER == "unknown" && Build.MODEL == "GCE x86 phone" && mActivityTestRule.activity.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return
+        }
         val appCompatImageButton = onView(
             allOf(
                 withContentDescription("Open navigation drawer"),

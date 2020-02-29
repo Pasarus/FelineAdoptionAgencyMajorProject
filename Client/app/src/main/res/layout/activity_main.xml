@@ -101,13 +101,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/navDrawSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/settings"
                 android:drawableStart="@drawable/ic_settings_black_24dp"
                 android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:textSize="10pt"/>
+                android:textSize="10pt"
+                android:onClick="onClick"/>
 
             <View
                 android:layout_width="match_parent"
@@ -116,13 +118,15 @@
                 android:padding="16dp"/>
 
             <TextView
+                android:id="@+id/navDrawLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
                 android:drawableStart="@drawable/ic_lock_black_24dp"
                 android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:textSize="10pt"/>
+                android:textSize="10pt"
+                android:onClick="onClick"/>
 
             <View
                 android:layout_width="match_parent"
@@ -131,13 +135,15 @@
                 android:padding="16dp"/>
 
             <TextView
+                android:id="@+id/navDrawAbout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about"
                 android:drawableStart="@drawable/ic_info_black_24dp"
                 android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:textSize="10pt"/>
+                android:textSize="10pt"
+                android:onClick="onClick"/>
 
             <View
                 android:layout_width="match_parent"
@@ -147,13 +153,15 @@
                 android:textSize="10pt"/>
 
             <TextView
+                android:id="@+id/navDrawHelp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/help"
                 android:drawableStart="@drawable/ic_live_help_black_24dp"
                 android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:textSize="10pt"/>
+                android:textSize="10pt"
+                android:onClick="onClick"/>
 
             <View
                 android:layout_width="match_parent"
@@ -161,13 +169,15 @@
                 android:background="@android:color/darker_gray"
                 android:padding="16dp"/>
             <TextView
+                android:id="@+id/navDrawFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/feedback"
                 android:drawableStart="@drawable/ic_forum_black_24dp"
                 android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:textSize="10pt"/>
+                android:textSize="10pt"
+                android:onClick="onClick"/>
 
         </LinearLayout>
 
