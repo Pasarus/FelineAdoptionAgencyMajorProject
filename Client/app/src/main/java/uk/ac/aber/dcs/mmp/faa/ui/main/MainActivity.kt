@@ -3,9 +3,10 @@ package uk.ac.aber.dcs.mmp.faa.ui.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
@@ -14,14 +15,17 @@ import androidx.navigation.ui.NavigationUI
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.ac.aber.dcs.mmp.faa.R
+import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private val startDestinations = setOf(R.id.homeFragment, R.id.savedFragment, R.id.findCatFragment)
-    private val RC_SIGN_IN = 0;
+    private val RC_SIGN_IN = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +86,11 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.settingsFragment)
             }
             R.id.navDrawLogin -> {
-                // Do login
-                doLogin()
+                if (DataService.INSTANCE.user != null) {
+                    navController.navigate(R.id.myAccountFragment)
+                } else {
+                    doLogin()
+                }
             }
             R.id.navDrawFeedback -> {
                 navController.navigate(R.id.feedbackFragment)
@@ -124,13 +131,19 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
-                println(user.toString())
-                // ...
+                DataService.INSTANCE.user = user
+                updateNavDrawLoginTextAndImage(user)
+            }
+        }
+    }
+
+    private fun updateNavDrawLoginTextAndImage(user: FirebaseUser?){
+        if (user != null) {
+            navDrawLogin.text = "My Account"
+            if (user.photoUrl != null) {
+                Picasso.get().load(user.photoUrl).into(navDrawLoginImage)
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+                navDrawLoginImage.setImageResource(R.drawable.ic_face_black_24dp)
             }
         }
     }

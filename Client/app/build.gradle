@@ -54,6 +54,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.1'
     implementation 'com.google.firebase:firebase-database-ktx:19.2.1'
 
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
