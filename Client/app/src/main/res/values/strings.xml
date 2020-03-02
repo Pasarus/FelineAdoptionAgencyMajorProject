@@ -14,4 +14,18 @@
     <string name="feedback">Feedback</string>
     <string name="contentDescriptionLogoOnNavigationForeground">App logo</string>
     <string name="loginImageDescription">AccountImage Or A Padlock</string>
+    <string name="adoption_status">Adoption Status</string>
+    <string name="your_information">Your Information</string>
+    <string name="person_icon">Person Icon</string>
+    <string name="location_icon">location icon</string>
+    <string name="phone_icon">phone icon</string>
+    <string name="name">Name</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="address_line_3_optional">Address Line 3 (Optional)</string>
+    <string name="address_line_2_optional">Address Line 2 (Optional)</string>
+    <string name="post_code">Post Code</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="county">County</string>
+    <string name="update">UPDATE</string>
 </resources>
