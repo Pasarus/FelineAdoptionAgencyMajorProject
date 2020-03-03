@@ -35,4 +35,9 @@
     <string name="materialDesignGoogleIcons">The icons created by google as part of Material Design are distributed under an Apache 2.0 License (http://www.apache.org/licenses/LICENSE-2.0).</string>
     <string name="templarianPermissions">The following icons, were made under SIL Open Font License 1.1 by @Templarian on Twitter:</string>
     <string name="cat_logo_material_design_icon">Cat Logo Material Design Icon</string>
+    <string name="catPictureContentDescription">Cat Picture</string>
+    <string name="defaultCatName">Jaskier</string>
+    <string name="defaultCatAge">6 Months Old</string>
+    <string name="defaultCatLocation">Aberystwyth Cattery</string>
+    <string name="favouritebuttononcatcard">favouriteButtonOnCatCard</string>
 </resources>

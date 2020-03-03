@@ -59,16 +59,6 @@ class LoginWindowPopsUpEmailAndGoogleButtonsPresent {
         val button = onView(
             allOf(
                 withId(R.id.email_button),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.btn_holder),
-                        childAtPosition(
-                            withId(R.id.container),
-                            0
-                        )
-                    ),
-                    0
-                ),
                 isDisplayed()
             )
         )
