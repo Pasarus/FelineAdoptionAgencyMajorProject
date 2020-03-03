@@ -28,4 +28,11 @@
     <string name="phone_number">Phone Number</string>
     <string name="county">County</string>
     <string name="update">UPDATE</string>
+    <string name="aboutFirstParagraph">This application is meant as a demonstration of how the adoption of a cat could be fully integrated into an app via a backend database and user verification system. This mobile application was created under an Apache 2.0 License (https://www.apache.org/licenses/LICENSE-2.0)</string>
+    <string name="copyrightInformation">Whilst use of this applications source code is free to everyone, the explicit copyright is owned by the sole author Samuel Jones (samjones714@gmail.com)</string>
+    <string name="openSourceLocation">It is distributed open source at https://github.com/Pasarus/FelineAdoptionAgencyMajorProject</string>
+    <string name="materialDesignPermissions">As part of this application certain icons have been used, these Material Design based icon are created by the community and are distrubuted under SIL Open Font License 1.1 (https://opensource.org/licenses/OFL-1.1).</string>
+    <string name="materialDesignGoogleIcons">The icons created by google as part of Material Design are distributed under an Apache 2.0 License (http://www.apache.org/licenses/LICENSE-2.0).</string>
+    <string name="templarianPermissions">The following icons, were made under SIL Open Font License 1.1 by @Templarian on Twitter:</string>
+    <string name="cat_logo_material_design_icon">Cat Logo Material Design Icon</string>
 </resources>

@@ -105,13 +105,6 @@ class NavDrawIsCreated {
         val textView3 = onView(
             allOf(
                 withText("Login"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.navDrawerNavView),
-                        1
-                    ),
-                    3
-                ),
                 isDisplayed()
             )
         )

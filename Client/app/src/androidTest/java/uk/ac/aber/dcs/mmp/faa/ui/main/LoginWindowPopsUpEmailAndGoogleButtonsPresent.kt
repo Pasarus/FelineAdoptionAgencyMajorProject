@@ -51,13 +51,6 @@ class LoginWindowPopsUpEmailAndGoogleButtonsPresent {
         val appCompatTextView = onView(
             allOf(
                 withId(R.id.navDrawLogin), withText("Login"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.navDrawerNavView),
-                        1
-                    ),
-                    3
-                ),
                 isDisplayed()
             )
         )
