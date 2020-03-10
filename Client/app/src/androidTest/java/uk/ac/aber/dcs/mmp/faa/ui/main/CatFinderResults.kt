@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.google.firebase.firestore.FirebaseFirestore
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
@@ -17,17 +19,18 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import uk.ac.aber.dcs.mmp.faa.R
+import uk.ac.aber.dcs.mmp.faa.utils.waitForFireStoreCollectionRequest
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class BottomNavTest {
+class CatFinderResults {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun bottomNavTest() {
+    fun catFinderResults() {
         val bottomNavigationItemView = onView(
             allOf(
                 withId(R.id.findCatFragment), withContentDescription("Cat Finder"),
@@ -43,27 +46,16 @@ class BottomNavTest {
         )
         bottomNavigationItemView.perform(click())
 
-        val bottomNavigationItemView2 = onView(
-            allOf(
-                withId(R.id.homeFragment), withContentDescription("Home"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottomNavigationBar),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        bottomNavigationItemView2.perform(click())
+        //This is where we add a hacky solution to ensure that FirebaseFirestore has had enough to
+        // get the data by making the same request and getting the response.
+        waitForFireStoreCollectionRequest("cats")
 
-        val bottomNavigationItemView3 = onView(
+        val textView = onView(
             allOf(
-                withId(R.id.savedFragment), withContentDescription("Saved Cats"),
+                withId(R.id.catName), withText("Jaskier"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.bottomNavigationBar),
+                        withId(R.id.catCard),
                         0
                     ),
                     2
@@ -71,59 +63,30 @@ class BottomNavTest {
                 isDisplayed()
             )
         )
-        bottomNavigationItemView3.perform(click())
+        textView.check(matches(withText("Jaskier")))
 
-        val bottomNavigationItemView4 = onView(
+        val textView2 = onView(
             allOf(
-                withId(R.id.homeFragment), withContentDescription("Home"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottomNavigationBar),
-                        0
-                    ),
-                    0
-                ),
+                withId(R.id.catAge), withText("1 Year, 4 Months Old"),
                 isDisplayed()
             )
         )
-        bottomNavigationItemView4.perform(click())
+        textView2.check(matches(withText("1 Year, 4 Months Old")))
 
-        val bottomNavigationItemView5 = onView(
+        val textView3 = onView(
             allOf(
-                withId(R.id.savedFragment), withContentDescription("Saved Cats"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottomNavigationBar),
-                        0
-                    ),
-                    2
-                ),
+                withId(R.id.catLocation), withText("Borth Cattery"),
                 isDisplayed()
             )
         )
-        bottomNavigationItemView5.perform(click())
+        textView3.check(matches(withText("Borth Cattery")))
 
-        val bottomNavigationItemView6 = onView(
+        val textView4 = onView(
             allOf(
-                withId(R.id.findCatFragment), withContentDescription("Cat Finder"),
+                withId(R.id.catName), withText("Tuna"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.bottomNavigationBar),
-                        0
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        bottomNavigationItemView6.perform(click())
-
-        val bottomNavigationItemView7 = onView(
-            allOf(
-                withId(R.id.savedFragment), withContentDescription("Saved Cats"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottomNavigationBar),
+                        withId(R.id.catCard),
                         0
                     ),
                     2
@@ -131,7 +94,7 @@ class BottomNavTest {
                 isDisplayed()
             )
         )
-        bottomNavigationItemView7.perform(click())
+        textView4.check(matches(withText("Tuna")))
     }
 
     private fun childAtPosition(
