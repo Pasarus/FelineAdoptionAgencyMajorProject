@@ -1,24 +1,27 @@
 @startuml ComponentDiagram
 
-database ServerContainer {
-    RESTfulAPI --> [SQLServer]
-    [SQLServer] --> RESTfulAPI
+database Firebase {
+    [Authentication]
+    [Database]
+    [Database] --> [UserData]
+    [Database] --> [PublicCatAdoptionInformation]
+    [Database] ..> [Authentication]
 }
 
-[RandomCatImageRESTfulAPI]
 package FelineAdoptionAgencyApp {
     node VisualAppFunctionality {
     }
     node DataProviderFunctionality {
-       HTTPSGetRequest ..> RESTfulAPI
-       RESTfulAPI ..> HTTPSGetRequest
-       RandomCatImageRequester - [RandomCatImageRESTfulAPI]
+       AuthenticateUser ..> [Authentication]
+       [Authentication] ..> LocalUserCopy
+       LocalUserCopy ..> UserDataRequest
+       RequestPublicCatData ..> Database
+       UserDataRequest ..> Database
     }
     package DataService {
-
+        
     }
 }
-
 
 VisualAppFunctionality --> DataService
 DataService --> DataProviderFunctionality
