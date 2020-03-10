@@ -40,4 +40,25 @@
     <string name="defaultCatAge">6 Months Old</string>
     <string name="defaultCatLocation">Aberystwyth Cattery</string>
     <string name="favouritebuttononcatcard">favouriteButtonOnCatCard</string>
+    <string name="catInfoFragmentImage">The Cat</string>
+    <string name="catInfoFragmentName">Jaskier</string>
+    <string name="catInfoFragmentAge">6 Months Old</string>
+    <string name="catInfoFragmentLocation">Aberystwyth Cattery</string>
+    <string name="more_info">More Info:</string>
+    <string name="canInfoCanDoIndoors">Indoor Only Cat</string>
+    <string name="canInfoCannotDoIndoors">Outdoor Only Cat</string>
+    <string name="catInfoCanBeWithDogs">Can be around dogs</string>
+    <string name="catInfoCannotBeWithDogs">Cannot be around dogs</string>
+    <string name="catInfoCanDealWithCats">Can be with other cats</string>
+    <string name="catInfoCannotDealWithCats">Cannot be around other cats</string>
+    <string name="catInfoCanBeAroundYoungChildren">Can be around young children</string>
+    <string name="catInfoCannotDealWithYoungChildren">Cannot be around young children</string>
+    <string name="catInfoCanBeAroundPrimaryAgeKids">Can be around primary school aged kids</string>
+    <string name="catInfoCannnotBeAroundPrimaryAgeKids">Cannot be around primary age kids</string>
+    <string name="catInfoCanBeAroundHighSchoolkids">Can be around High School children</string>
+    <string name="catInfoCannotBeAroundHighSchoolKids">Cannot be around High School kids</string>
+    <string name="catInfoIsDisabled">This cat has a disability, please read the description</string>
+    <string name="catInfoIsntDisabled">This cat is not disabled</string>
+    <string name="catInfoIsNeutered">This cat is Neutered</string>
+    <string name="catInfoIsntNeutered">This cat is not Neutered</string>
 </resources>

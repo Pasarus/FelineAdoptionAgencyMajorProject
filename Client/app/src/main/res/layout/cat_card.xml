@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
-    android:layout_height="180dp"
-    android:id="@+id/catCard">
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:id="@+id/catCard"
+    android:layout_margin="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
 
         <ImageView
             android:id="@+id/catPictureCard"
-            android:layout_width="140dp"
+            android:layout_width="match_parent"
             android:layout_height="110dp"
             android:contentDescription="@string/catPictureContentDescription"
             android:padding="8dp"
@@ -40,8 +41,10 @@
             android:layout_height="wrap_content"
             android:text="@string/defaultCatName"
             android:textSize="10pt"
+            android:paddingStart="8dp"
             app:layout_constraintTop_toBottomOf="@id/lineCard"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/catAge"
@@ -49,8 +52,10 @@
             android:layout_height="wrap_content"
             android:text="@string/defaultCatAge"
             android:textSize="7pt"
+            android:paddingStart="8dp"
             app:layout_constraintTop_toBottomOf="@id/catName"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/catLocation"
@@ -58,8 +63,10 @@
             android:layout_height="wrap_content"
             android:text="@string/defaultCatLocation"
             android:textSize="6pt"
+            android:paddingStart="8dp"
             app:layout_constraintTop_toBottomOf="@id/catAge"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/faveButtonCard"

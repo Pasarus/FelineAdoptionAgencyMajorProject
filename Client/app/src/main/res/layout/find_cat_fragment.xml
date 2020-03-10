@@ -3,8 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.findcat.FindCatFragment" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.findcat.FindCatFragment">
 
-    <include layout="@layout/cat_card" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/catRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="vertical"
+        app:spanCount="2"
+        android:layout_margin="8dp"/>
 
 </FrameLayout>
