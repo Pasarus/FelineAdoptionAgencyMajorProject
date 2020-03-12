@@ -73,24 +73,23 @@ class CatCardInfoFragment {
 
         val textView = onView(
             allOf(
-                withId(R.id.catInfoFragmentCatName), withText("Jaskier"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentCatName), withText("Jaskier")
+
             )
         )
         textView.check(matches(withText("Jaskier")))
 
         val textView2 = onView(
             allOf(
-                withId(R.id.catInfoFragmentCatAge), withText("1 Year, 4 Months Old"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentCatAge), withText("1 Year, 4 Months Old")
+
             )
         )
         textView2.check(matches(withText("1 Year, 4 Months Old")))
 
         val textView3 = onView(
             allOf(
-                withId(R.id.catInfoFragmentCatLocation), withText("Aberystwyth Cattery"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentCatLocation), withText("Aberystwyth Cattery")
             )
         )
         textView3.check(matches(withText("Aberystwyth Cattery")))
@@ -105,16 +104,15 @@ class CatCardInfoFragment {
 
         val textView4 = onView(
             allOf(
-                withId(R.id.catInfoFragmentSex), withText("Male"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentSex), withText("Male")
             )
         )
         textView4.check(matches(withText("Male")))
 
         val textView5 = onView(
             allOf(
-                withId(R.id.catInfoFragmentYoungKids), withText("Can be around young children"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentYoungKids), withText("Can be around young children")
+
             )
         )
         textView5.check(matches(withText("Can be around young children")))
@@ -122,8 +120,8 @@ class CatCardInfoFragment {
         val textView6 = onView(
             allOf(
                 withId(R.id.catInfoFragmentPrimaryAgeKids),
-                withText("Can be around primary school aged kids"),
-                isDisplayed()
+                withText("Can be around primary school aged kids")
+
             )
         )
         textView6.check(matches(withText("Can be around primary school aged kids")))
@@ -131,24 +129,24 @@ class CatCardInfoFragment {
         val textView7 = onView(
             allOf(
                 withId(R.id.catInfoFragmentHighSchoolKids),
-                withText("Can be around High School children"),
-                isDisplayed()
+                withText("Can be around High School children")
+
             )
         )
         textView7.check(matches(withText("Can be around High School children")))
 
         val textView8 = onView(
             allOf(
-                withId(R.id.catInfoFragmentCanDealWithCats), withText("Can be with other cats"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentCanDealWithCats), withText("Can be with other cats")
+
             )
         )
         textView8.check(matches(withText("Can be with other cats")))
 
         val textView9 = onView(
             allOf(
-                withId(R.id.catInfoFragmentCanDealWithDogs), withText("Cannot be around dogs"),
-                isDisplayed()
+                withId(R.id.catInfoFragmentCanDealWithDogs), withText("Cannot be around dogs")
+
             )
         )
         textView9.check(matches(withText("Cannot be around dogs")))
