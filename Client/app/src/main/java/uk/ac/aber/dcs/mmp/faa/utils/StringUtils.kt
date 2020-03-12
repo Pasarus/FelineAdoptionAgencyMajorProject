@@ -1,19 +1,25 @@
 package uk.ac.aber.dcs.mmp.faa.utils
 
-public fun convertMonthsNumberToUsableString(months: Int?): String {
+fun convertMonthsNumberToUsableString(months: Int?): String {
+    val years = months!! / 12
+    val finalMonths = months % 12
     return when {
-        months!! > 12 && months < 60 -> {
-            val years = months / 12
-            val finalMonths = months % 12
+        finalMonths == 0 -> {
+            if (years == 1) {
+                "$years Year Old"
+            } else {
+                "$years Years Old"
+            }
+        }
+        years in 1..4 -> {
             if (years == 1) {
                 "$years Year, $finalMonths Months Old"
             } else {
                 "$years Years, $finalMonths Months Old"
             }
         }
-        months > 60 -> {
+        years > 5 -> {
             // If age is > 5 years
-            val years = months / 12
             "$years Years Old"
         }
         else -> {

@@ -2,7 +2,7 @@ package uk.ac.aber.dcs.mmp.faa.utils
 
 class SimpleObservableStringSet : HashSet<String> {
 
-    private var observers: List<ObserverOfStringSet> = ArrayList()
+    private var observers: ArrayList<ObserverOfStringSet> = ArrayList()
 
     constructor(): super()
     constructor(set: Set<String>): super(set)
@@ -12,17 +12,6 @@ class SimpleObservableStringSet : HashSet<String> {
         // Not always true, as when a Set is being constructed it may call this method
         if (observers != null)
             observers.forEach { it.onObservedAdd(element) }
-        return returnValue
-    }
-
-    override fun addAll(elements: Collection<String>): Boolean {
-        val returnValue = super.addAll(elements)
-        // Not always true, as when a Set is being constructed it may call this method
-        if (observers != null)
-            observers.forEach{
-            val it2 = it
-            elements.forEach { it2.onObservedAdd(it) }
-            }
         return returnValue
     }
 
@@ -48,12 +37,20 @@ class SimpleObservableStringSet : HashSet<String> {
     override fun clear() {
         val copyOfClearedItems = HashSet<String>()
         copyOfClearedItems.addAll(this)
-        super.clear()
         // Not always true, as when a Set is being constructed it may call this method
         if (observers != null)
             observers.forEach{
-            val it2 = it
-            copyOfClearedItems.forEach { it2.onObservedRemove(it) }
+                val it2 = it
+                copyOfClearedItems.forEach { it2.onObservedRemove(it) }
             }
+        super.clear()
+    }
+
+    fun addObserver(observer: ObserverOfStringSet) {
+        observers.add(observer)
+    }
+
+    fun removeObserver(observer: ObserverOfStringSet) {
+        observers.remove(observer)
     }
 }
