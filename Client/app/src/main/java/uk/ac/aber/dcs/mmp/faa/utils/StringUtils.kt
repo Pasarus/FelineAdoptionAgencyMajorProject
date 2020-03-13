@@ -18,7 +18,7 @@ fun convertMonthsNumberToUsableString(months: Int?): String {
                 "$years Years, $finalMonths Months Old"
             }
         }
-        years > 5 -> {
+        years >= 5 -> {
             // If age is > 5 years
             "$years Years Old"
         }

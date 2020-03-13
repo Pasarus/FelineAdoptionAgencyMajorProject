@@ -6,8 +6,9 @@ import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
 class StringUtilsTests {
     @Test
-    fun sixtyMonthsReturnsFiveYears() {
+    fun sixtyMonthsAndAboveReturnsFiveYears() {
         assertEquals("5 Years Old", convertMonthsNumberToUsableString(60))
+        assertEquals("5 Years Old", convertMonthsNumberToUsableString(61))
     }
 
     @Test
