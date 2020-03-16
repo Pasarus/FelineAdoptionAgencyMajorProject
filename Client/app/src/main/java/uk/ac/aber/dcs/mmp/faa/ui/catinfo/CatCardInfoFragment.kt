@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cat_card_info_fragment.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
+import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
@@ -75,6 +78,16 @@ class CatCardInfoFragment : Fragment() {
             else
                 view.catInfoFragmentNeutered.text = resources.getText(R.string.catInfoIsntNeutered)
 
+        }
+
+        view.catInfoFragmentAdoptButton.setOnClickListener {
+            //Navigate to adopt form but pass this cat id to it
+            if (DataService.INSTANCE.user == null){
+                // Ask to Login
+                DataService.INSTANCE.mainActivity.doLogin()
+            } else {
+                view.findNavController().navigate(R.id.adoptionForm, bundle)
+            }
         }
 
         return view

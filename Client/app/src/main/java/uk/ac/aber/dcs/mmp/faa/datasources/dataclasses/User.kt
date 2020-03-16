@@ -1,6 +1,7 @@
 package uk.ac.aber.dcs.mmp.faa.datasources.dataclasses
 
 import com.google.firebase.database.IgnoreExtraProperties
+import com.google.firebase.firestore.DocumentReference
 
 @IgnoreExtraProperties
 data class User(
@@ -11,5 +12,6 @@ data class User(
     var name: String? = "",
     var mobileNumber: String? = "",
     var postCode: String? = "",
-    var favouritedCats: List<Int>? = ArrayList()
+    var favouritedCats: List<String>? = ArrayList(),
+    var adoptionProcesses: List<DocumentReference>? = ArrayList()
 )

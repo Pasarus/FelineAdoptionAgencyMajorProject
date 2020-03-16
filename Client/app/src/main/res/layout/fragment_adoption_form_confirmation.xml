@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.adoption.AdoptionFormConfirmation" >
+
+        <TextView
+            android:id="@+id/confirmationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_sure_you_would_like_to_adopt_catname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/confirmationFormImageOfCat"
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/confirmationTextView"
+            android:contentDescription="@string/picture_of_the_cat_being_adopted" />
+
+        <TextView
+            android:id="@+id/confirmationInformationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/catAdoptionConfirmationText"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/confirmationFormImageOfCat"
+            app:layout_constraintTop_toBottomOf="@id/confirmationFormImageOfCat" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/yesButton"
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:text="@string/yes"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/confirmationInformationTextView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelButton"
+            android:layout_width="100dp"
+            android:layout_height="56dp"
+            android:text="@string/cancel"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/confirmationInformationTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

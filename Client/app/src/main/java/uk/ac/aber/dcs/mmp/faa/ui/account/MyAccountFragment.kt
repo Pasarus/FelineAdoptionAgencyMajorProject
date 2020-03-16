@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.user_data.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
+import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
 class MyAccountFragment : Fragment() {
 
@@ -15,19 +17,20 @@ class MyAccountFragment : Fragment() {
         fun newInstance() = MyAccountFragment()
     }
 
-    private lateinit var viewModel: MyAccountViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.my_account_fragment, container, false)
+        val view = inflater.inflate(R.layout.my_account_fragment, container, false)
+
+        DataService.INSTANCE.getDataForViewFromFirestore(view)
+        view.updateAccountInformationButton.setOnClickListener {
+            // Grab all the data
+            DataService.INSTANCE.updateUserDataForView(view)
+        }
+
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MyAccountViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

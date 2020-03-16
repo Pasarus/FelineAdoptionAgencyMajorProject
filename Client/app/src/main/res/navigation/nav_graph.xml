@@ -62,6 +62,12 @@
         <action
             android:id="@+id/action_homeFragment_to_catCardInfoFragment"
             app:destination="@id/catCardInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adoptionForm"
+            app:destination="@id/adoptionForm" />
+        <action
+            android:id="@+id/action_homeFragment_to_adoptionFormConfirmation"
+            app:destination="@id/adoptionFormConfirmation" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
@@ -75,7 +81,7 @@
         tools:layout="@layout/find_cat_fragment" />
     <fragment
         android:id="@+id/adoptionStatusInfoViewFragment"
-        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoptionstatus.AdoptionStatusInfoViewFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionStatusInfoViewFragment"
         android:label="adoption_status_info_view_fragment"
         tools:layout="@layout/adoption_status_info_view_fragment" />
     <fragment
@@ -83,4 +89,14 @@
         android:name="uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCardInfoFragment"
         android:label="cat_card_info_fragment"
         tools:layout="@layout/cat_card_info_fragment" />
+    <fragment
+        android:id="@+id/adoptionForm"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionForm"
+        android:label="fragment_adoption_form"
+        tools:layout="@layout/fragment_adoption_form" />
+    <fragment
+        android:id="@+id/adoptionFormConfirmation"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionFormConfirmation"
+        android:label="fragment_adoption_form_confirmation"
+        tools:layout="@layout/fragment_adoption_form_confirmation" />
 </navigation>

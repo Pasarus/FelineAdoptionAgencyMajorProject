@@ -1,4 +1,4 @@
-package uk.ac.aber.dcs.mmp.faa.ui.adoptionstatus
+package uk.ac.aber.dcs.mmp.faa.ui.adoption
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle

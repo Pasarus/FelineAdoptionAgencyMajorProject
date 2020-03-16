@@ -17,7 +17,7 @@ import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val view: View = itemView
-    private val catName: TextView = view.findViewById<TextView>(R.id.catName)
+    private val catName: TextView = view.findViewById(R.id.catName)
     private val catAge: TextView = view.findViewById(R.id.catAge)
     private val catLocation: TextView = view.findViewById(R.id.catLocation)
     private val catPictureCard: ImageView = view.findViewById(R.id.catPictureCard)

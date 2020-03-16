@@ -16,13 +16,13 @@ class Cat : Parcelable {
     var pictureUrl: String? = ""
     var preferences: MutableMap<String, Boolean>? = HashMap()
     var sex: String? = ""
-    var catId: Int? = 0
+    var catId: String? = ""
 
     constructor() : super() {} // Needed for Firebase
     constructor(catAgeMonths: Int?, catBreed: String?, catName: String?, color: String?,
                 description: String?,  disabled: Boolean?, location: String?, neutered: Boolean?,
                 pictureId: String?, preferences: MutableMap<String, Boolean>?, sex: String?,
-                catId: Int?) : this() {
+                catId: String?) : this() {
         this.catAgeMonths = catAgeMonths
         this.catBreed = catBreed
         this.catName = catName
@@ -48,7 +48,7 @@ class Cat : Parcelable {
         neutered = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
         pictureUrl = parcel.readString()
         sex = parcel.readString()
-        catId = parcel.readValue(Int::class.java.classLoader) as? Int
+        catId = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

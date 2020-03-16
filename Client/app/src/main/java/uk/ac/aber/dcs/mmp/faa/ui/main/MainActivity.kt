@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.closeDrawers()
     }
 
-    private fun doLogin() {
+    fun doLogin() {
         // Choose authentication providers
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
