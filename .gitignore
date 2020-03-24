@@ -12,5 +12,11 @@
 /Client/captures
 /Client/.externalNativeBuild
 /Client/.cxx
-
+local.properties
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/runConfigurations.xml
+.idea/modules.xml
+.idea/gradle.xml
+.idea/codeStyles/Project.xml
 Client/app/google-services.json
