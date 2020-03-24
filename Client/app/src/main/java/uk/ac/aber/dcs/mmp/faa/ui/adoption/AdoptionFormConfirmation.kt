@@ -69,7 +69,8 @@ class AdoptionFormConfirmation : Fragment() {
             "accepted" to false,
             "pending" to true,
             "pendingReason" to "",
-            "rejected" to false
+            "rejected" to false,
+            "rejectedReason" to ""
         )
         val adoptionProcess = AdoptionProcess(status, cat)
         adoptionDocument.set(adoptionProcess)

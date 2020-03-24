@@ -137,6 +137,7 @@ class MainActivity : AppCompatActivity() {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setIsSmartLockEnabled(false, true)
                 .build(),
             RC_SIGN_IN)
     }

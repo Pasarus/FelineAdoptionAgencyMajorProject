@@ -68,4 +68,12 @@
     <string name="cancel">Cancel</string>
     <string name="catAdoptionConfirmationText">By agreeing to adopt this cat, you agree that an agent of the adoption charity may visit your home to provide a basic routine inspection. This inspection is to ensure the safety of all parties involved, including but not limited to the cat, the adopter, and the inspector. To adopt a cat an administration fee must be made payable during the inspection to the inspector. Furthermore, by agreeing to adopt this cat you provide that you are willing to pay the adoption fee and provide adequate and safe housing for the cat. Please do not adopt a cat if you believe that you are going to be at some point unable to look after this animal, or provide safe housing. If this cat is an outdoor cat you must not live on a main road to avoid the cat being harmed or worse. For further information do not hesistate to call or ask for advice by using the phone number on our website.</string>
     <string name="picture_of_the_cat_being_adopted">picture of the cat being adopted</string>
+    <string name="cat_picture">Cat Picture</string>
+    <string name="current_status_of_adoption">current status of adoption</string>
+    <string name="adoption_status_card_title">Adoption Status:</string>
+    <string name="default_text">default text</string>
+    <string name="featured_cat_title_text">Featured Cat:</string>
+    <string name="adoption_status_title">Your current adoption statuses:</string>
+    <string name="no_adoption_or_user_string">You haven\'t signed in to the app yet! please sign in or adopt a cat to see these statuses!</string>
+    <string name="adoption_success">You have been accepted please pick up your cat!</string>
 </resources>

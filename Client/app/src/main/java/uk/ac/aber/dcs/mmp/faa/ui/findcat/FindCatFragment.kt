@@ -37,10 +37,6 @@ class FindCatFragment : Fragment() {
         }
     }
 
-    companion object {
-        fun newInstance() = FindCatFragment()
-    }
-
     override fun onStart() {
         super.onStart()
         adapter.startListening()
@@ -58,7 +54,6 @@ class FindCatFragment : Fragment() {
         val view = inflater.inflate(R.layout.find_cat_fragment, container, false)
 
         view.catRecyclerView.adapter = adapter
-        view.catRecyclerView.layoutManager =
 
         return view
     }

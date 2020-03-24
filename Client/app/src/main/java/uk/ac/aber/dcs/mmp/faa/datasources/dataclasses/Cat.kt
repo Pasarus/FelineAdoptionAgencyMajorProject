@@ -8,7 +8,7 @@ class Cat : Parcelable {
     var catAgeMonths: Int? = 0
     var catBreed: String? = ""
     var catName: String? = ""
-    var color: String? = ""
+    var colour: String? = ""
     var description: String? = ""
     var disabled: Boolean? = false
     var location: String? = ""
@@ -26,7 +26,7 @@ class Cat : Parcelable {
         this.catAgeMonths = catAgeMonths
         this.catBreed = catBreed
         this.catName = catName
-        this.color = color
+        this.colour = color
         this.description = description
         this.disabled = disabled
         this.location = location
@@ -41,7 +41,7 @@ class Cat : Parcelable {
         catAgeMonths = parcel.readValue(Int::class.java.classLoader) as? Int
         catBreed = parcel.readString()
         catName = parcel.readString()
-        color = parcel.readString()
+        colour = parcel.readString()
         description = parcel.readString()
         disabled = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
         location = parcel.readString()
@@ -55,7 +55,7 @@ class Cat : Parcelable {
         parcel.writeValue(catAgeMonths)
         parcel.writeString(catBreed)
         parcel.writeString(catName)
-        parcel.writeString(color)
+        parcel.writeString(colour)
         parcel.writeString(description)
         parcel.writeValue(disabled)
         parcel.writeString(location)
