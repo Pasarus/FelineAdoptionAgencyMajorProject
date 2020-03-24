@@ -12,3 +12,5 @@
 /Client/captures
 /Client/.externalNativeBuild
 /Client/.cxx
+
+Client/app/google-services.json
