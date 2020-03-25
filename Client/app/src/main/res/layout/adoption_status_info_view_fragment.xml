@@ -1,13 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.adoption.AdoptionStatusInfoViewFragment">
-
-    <TextView
+    android:layout_height="wrap_content"
+    android:id="@+id/adoptionStatusInfoViewFragmentScrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".ui.catinfo.CatCardInfoFragment" >
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/adoptionStatusInfoFragmentImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_cat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/catInfoFragmentImage" />
+
+        <View
+            android:id="@+id/adoptionStatusInfoFragmentImageBottomLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:paddingBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/adoptionStatusInfoFragmentImage"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/adoptionStatusInfoFragmentCatName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/catInfoFragmentName"
+            android:textColor="@color/black"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="16pt"
+            app:layout_constraintTop_toBottomOf="@id/adoptionStatusInfoFragmentImageBottomLine"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/adoptionStatusInfoFragmentCatAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/catInfoFragmentAge"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="10pt"
+            app:layout_constraintTop_toBottomOf="@id/adoptionStatusInfoFragmentCatName"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/adoptionStatusInfoFragmentCatLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/catInfoFragmentLocation"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="8pt"
+            app:layout_constraintTop_toBottomOf="@id/adoptionStatusInfoFragmentCatAge"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <View
+            android:id="@+id/adoptionStatusInfoFragmentAfterLocationLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/adoptionStatusInfoFragmentCatLocation"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/adoptionStatusCurrentStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/adoptionStatusInfoFragmentAfterLocationLine"
+            android:paddingBottom="8dp"
+            android:text="@string/default_adoption_status"
+            android:paddingHorizontal="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

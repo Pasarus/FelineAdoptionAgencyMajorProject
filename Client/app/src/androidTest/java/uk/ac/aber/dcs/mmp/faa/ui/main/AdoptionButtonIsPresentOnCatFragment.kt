@@ -55,11 +55,7 @@ class AdoptionButtonIsPresentOnCatFragment {
                 withId(R.id.catCard),
                 childAtPosition(
                     allOf(
-                        withId(R.id.catRecyclerView),
-                        childAtPosition(
-                            withClassName(`is`("android.widget.FrameLayout")),
-                            0
-                        )
+                        withId(R.id.catRecyclerView)
                     ),
                     0
                 )

@@ -79,4 +79,5 @@
     <string name="image_of_the_cat_being_featured">Image of the cat being featured</string>
     <string name="cat_name_default">CatName</string>
     <string name="default_cat_description">Cat description!</string>
+    <string name="default_adoption_status">Adoption Status:</string>
 </resources>
