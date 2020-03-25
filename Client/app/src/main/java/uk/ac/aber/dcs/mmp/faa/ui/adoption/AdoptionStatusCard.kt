@@ -50,6 +50,5 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
             catName.text = cat.catName
             Picasso.get().load(cat.pictureUrl).into(catImage)
         }
-
     }
 }

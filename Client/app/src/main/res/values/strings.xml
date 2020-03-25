@@ -80,4 +80,6 @@
     <string name="cat_name_default">CatName</string>
     <string name="default_cat_description">Cat description!</string>
     <string name="default_adoption_status">Adoption Status:</string>
+    <string name="default_adoption_status_details">This is the adoption status details</string>
+    <string name="cancel_button">CANCEL</string>
 </resources>
