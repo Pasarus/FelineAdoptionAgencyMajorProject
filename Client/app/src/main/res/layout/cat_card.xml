@@ -42,6 +42,7 @@
             android:text="@string/defaultCatName"
             android:textSize="10pt"
             android:paddingStart="8dp"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/lineCard"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="RtlSymmetry" />

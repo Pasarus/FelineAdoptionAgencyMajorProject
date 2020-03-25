@@ -68,7 +68,7 @@ class AdoptionButtonIsPresentOnCatFragment {
         )
         materialCardView.perform(click())
 
-        onView(withId(R.id.catCardInfoFragmentScrollView)).perform(swipeUp());
+        onView(withId(R.id.catCardInfoFragmentScrollView)).perform(swipeUp())
         val button = onView(
             allOf(
                 withId(R.id.catInfoFragmentAdoptButton),

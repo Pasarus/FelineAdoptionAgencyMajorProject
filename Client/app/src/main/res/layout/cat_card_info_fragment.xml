@@ -36,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/catInfoFragmentName"
+            android:textColor="@color/black"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
@@ -82,6 +83,7 @@
             android:id="@+id/catInfoFragmentCatDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
@@ -106,6 +108,8 @@
             android:text="@string/more_info"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentAfterCatDescriptionLine"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            android:textSize="10pt"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp" />
@@ -115,62 +119,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentMoreInfoTitle"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:textSize="8pt"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"/>
 
         <TextView
             android:id="@+id/catInfoFragmentYoungKids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentSex"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:textSize="8pt"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"/>
 
         <TextView
             android:id="@+id/catInfoFragmentPrimaryAgeKids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentYoungKids"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:textSize="8pt"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"/>
 
         <TextView
             android:id="@+id/catInfoFragmentHighSchoolKids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentPrimaryAgeKids"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:textSize="8pt"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"/>
 
         <TextView
             android:id="@+id/catInfoFragmentCanDealWithCats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentHighSchoolKids"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:textSize="8pt"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"/>
 
         <TextView
             android:id="@+id/catInfoFragmentCanDealWithDogs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentCanDealWithCats"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:textSize="8pt"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"/>
 
         <TextView
             android:id="@+id/catInfoFragmentCanDealInside"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentCanDealWithDogs"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"
             android:textSize="8pt" />
 
         <TextView
@@ -180,6 +191,7 @@
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentCanDealInside"
             app:layout_constraintStart_toStartOf="parent"
             android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"
             android:textSize="8pt" />
 
         <TextView
@@ -187,8 +199,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentNeutered"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/catInfoFragmentMoreInfoTitle"
             android:paddingBottom="8dp"
+            android:paddingHorizontal="16dp"
             android:textSize="8pt" />
 
         <com.google.android.material.button.MaterialButton
@@ -199,6 +212,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentDisabled"
+            android:textColor="@color/black"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

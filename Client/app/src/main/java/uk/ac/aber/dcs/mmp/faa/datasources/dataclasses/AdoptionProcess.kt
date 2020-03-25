@@ -9,7 +9,7 @@ class AdoptionProcess {
     var status: Map<String, Any>? = HashMap()
     var user: DocumentReference? = null
 
-    constructor() : super() {} // Needed for Firebase
+    constructor() : super()  // Needed for Firebase
     constructor(status: Map<String, Any>, cat: Cat) : this() {
         this.status = status
         this.cat = FirebaseFirestore.getInstance().collection("cats")

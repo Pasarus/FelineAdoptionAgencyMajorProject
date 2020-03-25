@@ -18,7 +18,7 @@ class Cat : Parcelable {
     var sex: String? = ""
     var catId: String? = ""
 
-    constructor() : super() {} // Needed for Firebase
+    constructor() : super()  // Needed for Firebase
     constructor(catAgeMonths: Int?, catBreed: String?, catName: String?, color: String?,
                 description: String?,  disabled: Boolean?, location: String?, neutered: Boolean?,
                 pictureId: String?, preferences: MutableMap<String, Boolean>?, sex: String?,

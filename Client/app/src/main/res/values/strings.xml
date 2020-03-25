@@ -76,4 +76,7 @@
     <string name="adoption_status_title">Your current adoption statuses:</string>
     <string name="no_adoption_or_user_string">You haven\'t signed in to the app yet! please sign in or adopt a cat to see these statuses!</string>
     <string name="adoption_success">You have been accepted please pick up your cat!</string>
+    <string name="image_of_the_cat_being_featured">Image of the cat being featured</string>
+    <string name="cat_name_default">CatName</string>
+    <string name="default_cat_description">Cat description!</string>
 </resources>

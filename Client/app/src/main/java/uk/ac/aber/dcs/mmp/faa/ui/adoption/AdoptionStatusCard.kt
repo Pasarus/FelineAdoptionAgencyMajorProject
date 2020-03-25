@@ -31,12 +31,12 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 view.resources.getDrawable(R.drawable.ic_done_all_green_24dp)
             }
             status["pending"] as Boolean -> {
-                adoptionInfo.setText(status["pendingReason"].toString())
+                adoptionInfo.text = status["pendingReason"].toString()
                 view.resources.getDrawable(R.drawable.ic_access_alarm_yellow_24dp)
             }
             else -> {
                 // Must have been rejected
-                adoptionInfo.setText(status["rejectedReason"].toString())
+                adoptionInfo.text = status["rejectedReason"].toString()
                 view.resources.getDrawable(R.drawable.ic_highlight_off_red_24dp)
             }
         }
@@ -47,7 +47,7 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         catReference.get().addOnSuccessListener{
             document ->
             cat = document.toObject(Cat::class.java)!!
-            catName.setText(cat.catName)
+            catName.text = cat.catName
             Picasso.get().load(cat.pictureUrl).into(catImage)
         }
 
