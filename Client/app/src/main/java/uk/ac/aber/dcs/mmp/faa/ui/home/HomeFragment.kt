@@ -26,7 +26,7 @@ import uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionStatusCard
 import kotlin.random.Random
 
 class HomeFragment : Fragment() {
-    lateinit var layoutView: View
+    private lateinit var layoutView: View
 
     private var query = FirebaseFirestore.getInstance().collection("adoptionProcesses").document("default").collection("adoptionProcesses").limit(10)
 

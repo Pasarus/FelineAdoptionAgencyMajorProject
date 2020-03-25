@@ -62,8 +62,7 @@ class AdoptionButtonIsPresentOnCatFragment {
                         )
                     ),
                     0
-                ),
-                isDisplayed()
+                )
             )
         )
         materialCardView.perform(click())
