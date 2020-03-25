@@ -86,7 +86,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:paddingBottom="8dp"
             android:text="@string/default_adoption_status"
-            android:textSize="10pt"
+            android:textSize="9pt"
             android:textColor="@color/black"
             android:paddingHorizontal="16dp" />
 

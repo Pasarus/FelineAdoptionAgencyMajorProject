@@ -49,6 +49,8 @@ class AdoptionButtonIsPresentOnCatFragment {
         bottomNavigationItemView.perform(click())
 
         waitForFireStoreCollectionRequest("cats")
+        waitForFireStoreCollectionRequest("cats")
+        waitForFireStoreCollectionRequest("cats")
 
         val materialCardView = onView(
             allOf(

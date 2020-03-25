@@ -1,9 +1,11 @@
 package uk.ac.aber.dcs.mmp.faa.ui.adoption
 
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentReference
 import com.squareup.picasso.Picasso
@@ -28,19 +30,24 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val drawable = when {
             status["accepted"] as Boolean -> {
                 adoptionInfo.setText(R.string.adoption_success)
-                view.resources.getDrawable(R.drawable.ic_done_all_green_24dp)
+                view.resources.getDrawable(R.drawable.ic_done_all_green_24dp, null)
             }
             status["pending"] as Boolean -> {
                 adoptionInfo.text = status["pendingReason"].toString()
-                view.resources.getDrawable(R.drawable.ic_access_alarm_yellow_24dp)
+                view.resources.getDrawable(R.drawable.ic_access_alarm_yellow_24dp, null)
             }
             else -> {
                 // Must have been rejected
                 adoptionInfo.text = status["rejectedReason"].toString()
-                view.resources.getDrawable(R.drawable.ic_highlight_off_red_24dp)
+                view.resources.getDrawable(R.drawable.ic_highlight_off_red_24dp, null)
             }
         }
         adoptionStatusIcon.setImageDrawable(drawable)
+        view.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("adoptionProcess", model)
+            view.findNavController().navigate(R.id.adoptionStatusInfoViewFragment, bundle)
+        }
     }
 
     private fun requestCatInfoAndBind(catReference: DocumentReference){
