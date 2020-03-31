@@ -11,23 +11,15 @@ import uk.ac.aber.dcs.mmp.faa.R
 
 class SavedFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SavedFragment()
-    }
-
-    private lateinit var viewModel: SavedViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.saved_fragment, container, false)
-    }
+        val view = inflater.inflate(R.layout.saved_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SavedViewModel::class.java)
-        // TODO: Use the ViewModel
+
+
+        return view
     }
 
 }

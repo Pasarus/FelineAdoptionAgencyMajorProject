@@ -7,38 +7,60 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        <TextView
-            android:id="@+id/catName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/cat_name_default"
-            app:layout_constraintTop_toTopOf="parent"
+        <LinearLayout
+            android:id="@+id/linearCatDetails"
+            android:layout_width="185dp"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textSize="11pt"
-            android:textColor="@color/black" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/catName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11pt"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/catAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/catLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="8pt"
+                app:layout_constraintTop_toBottomOf="@id/catAge"
+                app:layout_constraintStart_toStartOf="@id/catAge" />
+
+
+            <TextView
+                android:id="@+id/catDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:paddingVertical="8dp" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/catImage"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/image_of_the_cat_being_featured"
-            android:src="@drawable/ic_cat"
-            android:layout_margin="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/catName" />
-
-        <TextView
-            android:id="@+id/catDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:paddingVertical="16dp"
-            android:paddingHorizontal="8dp"
-            android:text="@string/default_cat_description"
-            app:layout_constraintStart_toEndOf="@id/catImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/linearCatDetails"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -23,6 +23,7 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionStatusCard
+import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 import kotlin.random.Random
 
 class HomeFragment : Fragment() {
@@ -62,6 +63,8 @@ class HomeFragment : Fragment() {
             document ->
             cat = document.toObject()!!
             view.catName.text = cat.catName
+            view.catAge.text = convertMonthsNumberToUsableString(cat.catAgeMonths)
+            view.catLocation.text = cat.location
             Picasso.get().load(cat.pictureUrl).into(view.catImage)
             view.catDescription.text = cat.description
         }
