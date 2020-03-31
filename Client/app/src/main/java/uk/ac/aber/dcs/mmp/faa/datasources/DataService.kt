@@ -19,6 +19,7 @@ class DataService private constructor() {
     private var savedCats: SimpleObservableStringSet =
         SimpleObservableStringSet()
     private val FAVE_KEY = "FAVOURITE_KEY"
+    var navigatingBackHome: Boolean = false
 
     companion object {
         val INSTANCE = DataService()

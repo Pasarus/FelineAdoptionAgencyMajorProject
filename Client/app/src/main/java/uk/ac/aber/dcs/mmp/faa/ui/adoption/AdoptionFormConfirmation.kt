@@ -68,7 +68,7 @@ class AdoptionFormConfirmation : Fragment() {
         val status = mapOf(
             "accepted" to false,
             "pending" to true,
-            "pendingReason" to "",
+            "pendingReason" to "Please await a call with an administrator to arrange an appointment!",
             "rejected" to false,
             "rejectedReason" to ""
         )

@@ -82,4 +82,6 @@
     <string name="default_adoption_status">Adoption Status:</string>
     <string name="default_adoption_status_details">This is the adoption status details</string>
     <string name="cancel_button">CANCEL</string>
+    <string name="cancel_adoption_default">Are you sure you want to cancel the adoption for this cat?</string>
+    <string name="no">NO</string>
 </resources>

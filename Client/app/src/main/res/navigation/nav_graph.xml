@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_homeFragment_to_adoptionFormConfirmation"
             app:destination="@id/adoptionFormConfirmation" />
+        <action
+            android:id="@+id/action_homeFragment_to_cancel_adoption_dialog"
+            app:destination="@id/cancel_adoption_dialog" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
@@ -99,4 +102,9 @@
         android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionFormConfirmation"
         android:label="fragment_adoption_form_confirmation"
         tools:layout="@layout/fragment_adoption_form_confirmation" />
+    <dialog
+        android:id="@+id/cancel_adoption_dialog"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.CancelAdoptionDialog"
+        android:label="fragment_cancel_adoption_dialog"
+        tools:layout="@layout/fragment_cancel_adoption_dialog" />
 </navigation>
