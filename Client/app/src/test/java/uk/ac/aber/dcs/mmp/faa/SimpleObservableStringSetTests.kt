@@ -141,4 +141,10 @@ class SimpleObservableStringSetTests : ObserverOfStringSet {
             assertEquals(wannabeTest1, test1)
         }
     }
+
+    @Test
+    fun test_ensureUpdateOccursWithBlankFunction() {
+        testSet.updateObserversAddBlank()
+        assertEquals(addCalledCount, 1)
+    }
 }

@@ -1,11 +1,11 @@
 package uk.ac.aber.dcs.mmp.faa.datasources
 
-import android.content.Context
 import android.view.View
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.User
 import uk.ac.aber.dcs.mmp.faa.ui.main.MainActivity
@@ -14,12 +14,25 @@ import uk.ac.aber.dcs.mmp.faa.R
 
 class DataService private constructor() {
     var user: FirebaseUser? = null
+    set(user) {
+        field = user
+        if (user != null){
+            FirebaseFirestore.getInstance().collection("users")
+                .document(user.uid).get().addOnSuccessListener {
+                document ->
+                    val userObject: User? = document.toObject()
+                    if (userObject != null) {
+                        // User has an object so update the saved cats list
+                        savedCats.clear()
+                        savedCats.addAll(userObject.favouritedCats!!)
+                    }
+            }
+        }
+    }
     private lateinit var database: FirebaseFirestore
     lateinit var mainActivity: MainActivity
-    private var savedCats: SimpleObservableStringSet =
+    var savedCats: SimpleObservableStringSet =
         SimpleObservableStringSet()
-    private val FAVE_KEY = "FAVOURITE_KEY"
-    var navigatingBackHome: Boolean = false
 
     companion object {
         val INSTANCE = DataService()
@@ -30,21 +43,11 @@ class DataService private constructor() {
         database = Firebase.firestore
     }
 
-    fun loadSavedCats() {
-        val preferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
-        savedCats = SimpleObservableStringSet(
-            preferences.getStringSet(
-                FAVE_KEY,
-                HashSet()
-            )!!
-        )
-    }
-
-    fun saveSavedCats() {
-        val preferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
-        val editor = preferences.edit()
-        editor.putStringSet(FAVE_KEY, savedCats)
-        editor.apply()
+    fun syncSavedCats() {
+        if (user != null) {
+            FirebaseFirestore.getInstance().collection("users").document(user!!.uid)
+                .update(mapOf("favouritedCats" to savedCats.toList()))
+        }
     }
 
     fun isCatFavourite(catId: String?): Boolean {

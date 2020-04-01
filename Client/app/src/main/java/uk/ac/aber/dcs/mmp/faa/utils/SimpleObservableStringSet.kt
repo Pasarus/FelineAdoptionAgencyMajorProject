@@ -53,4 +53,8 @@ class SimpleObservableStringSet : HashSet<String> {
     fun removeObserver(observer: ObserverOfStringSet) {
         observers.remove(observer)
     }
+
+    fun updateObserversAddBlank() {
+        observers.forEach { it.onObservedAdd("") }
+    }
 }

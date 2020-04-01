@@ -84,4 +84,5 @@
     <string name="cancel_button">CANCEL</string>
     <string name="cancel_adoption_default">Are you sure you want to cancel the adoption for this cat?</string>
     <string name="no">NO</string>
+    <string name="signInForCatText">Please sign in to use the Saved Cat feature!</string>
 </resources>

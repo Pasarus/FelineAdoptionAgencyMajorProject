@@ -22,6 +22,7 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val catLocation: TextView = view.findViewById(R.id.catLocation)
     private val catPictureCard: ImageView = view.findViewById(R.id.catPictureCard)
     private val favouriteButton: ImageView = view.findViewById(R.id.faveButtonCard)
+    private var featuredCatSaved = false
     lateinit var cat: Cat
 
     init {
@@ -51,5 +52,32 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         this.cat = cat
+
+        favouriteButton.setOnClickListener {
+            if (DataService.INSTANCE.user == null) {
+                // We must login first
+                DataService.INSTANCE.mainActivity.doLogin()
+            } else {
+                if (featuredCatSaved) {
+                    // Perform un-saving
+                    // Update local state
+                    favouriteButton.setImageDrawable(view.resources
+                        .getDrawable(R.drawable.ic_favorite_border_black_24dp, null))
+                    featuredCatSaved = false
+
+                    // Update global state
+                    DataService.INSTANCE.savedCats.remove(cat.catId!!)
+                } else {
+                    // Perform saving
+                    // Update local state
+                    favouriteButton.setImageDrawable(view.resources
+                        .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                    featuredCatSaved = true
+
+                    // Update global state
+                    DataService.INSTANCE.savedCats.add(cat.catId!!)
+                }
+            }
+        }
     }
 }

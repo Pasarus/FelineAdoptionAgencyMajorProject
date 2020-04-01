@@ -27,6 +27,8 @@ import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 import kotlin.random.Random
 
 class HomeFragment : Fragment() {
+    private var featuredCatSaved = false
+
     private lateinit var layoutView: View
 
     private var query = FirebaseFirestore.getInstance().collection("adoptionProcesses").document("default").collection("adoptionProcesses").limit(10)
@@ -67,12 +69,46 @@ class HomeFragment : Fragment() {
             view.catLocation.text = cat.location
             Picasso.get().load(cat.pictureUrl).into(view.catImage)
             view.catDescription.text = cat.description
+
+            if (DataService.INSTANCE.isCatFavourite(cat.catId)){
+                // Update local state
+                view.faveButtonCard.setImageDrawable(resources
+                    .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                featuredCatSaved = true
+            }
         }
 
         view.featuredCatCardView.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("cat", cat)
             view.findNavController().navigate(R.id.catCardInfoFragment, bundle)
+        }
+
+        view.featuredCatCardView.faveButtonCard.setOnClickListener {
+            if (DataService.INSTANCE.user == null) {
+                // We must login first
+                DataService.INSTANCE.mainActivity.doLogin()
+            } else {
+                if (featuredCatSaved) {
+                    // Perform un-saving
+                    // Update local state
+                    view.faveButtonCard.setImageDrawable(resources
+                        .getDrawable(R.drawable.ic_favorite_border_black_24dp, null))
+                    featuredCatSaved = false
+
+                    // Update global state
+                    DataService.INSTANCE.savedCats.remove(cat.catId!!)
+                } else {
+                    // Perform saving
+                    // Update local state
+                    view.faveButtonCard.setImageDrawable(resources
+                        .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                    featuredCatSaved = true
+
+                    // Update global state
+                    DataService.INSTANCE.savedCats.add(cat.catId!!)
+                }
+            }
         }
 
         return view

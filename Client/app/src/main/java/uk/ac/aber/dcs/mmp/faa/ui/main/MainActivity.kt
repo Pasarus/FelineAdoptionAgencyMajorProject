@@ -12,7 +12,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
@@ -21,10 +20,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
-import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
-import uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCard
-import uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCardInfoFragment
-import uk.ac.aber.dcs.mmp.faa.ui.findcat.FindCatFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,14 +48,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        DataService.INSTANCE.loadSavedCats()
-    }
-
     override fun onStop() {
         super.onStop()
-        DataService.INSTANCE.saveSavedCats()
+        DataService.INSTANCE.syncSavedCats()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -155,6 +145,8 @@ class MainActivity : AppCompatActivity() {
                 updateNavDrawLoginTextAndImage(user)
             }
         }
+
+        DataService.INSTANCE.savedCats.updateObserversAddBlank()
     }
 
     private fun updateNavDrawLoginTextAndImage(user: FirebaseUser?){
