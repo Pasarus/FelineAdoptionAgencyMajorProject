@@ -8,6 +8,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.cat_card_info_fragment.*
 import kotlinx.android.synthetic.main.cat_card_info_fragment.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
@@ -17,9 +18,7 @@ import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
 class CatCardInfoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CatCardInfoFragment()
-    }
+    private var catSaved = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,55 +29,53 @@ class CatCardInfoFragment : Fragment() {
         val bundle: Bundle? = this.arguments
         val cat: Cat? = bundle!!.getParcelable("cat")
 
-        if (cat != null) {
-            Picasso.get().load(cat.pictureUrl).into(view.catInfoFragmentImage)
-            view.catInfoFragmentCatName.text = cat.catName
-            view.catInfoFragmentCatAge.text = convertMonthsNumberToUsableString(cat.catAgeMonths)
-            view.catInfoFragmentCatLocation.text = cat.location
-            view.catInfoFragmentCatDescription.text = cat.description
-            view.catInfoFragmentSex.text = cat.sex
+        Picasso.get().load(cat!!.pictureUrl).into(view.catInfoFragmentImage)
+        view.catInfoFragmentCatName.text = cat.catName
+        view.catInfoFragmentCatAge.text = convertMonthsNumberToUsableString(cat.catAgeMonths)
+        view.catInfoFragmentCatLocation.text = cat.location
+        view.catInfoFragmentCatDescription.text = cat.description
+        view.catInfoFragmentSex.text = cat.sex
 
-            if (cat.preferences!!["indoors"]!!)
-                view.catInfoFragmentCanDealInside.text = resources.getText(R.string.canInfoCanDoIndoors)
-            else
-                view.catInfoFragmentCanDealInside.text = resources.getText(R.string.canInfoCannotDoIndoors)
+        if (cat.preferences!!["indoors"]!!)
+            view.catInfoFragmentCanDealInside.text = resources.getText(R.string.canInfoCanDoIndoors)
+        else
+            view.catInfoFragmentCanDealInside.text = resources.getText(R.string.canInfoCannotDoIndoors)
 
-            if (cat.preferences!!["dogs"]!!)
-                view.catInfoFragmentCanDealWithDogs.text = resources.getText(R.string.catInfoCanBeWithDogs)
-            else
-                view.catInfoFragmentCanDealWithDogs.text = resources.getText(R.string.catInfoCannotBeWithDogs)
+        if (cat.preferences!!["dogs"]!!)
+            view.catInfoFragmentCanDealWithDogs.text = resources.getText(R.string.catInfoCanBeWithDogs)
+        else
+            view.catInfoFragmentCanDealWithDogs.text = resources.getText(R.string.catInfoCannotBeWithDogs)
 
-            if (cat.preferences!!["otherCats"]!!)
-                view.catInfoFragmentCanDealWithCats.text = resources.getText(R.string.catInfoCanDealWithCats)
-            else
-                view.catInfoFragmentCanDealWithCats.text = resources.getText(R.string.catInfoCannotDealWithCats)
+        if (cat.preferences!!["otherCats"]!!)
+            view.catInfoFragmentCanDealWithCats.text = resources.getText(R.string.catInfoCanDealWithCats)
+        else
+            view.catInfoFragmentCanDealWithCats.text = resources.getText(R.string.catInfoCannotDealWithCats)
 
-            if (cat.preferences!!["kids0to4"]!!)
-                view.catInfoFragmentYoungKids.text = resources.getText(R.string.catInfoCanBeAroundYoungChildren)
-            else
-                view.catInfoFragmentYoungKids.text = resources.getText(R.string.catInfoCannotDealWithYoungChildren)
+        if (cat.preferences!!["kids0to4"]!!)
+            view.catInfoFragmentYoungKids.text = resources.getText(R.string.catInfoCanBeAroundYoungChildren)
+        else
+            view.catInfoFragmentYoungKids.text = resources.getText(R.string.catInfoCannotDealWithYoungChildren)
 
-            if (cat.preferences!!["kids5to12"]!!)
-                view.catInfoFragmentPrimaryAgeKids.text = resources.getText(R.string.catInfoCanBeAroundPrimaryAgeKids)
-            else
-                view.catInfoFragmentPrimaryAgeKids.text = resources.getText(R.string.catInfoCannnotBeAroundPrimaryAgeKids)
+        if (cat.preferences!!["kids5to12"]!!)
+            view.catInfoFragmentPrimaryAgeKids.text = resources.getText(R.string.catInfoCanBeAroundPrimaryAgeKids)
+        else
+            view.catInfoFragmentPrimaryAgeKids.text = resources.getText(R.string.catInfoCannnotBeAroundPrimaryAgeKids)
 
-            if (cat.preferences!!["kids13to18"]!!)
-                view.catInfoFragmentHighSchoolKids.text = resources.getText(R.string.catInfoCanBeAroundHighSchoolkids)
-            else
-                view.catInfoFragmentHighSchoolKids.text = resources.getText(R.string.catInfoCannotBeAroundHighSchoolKids)
+        if (cat.preferences!!["kids13to18"]!!)
+            view.catInfoFragmentHighSchoolKids.text = resources.getText(R.string.catInfoCanBeAroundHighSchoolkids)
+        else
+            view.catInfoFragmentHighSchoolKids.text = resources.getText(R.string.catInfoCannotBeAroundHighSchoolKids)
 
-            if (cat.disabled!!)
-                view.catInfoFragmentDisabled.text = resources.getText(R.string.catInfoIsDisabled)
-            else
-                view.catInfoFragmentDisabled.text = resources.getText(R.string.catInfoIsntDisabled)
+        if (cat.disabled!!)
+            view.catInfoFragmentDisabled.text = resources.getText(R.string.catInfoIsDisabled)
+        else
+            view.catInfoFragmentDisabled.text = resources.getText(R.string.catInfoIsntDisabled)
 
-            if (cat.neutered!!)
-                view.catInfoFragmentNeutered.text = resources.getText(R.string.catInfoIsNeutered)
-            else
-                view.catInfoFragmentNeutered.text = resources.getText(R.string.catInfoIsntNeutered)
+        if (cat.neutered!!)
+            view.catInfoFragmentNeutered.text = resources.getText(R.string.catInfoIsNeutered)
+        else
+            view.catInfoFragmentNeutered.text = resources.getText(R.string.catInfoIsntNeutered)
 
-        }
 
         view.catInfoFragmentAdoptButton.setOnClickListener {
             //Navigate to adopt form but pass this cat id to it
@@ -87,6 +84,40 @@ class CatCardInfoFragment : Fragment() {
                 DataService.INSTANCE.mainActivity.doLogin()
             } else {
                 view.findNavController().navigate(R.id.adoptionForm, bundle)
+            }
+        }
+
+        // Get if this cat is a saved/favourite cat.
+        if (DataService.INSTANCE.isCatFavourite(cat.catId)) {
+            // Set to unfavoured button if not favourite already
+            view.faveButton.setImageDrawable(resources
+                .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+            catSaved = true
+        }
+
+
+        view.faveButton.setOnClickListener {
+            if (DataService.INSTANCE.user == null) {
+                // We must login first
+                DataService.INSTANCE.mainActivity.doLogin()
+            } else {
+                if (catSaved) {
+                    // Saved, so un-save
+                    catSaved = false
+                    view.faveButton.setImageDrawable(
+                        resources
+                            .getDrawable(R.drawable.ic_favorite_border_black_24dp, null)
+                    )
+                    DataService.INSTANCE.savedCats.remove(cat.catId)
+                } else {
+                    // Not saved, so save
+                    view.faveButton.setImageDrawable(
+                        resources
+                            .getDrawable(R.drawable.ic_favorite_black_24dp, null)
+                    )
+                    catSaved = true
+                    DataService.INSTANCE.savedCats.add(cat.catId!!)
+                }
             }
         }
 

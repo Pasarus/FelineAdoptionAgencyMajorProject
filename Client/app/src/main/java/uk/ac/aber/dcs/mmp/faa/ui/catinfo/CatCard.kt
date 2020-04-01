@@ -49,6 +49,8 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
             // Set to unfavoured button if not favourite already
             favouriteButton.setImageDrawable(ResourcesCompat.getDrawable(view.context.resources,
                 R.drawable.ic_favorite_border_black_24dp, null))
+        } else {
+            featuredCatSaved = true
         }
 
         this.cat = cat

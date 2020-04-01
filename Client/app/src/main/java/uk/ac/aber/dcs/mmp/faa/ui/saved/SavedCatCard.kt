@@ -21,18 +21,33 @@ class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     init {
         faveButtonCard.setOnClickListener {
-            if (catSaved) {
-                // Saved, so un-save
-                catSaved = false
-                faveButtonCard.setImageDrawable(itemView.resources
-                    .getDrawable(R.drawable.ic_favorite_border_black_24dp, null))
-                DataService.INSTANCE.savedCats.remove(catCopy.catId)
+            if (DataService.INSTANCE.user == null) {
+                // We must login first
+                DataService.INSTANCE.mainActivity.doLogin()
             } else {
-                // Not saved, so save
-                faveButtonCard.setImageDrawable(itemView.resources
-                    .getDrawable(R.drawable.ic_favorite_black_24dp, null))
-                catSaved = true
-                DataService.INSTANCE.savedCats.add(catCopy.catId!!)
+                if (catSaved) {
+                    // Perform un-saving
+                    // Update local state
+                    faveButtonCard.setImageDrawable(
+                        itemView.resources
+                            .getDrawable(R.drawable.ic_favorite_border_black_24dp, null)
+                    )
+                    catSaved = false
+
+                    // Update global state
+                    DataService.INSTANCE.savedCats.remove(catCopy.catId!!)
+                } else {
+                    // Perform saving
+                    // Update local state
+                    faveButtonCard.setImageDrawable(
+                        itemView.resources
+                            .getDrawable(R.drawable.ic_favorite_black_24dp, null)
+                    )
+                    catSaved = true
+
+                    // Update global state
+                    DataService.INSTANCE.savedCats.add(catCopy.catId!!)
+                }
             }
         }
     }
