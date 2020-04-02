@@ -1,13 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.feedback.FeedbackFragment">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/feedbackOpeningParagraph"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="feedbackFragment" />
+        android:text="@string/feedbackOpening"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/feedbackIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_feedback_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedbackOpeningParagraph"
+        app:layout_constraintBottom_toTopOf="@id/developerContactText"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/feedbackLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="@string/feedback"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedbackOpeningParagraph"
+        app:layout_constraintStart_toEndOf="@id/feedbackIcon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="10"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/developerContactText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/replied_to_request_feedback"
+        android:paddingTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedbackLayout"/>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        app:layout_constraintStart_toEndOf="@id/developerContactText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedbackLayout"
+        app:layout_constraintHorizontal_bias="0.9"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendFeedbackButton"
+        android:layout_height="56dp"
+        android:layout_width="120dp"
+        android:text="@string/send"
+        android:textSize="10pt"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/developerContactText"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Widget.MaterialComponents.Chip.Entry"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

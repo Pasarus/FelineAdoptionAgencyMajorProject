@@ -1,13 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.help.HelpFragment">
-
-    <TextView
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="aboutFragment" />
+        tools:context=".ui.help.HelpFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How to adopt a cat:"
+            android:textColor="@color/black"
+            android:textSize="10pt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/firstParagraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/help_first_paragraph"
+            android:textColor="@color/black"
+            android:textSize="8pt"
+            android:padding="16dp"
+            />
+
+        <ImageView
+            android:id="@+id/navBarImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nav_view_for_help"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstParagraph"
+            android:padding="16dp"
+            />
+
+        <TextView
+            android:id="@+id/secondParagraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/navBarImage"
+            android:text="@string/help_second_paragraph"
+            android:textSize="8pt"
+            android:textColor="@color/black"
+            android:padding="16dp"
+            />
+
+        <ImageView
+            android:id="@+id/infoCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondParagraph"
+            android:src="@drawable/cat_card_nectarine"
+            android:padding="16dp"
+            />
+
+        <TextView
+            android:id="@+id/thirdParagraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/help_third_paragraph"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/infoCard"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="8pt"
+            />
+
+        <ImageView
+            android:id="@+id/adoptionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thirdParagraph"
+            android:padding="8dp"
+            android:src="@drawable/adopt_button"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

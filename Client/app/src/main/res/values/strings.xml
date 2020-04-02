@@ -85,4 +85,10 @@
     <string name="cancel_adoption_default">Are you sure you want to cancel the adoption for this cat?</string>
     <string name="no">NO</string>
     <string name="signInForCatText">Please sign in to use the Saved Cat feature!</string>
+    <string name="send">SEND</string>
+    <string name="replied_to_request_feedback">Would you like to be replied to, by the developer?</string>
+    <string name="feedbackOpening">You will be asked to login to the application if not already done so when you click send, this is to reduce spam, and allow responses from developers, to your emails.</string>
+    <string name="help_third_paragraph">Once you find a cat that you may consider adopting tap on the info card. To get more information, after you have decided to adopt a specific cat, scroll down on the extra information screen and click the adopt button, if you haven\'t logged in, you will be asked to login, after logging in click the button again and the adoption forms will assist you.</string>
+    <string name="help_second_paragraph">Once using the tool, find a cat by browsing our selection, a cat will be displayed in a info card.</string>
+    <string name="help_first_paragraph">You need to find a cat in our helpful cat finder tool!, to do this please navigate to the cat finder tab using the bottom navigation bar.</string>
 </resources>
