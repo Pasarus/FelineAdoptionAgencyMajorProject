@@ -15,7 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/help_title"
-            android:textColor="@color/black"
             android:textSize="10pt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +30,6 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/help_first_paragraph"
-            android:textColor="@color/black"
             android:textSize="8pt"
             android:padding="16dp"
             />
@@ -56,7 +54,6 @@
             app:layout_constraintTop_toBottomOf="@id/navBarImage"
             android:text="@string/help_second_paragraph"
             android:textSize="8pt"
-            android:textColor="@color/black"
             android:padding="16dp"
             />
 
@@ -80,7 +77,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/infoCard"
             android:padding="8dp"
-            android:textColor="@color/black"
             android:textSize="8pt"
             />
 

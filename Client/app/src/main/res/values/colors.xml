@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="cardBackground">#F1F1F1</color>
+    <color name="darkCardBackground">#424242</color>
 </resources>

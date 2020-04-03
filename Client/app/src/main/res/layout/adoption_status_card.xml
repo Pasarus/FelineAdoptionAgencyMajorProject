@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
+    android:id="@+id/adoptionProcessCard"
     app:cardBackgroundColor="@color/cardBackground">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/adoption_status_card_title"
             android:textSize="8pt"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -46,6 +48,7 @@
                 android:layout_height="match_parent"
                 android:padding="8dp"
                 android:layout_weight="0.33"
+                android:textColor="@color/black"
                 android:text="@string/default_text"/>
 
             <View

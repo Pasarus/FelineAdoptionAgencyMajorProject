@@ -9,6 +9,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.home_fragment.view.*
+import kotlinx.android.synthetic.main.home_fragment.view.adoptionStatusRecyclerView
+import kotlinx.android.synthetic.main.my_account_fragment.view.*
 import kotlinx.android.synthetic.main.user_data.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
@@ -45,6 +47,12 @@ class MyAccountFragment : Fragment() {
             DataService.INSTANCE.updateUserDataForView(view)
         }
         view.adoptionStatusRecyclerView.adapter = adapter
+
+        val white = view.resources.getColor(R.color.white, null)
+        if (DataService.INSTANCE.darkMode){
+            view.accountTitle.setTextColor(white)
+            view.accountInformation.setTextColor(white)
+        }
 
         return view
     }

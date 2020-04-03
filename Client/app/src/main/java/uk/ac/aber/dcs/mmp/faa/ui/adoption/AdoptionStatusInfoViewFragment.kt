@@ -65,6 +65,13 @@ class AdoptionStatusInfoViewFragment : Fragment() {
             view.findNavController().navigate(R.id.cancel_adoption_dialog, cancelBundle)
         }
 
+        // Setup Darkmode
+        if (DataService.INSTANCE.darkMode){
+            val white = view.resources.getColor(R.color.white, null)
+            view.adoptionStatusInfoFragmentCatName.setTextColor(white)
+            view.adoptionStatusCurrentStatus.setTextColor(white)
+        }
+
         return view
     }
 

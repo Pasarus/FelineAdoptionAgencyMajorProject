@@ -19,7 +19,7 @@
         android:id="@+id/feedbackIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_feedback_black_24dp"
+        android:src="@drawable/ic_feedback_orange_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/feedbackOpeningParagraph"
         app:layout_constraintBottom_toTopOf="@id/developerContactText"/>

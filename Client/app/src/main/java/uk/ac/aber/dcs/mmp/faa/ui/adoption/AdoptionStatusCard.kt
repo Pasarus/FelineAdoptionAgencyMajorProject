@@ -1,6 +1,5 @@
 package uk.ac.aber.dcs.mmp.faa.ui.adoption
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -9,8 +8,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentReference
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.adoption_status_card.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
+import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 
@@ -47,6 +48,13 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val bundle = Bundle()
             bundle.putParcelable("adoptionProcess", model)
             view.findNavController().navigate(R.id.adoptionStatusInfoViewFragment, bundle)
+        }
+
+        val white = view.resources.getColor(R.color.white, null)
+        if (DataService.INSTANCE.darkMode){
+            view.adoptionProcessCard.setBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+            catName.setTextColor(white)
+            adoptionInfo.setTextColor(white)
         }
     }
 

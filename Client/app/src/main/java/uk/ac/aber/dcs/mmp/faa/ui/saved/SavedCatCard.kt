@@ -1,6 +1,8 @@
 package uk.ac.aber.dcs.mmp.faa.ui.saved
 
+import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.saved_cat_card.view.*
@@ -30,7 +32,7 @@ class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     // Update local state
                     faveButtonCard.setImageDrawable(
                         itemView.resources
-                            .getDrawable(R.drawable.ic_favorite_border_black_24dp, null)
+                            .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null)
                     )
                     catSaved = false
 
@@ -41,7 +43,7 @@ class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     // Update local state
                     faveButtonCard.setImageDrawable(
                         itemView.resources
-                            .getDrawable(R.drawable.ic_favorite_black_24dp, null)
+                            .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
                     )
                     catSaved = true
 
@@ -62,9 +64,25 @@ class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         if (DataService.INSTANCE.isCatFavourite(cat.catId)){
             // Update local state
             faveButtonCard.setImageDrawable(itemView.resources
-                .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
             catSaved = true
         }
         catCopy = cat
+
+        // Set up darkMode for card
+        if (DataService.INSTANCE.darkMode){
+            itemView.savedCatCardViewLayout.setBackgroundColor(itemView.resources.getColor(R.color.darkCardBackground, null))
+            catName.setTextColor(itemView.resources.getColor(R.color.white, null))
+            catAge.setTextColor(itemView.resources.getColor(R.color.white, null))
+            catLocation.setTextColor(itemView.resources.getColor(R.color.white, null))
+            catDescription.setTextColor(itemView.resources.getColor(R.color.white, null))
+        }
+
+        itemView.setOnClickListener {
+            val navController = itemView.findNavController()
+            val bundle = Bundle()
+            bundle.putParcelable("cat", cat)
+            navController.navigate(R.id.catCardInfoFragment, bundle)
+        }
     }
 }

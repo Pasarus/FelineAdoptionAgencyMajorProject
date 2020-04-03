@@ -1,15 +1,14 @@
 package uk.ac.aber.dcs.mmp.faa.ui.settings
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.settings_fragment.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
+import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
 class SettingsFragment : Fragment() {
 
@@ -18,6 +17,30 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.settings_fragment, container, false)
+
+        // Setup UI for darkmode
+        if (DataService.INSTANCE.darkMode){
+            view.darkModeLayout.setBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+            view.darkModeText.setTextColor(view.resources.getColor(R.color.white, null))
+        }
+
+
+        // Ensure settings reflects current state.
+        if (DataService.INSTANCE.settings[DataService.INSTANCE.DARK_MODE_KEY]!!){
+            view.darkModeSwitch.isChecked = true
+        }
+
+        view.darkModeSwitch.setOnCheckedChangeListener{
+            buttonView, isChecked ->
+            if (isChecked){
+                // Switch to dark mode
+                DataService.INSTANCE.darkMode()
+            } else {
+                // Switch to light mode
+                DataService.INSTANCE.lightMode()
+            }
+            DataService.INSTANCE.settings[DataService.INSTANCE.DARK_MODE_KEY] = isChecked
+        }
 
         view.allNotificationsSwitch.setOnCheckedChangeListener {
                 buttonView, isChecked ->

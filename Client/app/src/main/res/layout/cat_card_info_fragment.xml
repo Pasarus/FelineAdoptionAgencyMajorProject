@@ -52,7 +52,7 @@
             app:layout_constraintStart_toEndOf="@id/catInfoFragmentCatName"
             app:layout_constraintTop_toTopOf="@id/catInfoFragmentCatName"
             app:layout_constraintHorizontal_bias="1"
-            android:src="@drawable/ic_favorite_border_black_24dp"
+            android:src="@drawable/ic_favorite_border_orange_24dp"
             android:contentDescription="@string/favouritebuttononcatcard" />
 
         <TextView
@@ -94,7 +94,6 @@
             android:id="@+id/catInfoFragmentCatDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
@@ -119,7 +118,6 @@
             android:text="@string/more_info"
             app:layout_constraintTop_toBottomOf="@id/catInfoFragmentAfterCatDescriptionLine"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/black"
             android:textSize="10pt"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"

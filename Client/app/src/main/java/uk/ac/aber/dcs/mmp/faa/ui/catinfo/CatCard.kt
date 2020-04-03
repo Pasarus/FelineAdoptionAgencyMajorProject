@@ -8,6 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.cat_card.view.*
 import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
@@ -48,9 +49,17 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         if (!DataService.INSTANCE.isCatFavourite(cat.catId)) {
             // Set to unfavoured button if not favourite already
             favouriteButton.setImageDrawable(ResourcesCompat.getDrawable(view.context.resources,
-                R.drawable.ic_favorite_border_black_24dp, null))
+                R.drawable.ic_favorite_border_orange_24dp, null))
         } else {
             featuredCatSaved = true
+        }
+
+        if (DataService.INSTANCE.darkMode){
+            val white = view.resources.getColor(R.color.white, null)
+            itemView.catCard.setCardBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+            catName.setTextColor(white)
+            catAge.setTextColor(white)
+            catLocation.setTextColor(white)
         }
 
         this.cat = cat
@@ -64,7 +73,7 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     // Perform un-saving
                     // Update local state
                     favouriteButton.setImageDrawable(view.resources
-                        .getDrawable(R.drawable.ic_favorite_border_black_24dp, null))
+                        .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null))
                     featuredCatSaved = false
 
                     // Update global state
@@ -73,7 +82,7 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     // Perform saving
                     // Update local state
                     favouriteButton.setImageDrawable(view.resources
-                        .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                        .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
                     featuredCatSaved = true
 
                     // Update global state

@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
@@ -52,6 +53,16 @@ class MainActivity : AppCompatActivity() {
 
         // Start the DataService
         DataService.INSTANCE.initialize(this)
+        DataService.INSTANCE.loadPreferences()
+        if (DataService.INSTANCE.darkMode){
+            invalidateOptionsMenu()
+        }
+
+        // Handle already being logged in before navigation/starting the app for persistent login
+        val user = DataService.INSTANCE.user
+        if (user != null){
+            updateNavDrawLoginTextAndImage(user)
+        }
 
         // Create the notification channels
         // Adoption Status Change
@@ -70,9 +81,18 @@ class MainActivity : AppCompatActivity() {
             ADOPTION_NEWS_CHANNEL_ID)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        if (DataService.INSTANCE.darkMode){
+            val settingsItem = menu.findItem(R.id.actionSettingsButton)
+            settingsItem.icon = ContextCompat.getDrawable(this, R.drawable.ic_settings_white_24dp)
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onStop() {
         super.onStop()
         DataService.INSTANCE.syncSavedCats()
+        DataService.INSTANCE.savePreferences()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -173,11 +193,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateNavDrawLoginTextAndImage(user: FirebaseUser?){
         if (user != null) {
-            navDrawLogin.text = "My Account"
+            navDrawLoginText.text = "My Account"
             if (user.photoUrl != null) {
                 Picasso.get().load(user.photoUrl).into(navDrawLoginImage)
             } else {
-                navDrawLoginImage.setImageResource(R.drawable.ic_face_black_24dp)
+                navDrawLoginImage.setImageResource(R.drawable.ic_face_orange_24dp)
             }
         }
     }

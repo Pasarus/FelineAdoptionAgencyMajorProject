@@ -57,6 +57,13 @@ class HomeFragment : Fragment() {
         view.adoptionStatusRecyclerView.adapter = adapter
         layoutView = view
 
+        val white = view.resources.getColor(R.color.white, null)
+        // Setup DarkMode
+        if (DataService.INSTANCE.darkMode) {
+            view.featuredCatTitleText.setTextColor(white)
+            view.adoptionStatusTitle.setTextColor(white)
+        }
+
         //Set up featured cat
         val randomInt = Random.nextInt(1, 9)
         val catToGet = "cat$randomInt"
@@ -73,10 +80,20 @@ class HomeFragment : Fragment() {
             if (DataService.INSTANCE.isCatFavourite(cat.catId)){
                 // Update local state
                 view.faveButtonCard.setImageDrawable(resources
-                    .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                    .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
                 featuredCatSaved = true
             }
+
+            // Setup Card Dark mode
+            if (DataService.INSTANCE.darkMode){
+                view.savedCatCardViewLayout.setBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+                view.catName.setTextColor(white)
+                view.catAge.setTextColor(white)
+                view.catLocation.setTextColor(white)
+                view.catDescription.setTextColor(white)
+            }
         }
+
 
         view.featuredCatCardView.setOnClickListener {
             val bundle = Bundle()
@@ -93,7 +110,7 @@ class HomeFragment : Fragment() {
                     // Perform un-saving
                     // Update local state
                     view.faveButtonCard.setImageDrawable(resources
-                        .getDrawable(R.drawable.ic_favorite_border_black_24dp, null))
+                        .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null))
                     featuredCatSaved = false
 
                     // Update global state
@@ -102,7 +119,7 @@ class HomeFragment : Fragment() {
                     // Perform saving
                     // Update local state
                     view.faveButtonCard.setImageDrawable(resources
-                        .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                        .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
                     featuredCatSaved = true
 
                     // Update global state

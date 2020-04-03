@@ -1,16 +1,20 @@
 package uk.ac.aber.dcs.mmp.faa.datasources
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.User
 import uk.ac.aber.dcs.mmp.faa.ui.main.MainActivity
 import uk.ac.aber.dcs.mmp.faa.utils.SimpleObservableStringSet
-import uk.ac.aber.dcs.mmp.faa.R
+
 
 class DataService private constructor() {
     var user: FirebaseUser? = null
@@ -34,6 +38,12 @@ class DataService private constructor() {
     var savedCats: SimpleObservableStringSet =
         SimpleObservableStringSet()
 
+    val DARK_MODE_KEY = "darkMode"
+    var settings = mutableMapOf(
+        DARK_MODE_KEY to false
+    )
+    var darkMode = false
+
     companion object {
         val INSTANCE = DataService()
     }
@@ -41,6 +51,34 @@ class DataService private constructor() {
     fun initialize(mainActivity: MainActivity) {
         this.mainActivity = mainActivity
         database = Firebase.firestore
+    }
+
+    fun loadPreferences() {
+        val preferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
+        settings = mutableMapOf(DARK_MODE_KEY to preferences.getBoolean(DARK_MODE_KEY, false))
+
+        if (settings.getOrDefault(DARK_MODE_KEY, false)){
+            darkMode()
+        } else {
+            lightMode()
+        }
+    }
+
+    fun darkMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        darkMode = true
+    }
+
+    fun lightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        darkMode = false
+    }
+
+    fun savePreferences() {
+        val preferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putBoolean(DARK_MODE_KEY, settings.getOrElse(DARK_MODE_KEY) { false })
+        editor.apply()
     }
 
     fun syncSavedCats() {

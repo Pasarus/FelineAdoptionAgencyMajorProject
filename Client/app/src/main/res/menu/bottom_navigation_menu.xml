@@ -8,5 +8,5 @@
         android:icon="@drawable/ic_cat" />
     <item android:id="@+id/savedFragment"
         android:title="@string/saved_cats"
-        android:icon="@drawable/ic_favorite_black_24dp" />
+        android:icon="@drawable/ic_favorite_orange_24dp" />
 </menu>

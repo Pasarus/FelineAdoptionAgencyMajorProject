@@ -4,11 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.cat_card_info_fragment.*
 import kotlinx.android.synthetic.main.cat_card_info_fragment.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
@@ -91,7 +89,7 @@ class CatCardInfoFragment : Fragment() {
         if (DataService.INSTANCE.isCatFavourite(cat.catId)) {
             // Set to unfavoured button if not favourite already
             view.faveButton.setImageDrawable(resources
-                .getDrawable(R.drawable.ic_favorite_black_24dp, null))
+                .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
             catSaved = true
         }
 
@@ -106,19 +104,25 @@ class CatCardInfoFragment : Fragment() {
                     catSaved = false
                     view.faveButton.setImageDrawable(
                         resources
-                            .getDrawable(R.drawable.ic_favorite_border_black_24dp, null)
+                            .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null)
                     )
                     DataService.INSTANCE.savedCats.remove(cat.catId)
                 } else {
                     // Not saved, so save
                     view.faveButton.setImageDrawable(
                         resources
-                            .getDrawable(R.drawable.ic_favorite_black_24dp, null)
+                            .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
                     )
                     catSaved = true
                     DataService.INSTANCE.savedCats.add(cat.catId!!)
                 }
             }
+        }
+
+        // Setup Dark mode
+        if (DataService.INSTANCE.darkMode){
+            val white = view.resources.getColor(R.color.white, null)
+            view.catInfoFragmentCatName.setTextColor(white)
         }
 
         return view
