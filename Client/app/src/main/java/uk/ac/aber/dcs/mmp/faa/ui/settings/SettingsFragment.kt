@@ -7,16 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.settings_fragment.view.*
 
 import uk.ac.aber.dcs.mmp.faa.R
 
 class SettingsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
-
-    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,15 +19,53 @@ class SettingsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.settings_fragment, container, false)
 
-        view.findViewById<BottomNavigationView>(R.id.bottomNavigationBar)
+        view.allNotificationsSwitch.setOnCheckedChangeListener {
+                buttonView, isChecked ->
+            if (isChecked){
+                view.newCatNotification.isChecked = true
+                view.newsNotification.isChecked = true
+                view.adoptionStatusChangeNotifications.isChecked = true
+            } else {
+                view.newCatNotification.isChecked = false
+                view.newsNotification.isChecked = false
+                view.adoptionStatusChangeNotifications.isChecked = false
+            }
+        }
+
+        view.newCatNotification.setOnCheckedChangeListener {
+                buttonView, isChecked ->
+            if (isChecked){
+
+            } else {
+
+            }
+        }
 
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SettingsViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun switchToDarkMode(){
+
+    }
+
+    private fun switchFromDarkMode(){
+
+    }
+
+    private fun turnOnAllNotifications() {
+
+    }
+
+    private fun turnOnAdoptionStatusChangeNotifications() {
+
+    }
+
+    private fun turnOnNewlyListedCatsNotifications() {
+
+    }
+
+    private fun turnOnAdoptionNewsNotifications() {
+
     }
 
 }

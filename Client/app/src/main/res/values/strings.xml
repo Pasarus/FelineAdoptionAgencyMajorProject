@@ -91,4 +91,13 @@
     <string name="help_third_paragraph">Once you find a cat that you may consider adopting tap on the info card. To get more information, after you have decided to adopt a specific cat, scroll down on the extra information screen and click the adopt button, if you haven\'t logged in, you will be asked to login, after logging in click the button again and the adoption forms will assist you.</string>
     <string name="help_second_paragraph">Once using the tool, find a cat by browsing our selection, a cat will be displayed in a info card.</string>
     <string name="help_first_paragraph">You need to find a cat in our helpful cat finder tool!, to do this please navigate to the cat finder tab using the bottom navigation bar.</string>
+    <string name="help_title">How to adopt a cat:</string>
+    <string name="adoption_news">Adoption news</string>
+    <string name="newly_listed_cat">Newly listed cat</string>
+    <string name="adoption_status_change">Adoption Status Change</string>
+    <string name="all_notifications">All Notifications</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="adoption_status_change_description">Notifies a user of any change to their adoptions</string>
+    <string name="adoption_news_description">Any news from the adoption app that you may need to know</string>
+    <string name="newly_listed_cat_description">When a new cat is listed, recieve a notification</string>
 </resources>

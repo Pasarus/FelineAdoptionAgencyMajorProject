@@ -1,7 +1,11 @@
 package uk.ac.aber.dcs.mmp.faa.ui.main
 
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -26,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private val startDestinations = setOf(R.id.homeFragment, R.id.savedFragment, R.id.findCatFragment)
     private val RC_SIGN_IN = 0
+    private val ADOPTION_STATUS_CHANGE_CHANNEL_ID = "ADOPTIONSTATUSCHANGECHANNELID"
+    private val NEWLY_LISTED_CAT_CHANNEL_ID = "NEWLYLISTEDCATCHANNELID"
+    private val ADOPTION_NEWS_CHANNEL_ID = "ADOPTIONNEWSCHANNELID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +53,21 @@ class MainActivity : AppCompatActivity() {
         // Start the DataService
         DataService.INSTANCE.initialize(this)
 
+        // Create the notification channels
+        // Adoption Status Change
+        createNotificationChannel(getString(R.string.adoption_status_change),
+            getString(R.string.adoption_status_change_description),
+            ADOPTION_STATUS_CHANGE_CHANNEL_ID)
+
+        // Newly listed cat
+        createNotificationChannel(getString(R.string.newly_listed_cat),
+            getString(R.string.newly_listed_cat_description),
+            NEWLY_LISTED_CAT_CHANNEL_ID)
+
+        // Adoption news
+        createNotificationChannel(getString(R.string.adoption_news),
+            getString(R.string.adoption_news_description),
+            ADOPTION_NEWS_CHANNEL_ID)
     }
 
     override fun onStop() {
@@ -159,5 +181,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun createNotificationChannel(channelName: String, channelDescription: String, channelID: String) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelID, channelName, importance).apply {
+                description = channelDescription
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }
 
