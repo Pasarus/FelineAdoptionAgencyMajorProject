@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.home_fragment.view.*
 import kotlinx.android.synthetic.main.home_fragment.view.adoptionStatusRecyclerView
@@ -47,6 +49,13 @@ class MyAccountFragment : Fragment() {
             DataService.INSTANCE.updateUserDataForView(view)
         }
         view.adoptionStatusRecyclerView.adapter = adapter
+
+        view.logOutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            DataService.INSTANCE.user = null
+            DataService.INSTANCE.mainActivity.updateNavDrawLoginTextAndImage(null)
+            findNavController().navigate(R.id.homeFragment)
+        }
 
         val white = view.resources.getColor(R.color.white, null)
         if (DataService.INSTANCE.darkMode){

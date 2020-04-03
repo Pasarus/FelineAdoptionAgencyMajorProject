@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -17,7 +18,7 @@ import uk.ac.aber.dcs.mmp.faa.utils.SimpleObservableStringSet
 
 
 class DataService private constructor() {
-    var user: FirebaseUser? = null
+    var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
     set(user) {
         field = user
         if (user != null){

@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity() {
         DataService.INSTANCE.savedCats.updateObserversAddBlank()
     }
 
-    private fun updateNavDrawLoginTextAndImage(user: FirebaseUser?){
+    fun updateNavDrawLoginTextAndImage(user: FirebaseUser?){
         if (user != null) {
             navDrawLoginText.text = "My Account"
             if (user.photoUrl != null) {
@@ -199,6 +199,9 @@ class MainActivity : AppCompatActivity() {
             } else {
                 navDrawLoginImage.setImageResource(R.drawable.ic_face_orange_24dp)
             }
+        } else {
+            navDrawLoginText.text = "Login"
+            navDrawLoginImage.setImageResource(R.drawable.ic_lock_orange_24dp)
         }
     }
 

@@ -100,4 +100,5 @@
     <string name="adoption_status_change_description">Notifies a user of any change to their adoptions</string>
     <string name="adoption_news_description">Any news from the adoption app that you may need to know</string>
     <string name="newly_listed_cat_description">When a new cat is listed, recieve a notification</string>
+    <string name="logout">logout</string>
 </resources>
