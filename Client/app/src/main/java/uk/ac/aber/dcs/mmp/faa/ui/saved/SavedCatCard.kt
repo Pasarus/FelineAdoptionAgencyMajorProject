@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.ui.saved
 
 import android.os.Bundle
@@ -54,24 +69,31 @@ class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun bind (cat: Cat) {
+    fun bind(cat: Cat) {
         catName.text = cat.catName
         catAge.text = convertMonthsNumberToUsableString(cat.catAgeMonths)
         catLocation.text = cat.location
         Picasso.get().load(cat.pictureUrl).into(catImage)
         catDescription.text = cat.description
 
-        if (DataService.INSTANCE.isCatFavourite(cat.catId)){
+        if (DataService.INSTANCE.isCatFavourite(cat.catId)) {
             // Update local state
-            faveButtonCard.setImageDrawable(itemView.resources
-                .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
+            faveButtonCard.setImageDrawable(
+                itemView.resources
+                    .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
+            )
             catSaved = true
         }
         catCopy = cat
 
         // Set up darkMode for card
-        if (DataService.INSTANCE.darkMode){
-            itemView.savedCatCardViewLayout.setBackgroundColor(itemView.resources.getColor(R.color.darkCardBackground, null))
+        if (DataService.INSTANCE.darkMode) {
+            itemView.savedCatCardViewLayout.setBackgroundColor(
+                itemView.resources.getColor(
+                    R.color.darkCardBackground,
+                    null
+                )
+            )
             catName.setTextColor(itemView.resources.getColor(R.color.white, null))
             catAge.setTextColor(itemView.resources.getColor(R.color.white, null))
             catLocation.setTextColor(itemView.resources.getColor(R.color.white, null))

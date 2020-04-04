@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.ui.adoption
 
 import android.os.Bundle
@@ -51,16 +66,20 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         val white = view.resources.getColor(R.color.white, null)
-        if (DataService.INSTANCE.darkMode){
-            view.adoptionProcessCard.setBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+        if (DataService.INSTANCE.darkMode) {
+            view.adoptionProcessCard.setBackgroundColor(
+                view.resources.getColor(
+                    R.color.darkCardBackground,
+                    null
+                )
+            )
             catName.setTextColor(white)
             adoptionInfo.setTextColor(white)
         }
     }
 
-    private fun requestCatInfoAndBind(catReference: DocumentReference){
-        catReference.get().addOnSuccessListener{
-            document ->
+    private fun requestCatInfoAndBind(catReference: DocumentReference) {
+        catReference.get().addOnSuccessListener { document ->
             cat = document.toObject(Cat::class.java)!!
             catName.text = cat.catName
             Picasso.get().load(cat.pictureUrl).into(catImage)

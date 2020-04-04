@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.ui.catinfo
 
 import android.os.Bundle
@@ -37,26 +52,35 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         navController.navigate(R.id.catCardInfoFragment, bundle)
     }
 
-    fun bind (cat: Cat){
+    fun bind(cat: Cat) {
         catName.text = cat.catName
         catAge.text = convertMonthsNumberToUsableString(cat.catAgeMonths)
         catLocation.text = cat.location
-        if (cat.pictureUrl != "" && cat.pictureUrl != null){
+        if (cat.pictureUrl != "" && cat.pictureUrl != null) {
             Picasso.get().load(cat.pictureUrl).into(catPictureCard)
         }
 
         // Get if this cat is a saved/favourite cat.
         if (!DataService.INSTANCE.isCatFavourite(cat.catId)) {
             // Set to unfavoured button if not favourite already
-            favouriteButton.setImageDrawable(ResourcesCompat.getDrawable(view.context.resources,
-                R.drawable.ic_favorite_border_orange_24dp, null))
+            favouriteButton.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    view.context.resources,
+                    R.drawable.ic_favorite_border_orange_24dp, null
+                )
+            )
         } else {
             featuredCatSaved = true
         }
 
-        if (DataService.INSTANCE.darkMode){
+        if (DataService.INSTANCE.darkMode) {
             val white = view.resources.getColor(R.color.white, null)
-            itemView.catCard.setCardBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+            itemView.catCard.setCardBackgroundColor(
+                view.resources.getColor(
+                    R.color.darkCardBackground,
+                    null
+                )
+            )
             catName.setTextColor(white)
             catAge.setTextColor(white)
             catLocation.setTextColor(white)
@@ -72,8 +96,10 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 if (featuredCatSaved) {
                     // Perform un-saving
                     // Update local state
-                    favouriteButton.setImageDrawable(view.resources
-                        .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null))
+                    favouriteButton.setImageDrawable(
+                        view.resources
+                            .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null)
+                    )
                     featuredCatSaved = false
 
                     // Update global state
@@ -81,8 +107,10 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 } else {
                     // Perform saving
                     // Update local state
-                    favouriteButton.setImageDrawable(view.resources
-                        .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
+                    favouriteButton.setImageDrawable(
+                        view.resources
+                            .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
+                    )
                     featuredCatSaved = true
 
                     // Update global state

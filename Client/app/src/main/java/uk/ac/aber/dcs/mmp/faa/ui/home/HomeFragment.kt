@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.ui.home
 
 import android.os.Bundle
@@ -31,20 +46,29 @@ class HomeFragment : Fragment() {
 
     private lateinit var layoutView: View
 
-    private var query = FirebaseFirestore.getInstance().collection("adoptionProcesses").document("default").collection("adoptionProcesses").limit(10)
+    private var query =
+        FirebaseFirestore.getInstance().collection("adoptionProcesses").document("default")
+            .collection("adoptionProcesses").limit(10)
 
-    private val options = FirestoreRecyclerOptions.Builder<AdoptionProcess>().setQuery(query, AdoptionProcess::class.java).setLifecycleOwner(this).build()
+    private val options = FirestoreRecyclerOptions.Builder<AdoptionProcess>()
+        .setQuery(query, AdoptionProcess::class.java).setLifecycleOwner(this).build()
 
-    private val adapter = object : FirestoreRecyclerAdapter<AdoptionProcess, AdoptionStatusCard>(options) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptionStatusCard {
-            val localView = LayoutInflater.from(parent.context).inflate(R.layout.adoption_status_card, parent, false)
-            return AdoptionStatusCard(localView)
+    private val adapter =
+        object : FirestoreRecyclerAdapter<AdoptionProcess, AdoptionStatusCard>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptionStatusCard {
+                val localView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.adoption_status_card, parent, false)
+                return AdoptionStatusCard(localView)
+            }
+
+            override fun onBindViewHolder(
+                holder: AdoptionStatusCard,
+                position: Int,
+                model: AdoptionProcess
+            ) {
+                holder.bind(model)
+            }
         }
-
-        override fun onBindViewHolder(holder: AdoptionStatusCard, position: Int, model: AdoptionProcess) {
-            holder.bind(model)
-        }
-    }
 
     lateinit var cat: Cat
 
@@ -68,8 +92,7 @@ class HomeFragment : Fragment() {
         val randomInt = Random.nextInt(1, 9)
         val catToGet = "cat$randomInt"
         val catQuery = FirebaseFirestore.getInstance().collection("cats").document(catToGet)
-        catQuery.get().addOnSuccessListener {
-            document ->
+        catQuery.get().addOnSuccessListener { document ->
             cat = document.toObject()!!
             view.catName.text = cat.catName
             view.catAge.text = convertMonthsNumberToUsableString(cat.catAgeMonths)
@@ -77,16 +100,23 @@ class HomeFragment : Fragment() {
             Picasso.get().load(cat.pictureUrl).into(view.catImage)
             view.catDescription.text = cat.description
 
-            if (DataService.INSTANCE.isCatFavourite(cat.catId)){
+            if (DataService.INSTANCE.isCatFavourite(cat.catId)) {
                 // Update local state
-                view.faveButtonCard.setImageDrawable(resources
-                    .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
+                view.faveButtonCard.setImageDrawable(
+                    resources
+                        .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
+                )
                 featuredCatSaved = true
             }
 
             // Setup Card Dark mode
-            if (DataService.INSTANCE.darkMode){
-                view.savedCatCardViewLayout.setBackgroundColor(view.resources.getColor(R.color.darkCardBackground, null))
+            if (DataService.INSTANCE.darkMode) {
+                view.savedCatCardViewLayout.setBackgroundColor(
+                    view.resources.getColor(
+                        R.color.darkCardBackground,
+                        null
+                    )
+                )
                 view.catName.setTextColor(white)
                 view.catAge.setTextColor(white)
                 view.catLocation.setTextColor(white)
@@ -109,8 +139,10 @@ class HomeFragment : Fragment() {
                 if (featuredCatSaved) {
                     // Perform un-saving
                     // Update local state
-                    view.faveButtonCard.setImageDrawable(resources
-                        .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null))
+                    view.faveButtonCard.setImageDrawable(
+                        resources
+                            .getDrawable(R.drawable.ic_favorite_border_orange_24dp, null)
+                    )
                     featuredCatSaved = false
 
                     // Update global state
@@ -118,8 +150,10 @@ class HomeFragment : Fragment() {
                 } else {
                     // Perform saving
                     // Update local state
-                    view.faveButtonCard.setImageDrawable(resources
-                        .getDrawable(R.drawable.ic_favorite_orange_24dp, null))
+                    view.faveButtonCard.setImageDrawable(
+                        resources
+                            .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
+                    )
                     featuredCatSaved = true
 
                     // Update global state
@@ -136,24 +170,36 @@ class HomeFragment : Fragment() {
         val user = DataService.INSTANCE.user
         val reyclerView = layoutView.findViewById<RecyclerView>(R.id.adoptionStatusRecyclerView)
         val noUserText = layoutView.findViewById<TextView>(R.id.noUserYetTextView)
-        if (user != null){
+        if (user != null) {
             // Hide text and setup recycler view as the user is signed in.
             reyclerView.visibility = VISIBLE
             noUserText.visibility = INVISIBLE
-            val query = FirebaseFirestore.getInstance().collection("adoptionProcesses").document(user.uid).collection("adoptionProcesses").limit(10)
+            val query =
+                FirebaseFirestore.getInstance().collection("adoptionProcesses").document(user.uid)
+                    .collection("adoptionProcesses").limit(10)
 
-            val options = FirestoreRecyclerOptions.Builder<AdoptionProcess>().setQuery(query, AdoptionProcess::class.java).setLifecycleOwner(this).build()
+            val options = FirestoreRecyclerOptions.Builder<AdoptionProcess>()
+                .setQuery(query, AdoptionProcess::class.java).setLifecycleOwner(this).build()
 
-            val adapter = object : FirestoreRecyclerAdapter<AdoptionProcess, AdoptionStatusCard>(options) {
-                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptionStatusCard {
-                    val localView = LayoutInflater.from(parent.context).inflate(R.layout.adoption_status_card, parent, false)
-                    return AdoptionStatusCard(localView)
+            val adapter =
+                object : FirestoreRecyclerAdapter<AdoptionProcess, AdoptionStatusCard>(options) {
+                    override fun onCreateViewHolder(
+                        parent: ViewGroup,
+                        viewType: Int
+                    ): AdoptionStatusCard {
+                        val localView = LayoutInflater.from(parent.context)
+                            .inflate(R.layout.adoption_status_card, parent, false)
+                        return AdoptionStatusCard(localView)
+                    }
+
+                    override fun onBindViewHolder(
+                        holder: AdoptionStatusCard,
+                        position: Int,
+                        model: AdoptionProcess
+                    ) {
+                        holder.bind(model)
+                    }
                 }
-
-                override fun onBindViewHolder(holder: AdoptionStatusCard, position: Int, model: AdoptionProcess) {
-                    holder.bind(model)
-                }
-            }
             reyclerView.adapter = adapter
         } else {
             reyclerView.visibility = INVISIBLE

@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.datasources
 
 import android.content.Context
@@ -19,21 +34,25 @@ import uk.ac.aber.dcs.mmp.faa.utils.SimpleObservableStringSet
 
 class DataService private constructor() {
     var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
-    set(user) {
-        field = user
-        if (user != null){
+        set(user) {
+            field = user
+            updateSavedCatsFromUser()
+        }
+
+    private fun updateSavedCatsFromUser() {
+        if (user != null) {
             FirebaseFirestore.getInstance().collection("users")
-                .document(user.uid).get().addOnSuccessListener {
-                document ->
+                .document(user!!.uid).get().addOnSuccessListener { document ->
                     val userObject: User? = document.toObject()
                     if (userObject != null) {
                         // User has an object so update the saved cats list
                         savedCats.clear()
                         savedCats.addAll(userObject.favouritedCats!!)
                     }
-            }
+                }
         }
     }
+
     private lateinit var database: FirebaseFirestore
     lateinit var mainActivity: MainActivity
     var savedCats: SimpleObservableStringSet =
@@ -44,6 +63,17 @@ class DataService private constructor() {
         DARK_MODE_KEY to false
     )
     var darkMode = false
+    private var onStopCalledCount = 0
+    fun shouldMainActivitySyncOnStop(): Boolean {
+        // When darkmode is applied, onStop is called before we can
+        // receive the current favourite cat's state from the Firestore, this means we must allow
+        // for 1 extra call to ensure the darkmode state can be set correctly
+        val returnValue = if (darkMode && onStopCalledCount >= 1){
+            true
+        } else !darkMode
+        onStopCalledCount += 1
+        return returnValue
+    }
 
     companion object {
         val INSTANCE = DataService()
@@ -58,11 +88,14 @@ class DataService private constructor() {
         val preferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
         settings = mutableMapOf(DARK_MODE_KEY to preferences.getBoolean(DARK_MODE_KEY, false))
 
-        if (settings.getOrDefault(DARK_MODE_KEY, false)){
+        if (settings.getOrDefault(DARK_MODE_KEY, false)) {
             darkMode()
         } else {
             lightMode()
         }
+
+        // Load back the current saved cat state
+        updateSavedCatsFromUser()
     }
 
     fun darkMode() {
@@ -98,15 +131,27 @@ class DataService private constructor() {
      */
     fun updateUserDataForView(view: View) {
         val name = view.findViewById<TextInputEditText>(R.id.nameTextField).text.toString()
-        val addressLineOne = view.findViewById<TextInputEditText>(R.id.addressLineOneTextField).text.toString()
-        val addressLineTwo = view.findViewById<TextInputEditText>(R.id.addressLineTwoTextField).text.toString()
-        val addressLineThree = view.findViewById<TextInputEditText>(R.id.addressLineThreeTextField).text.toString()
+        val addressLineOne =
+            view.findViewById<TextInputEditText>(R.id.addressLineOneTextField).text.toString()
+        val addressLineTwo =
+            view.findViewById<TextInputEditText>(R.id.addressLineTwoTextField).text.toString()
+        val addressLineThree =
+            view.findViewById<TextInputEditText>(R.id.addressLineThreeTextField).text.toString()
         val postCode = view.findViewById<TextInputEditText>(R.id.postCodeTextField).text.toString()
         val county = view.findViewById<TextInputEditText>(R.id.countyTextField).text.toString()
         val phone = view.findViewById<TextInputEditText>(R.id.phoneNumberTextField).text.toString()
 
 
-        val newUser = User(addressLineOne, addressLineTwo, addressLineThree, county, name, phone, postCode, favouritedCats = savedCats.toList())
+        val newUser = User(
+            addressLineOne,
+            addressLineTwo,
+            addressLineThree,
+            county,
+            name,
+            phone,
+            postCode,
+            favouritedCats = savedCats.toList()
+        )
         val userId = user!!.uid
         database.collection("users").document(userId).set(newUser)
     }
@@ -123,8 +168,7 @@ class DataService private constructor() {
         val county = view.findViewById<TextInputEditText>(R.id.countyTextField)
         val phone = view.findViewById<TextInputEditText>(R.id.phoneNumberTextField)
 
-        database.collection("users").document(user!!.uid).get().addOnSuccessListener {
-                document ->
+        database.collection("users").document(user!!.uid).get().addOnSuccessListener { document ->
             if (document != null) {
                 name.setText(document.get("name").toString())
                 addressLineOne.setText(document.get("addressLineOne").toString())

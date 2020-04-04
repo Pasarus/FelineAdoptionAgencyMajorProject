@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.datasources.dataclasses
 
 import android.os.Parcel
@@ -15,14 +30,15 @@ class AdoptionProcess : Parcelable {
     constructor(status: Map<String, Any>, cat: Cat) : this() {
         this.status = status
         this.cat = FirebaseFirestore.getInstance().collection("cats")
-            .document("cat"+cat.catId)
+            .document("cat" + cat.catId)
 
         this.user = FirebaseFirestore.getInstance().collection("users").document(
-            DataService.INSTANCE.user!!.uid)
+            DataService.INSTANCE.user!!.uid
+        )
     }
 
     constructor(parcel: Parcel) : this() {
-
+        TODO("Not yet implemented")
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {

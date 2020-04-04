@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa.ui.adoption
 
 import android.os.Bundle
@@ -34,14 +49,16 @@ class AdoptionStatusInfoViewFragment : Fragment() {
         val adoptionDescription: String
         val statusDrawable: Int
         when {
-            status!!["pending"] as Boolean -> {super.onResume()
+            status!!["pending"] as Boolean -> {
+                super.onResume()
                 statusDrawable = R.drawable.ic_access_alarm_yellow_24dp
                 adoptionDescription = status["pendingReason"] as String
                 adoptionStatus += "Pending"
             }
             status["accepted"] as Boolean -> {
                 statusDrawable = R.drawable.ic_done_all_green_24dp
-                adoptionDescription = "This cat is ready to collect or has already been collected! If you haven't yet please collect the cat from the Cattery!"
+                adoptionDescription =
+                    "This cat is ready to collect or has already been collected! If you haven't yet please collect the cat from the Cattery!"
                 adoptionStatus += "Accepted"
             }
             else -> {
@@ -51,7 +68,12 @@ class AdoptionStatusInfoViewFragment : Fragment() {
             }
         }
         view.adoptionStatusCurrentStatus.text = adoptionStatus
-        view.adoptionStatusCurrentStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, statusDrawable, 0)
+        view.adoptionStatusCurrentStatus.setCompoundDrawablesWithIntrinsicBounds(
+            0,
+            0,
+            statusDrawable,
+            0
+        )
         view.adoptionStatusCurrentStatusDetails.text = adoptionDescription
 
         view.cancelButton.setOnClickListener {
@@ -61,7 +83,7 @@ class AdoptionStatusInfoViewFragment : Fragment() {
         }
 
         // Setup Dark mode
-        if (DataService.INSTANCE.darkMode){
+        if (DataService.INSTANCE.darkMode) {
             val white = view.resources.getColor(R.color.white, null)
             view.adoptionStatusInfoFragmentCatName.setTextColor(white)
             view.adoptionStatusCurrentStatus.setTextColor(white)
@@ -71,8 +93,7 @@ class AdoptionStatusInfoViewFragment : Fragment() {
     }
 
     private fun requestCatUsingDocRef(catReference: DocumentReference, view: View) {
-        catReference.get().addOnSuccessListener {
-            document ->
+        catReference.get().addOnSuccessListener { document ->
             cat = document.toObject()
             view.adoptionStatusInfoFragmentCatName.text = cat!!.catName
             Picasso.get().load(cat!!.pictureUrl).into(view.adoptionStatusInfoFragmentImage)

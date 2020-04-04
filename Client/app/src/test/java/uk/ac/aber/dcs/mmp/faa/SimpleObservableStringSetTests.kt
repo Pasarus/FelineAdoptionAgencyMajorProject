@@ -1,3 +1,18 @@
+/*   Copyright 2020 Samuel Jones
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.ac.aber.dcs.mmp.faa
 
 import junit.framework.Assert.assertEquals
@@ -87,7 +102,7 @@ class SimpleObservableStringSetTests : ObserverOfStringSet {
     }
 
     @Test
-    fun test_notifiesOncePerItemAddedWhenAddingMultipleItemsWithAddAll(){
+    fun test_notifiesOncePerItemAddedWhenAddingMultipleItemsWithAddAll() {
         testSet.addAll(setOf("test1", "test2", "test3"))
         assertEquals(addCalledCount, 3)
     }
@@ -102,7 +117,7 @@ class SimpleObservableStringSetTests : ObserverOfStringSet {
     }
 
     @Test
-    fun test_notifiesOncePerItemClearedWhenRemovingMultipleItemsWithRemoveAll(){
+    fun test_notifiesOncePerItemClearedWhenRemovingMultipleItemsWithRemoveAll() {
         testSet.addAll(setOf("test1", "test2", "test3"))
         assertEquals(addCalledCount, 3)
 
@@ -114,7 +129,7 @@ class SimpleObservableStringSetTests : ObserverOfStringSet {
     @Test
     fun test_setSizeOption() {
         for (i in 1..10) {
-            testSet.add(""+i)
+            testSet.add("" + i)
             assertEquals(testSet.size, i)
         }
     }
@@ -137,7 +152,7 @@ class SimpleObservableStringSetTests : ObserverOfStringSet {
     fun test_setRetrievalViaIteratorStillWorks() {
         val test1 = "test1"
         testSet.add(test1)
-        for (wannabeTest1 in testSet){
+        for (wannabeTest1 in testSet) {
             assertEquals(wannabeTest1, test1)
         }
     }
