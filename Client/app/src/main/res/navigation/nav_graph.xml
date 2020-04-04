@@ -23,32 +23,32 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.settings.SettingsFragment"
-        android:label="settings_fragment"
+        android:label="Settings"
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/myAccountFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.account.MyAccountFragment"
-        android:label="my_account_fragment"
+        android:label="Account Details"
         tools:layout="@layout/my_account_fragment" />
     <fragment
         android:id="@+id/helpFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.help.HelpFragment"
-        android:label="help_fragment"
+        android:label="Help"
         tools:layout="@layout/help_fragment" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.about.AboutFragment"
-        android:label="fragment_about"
+        android:label="About"
         tools:layout="@layout/about_fragment" />
     <fragment
         android:id="@+id/feedbackFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.feedback.FeedbackFragment"
-        android:label="feedback_fragment"
+        android:label="Feedback"
         tools:layout="@layout/feedback_fragment" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.home.HomeFragment"
-        android:label="home_fragment"
+        android:label="Home"
         tools:layout="@layout/home_fragment" >
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
@@ -90,36 +90,36 @@
     <fragment
         android:id="@+id/savedFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.saved.SavedFragment"
-        android:label="saved_fragment"
+        android:label="Saved Cats"
         tools:layout="@layout/saved_fragment" />
     <fragment
         android:id="@+id/findCatFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.findcat.FindCatFragment"
-        android:label="find_cat_fragment"
+        android:label="Find A Cat Tool"
         tools:layout="@layout/find_cat_fragment" />
     <fragment
         android:id="@+id/adoptionStatusInfoViewFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionStatusInfoViewFragment"
-        android:label="adoption_status_info_view_fragment"
+        android:label="Adoption Status Info"
         tools:layout="@layout/adoption_status_info_view_fragment" />
     <fragment
         android:id="@+id/catCardInfoFragment"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCardInfoFragment"
-        android:label="cat_card_info_fragment"
+        android:label="More Info"
         tools:layout="@layout/cat_card_info_fragment" />
     <fragment
         android:id="@+id/adoptionForm"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionForm"
-        android:label="fragment_adoption_form"
+        android:label="Adoption Form"
         tools:layout="@layout/fragment_adoption_form" />
     <fragment
         android:id="@+id/adoptionFormConfirmation"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionFormConfirmation"
-        android:label="fragment_adoption_form_confirmation"
+        android:label="Adoption Confirmation"
         tools:layout="@layout/fragment_adoption_form_confirmation" />
     <dialog
         android:id="@+id/cancel_adoption_dialog"
         android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.CancelAdoptionDialog"
-        android:label="fragment_cancel_adoption_dialog"
+        android:label="Adoption Cancellation confirmation"
         tools:layout="@layout/fragment_cancel_adoption_dialog" />
 </navigation>
