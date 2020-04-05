@@ -33,7 +33,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
     private val ADOPTION_STATUS_CHANGE_CHANNEL_ID = "ADOPTIONSTATUSCHANGECHANNELID"
     private val NEWLY_LISTED_CAT_CHANNEL_ID = "NEWLYLISTEDCATCHANNELID"
     private val ADOPTION_NEWS_CHANNEL_ID = "ADOPTIONNEWSCHANNELID"
-    private var onStopCalledCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

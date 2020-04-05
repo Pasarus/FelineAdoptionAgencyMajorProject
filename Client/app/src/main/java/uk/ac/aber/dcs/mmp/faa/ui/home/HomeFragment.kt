@@ -100,27 +100,33 @@ class HomeFragment : Fragment() {
             Picasso.get().load(cat.pictureUrl).into(view.catImage)
             view.catDescription.text = cat.description
 
-            if (DataService.INSTANCE.isCatFavourite(cat.catId)) {
-                // Update local state
-                view.faveButtonCard.setImageDrawable(
-                    resources
-                        .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
-                )
-                featuredCatSaved = true
-            }
+            // Sometimes when the app is starting, apparently the HomeFragment may not have it's
+            // context assigned yet causing a hard crash, this if statement stops that crash but
+            // doesn't solve the overall issue.
+            if (context != null) {
+                if (DataService.INSTANCE.isCatFavourite(cat.catId)) {
+                    // Update local state
 
-            // Setup Card Dark mode
-            if (DataService.INSTANCE.darkMode) {
-                view.savedCatCardViewLayout.setBackgroundColor(
-                    view.resources.getColor(
-                        R.color.darkCardBackground,
-                        null
+                    view.faveButtonCard.setImageDrawable(
+                        resources
+                            .getDrawable(R.drawable.ic_favorite_orange_24dp, null)
                     )
-                )
-                view.catName.setTextColor(white)
-                view.catAge.setTextColor(white)
-                view.catLocation.setTextColor(white)
-                view.catDescription.setTextColor(white)
+                    featuredCatSaved = true
+                }
+
+                // Setup Card Dark mode
+                if (DataService.INSTANCE.darkMode) {
+                    view.savedCatCardViewLayout.setBackgroundColor(
+                        view.resources.getColor(
+                            R.color.darkCardBackground,
+                            null
+                        )
+                    )
+                    view.catName.setTextColor(white)
+                    view.catAge.setTextColor(white)
+                    view.catLocation.setTextColor(white)
+                    view.catDescription.setTextColor(white)
+                }
             }
         }
 

@@ -48,41 +48,41 @@ class CatCardInfoFragment : Fragment() {
         view.catInfoFragmentCatDescription.text = cat.description
         view.catInfoFragmentSex.text = cat.sex
 
-        if (cat.preferences!!["indoors"]!!)
+        if (cat.indoors!!)
             view.catInfoFragmentCanDealInside.text = resources.getText(R.string.canInfoCanDoIndoors)
         else
             view.catInfoFragmentCanDealInside.text =
                 resources.getText(R.string.canInfoCannotDoIndoors)
 
-        if (cat.preferences!!["dogs"]!!)
+        if (cat.dogs!!)
             view.catInfoFragmentCanDealWithDogs.text =
                 resources.getText(R.string.catInfoCanBeWithDogs)
         else
             view.catInfoFragmentCanDealWithDogs.text =
                 resources.getText(R.string.catInfoCannotBeWithDogs)
 
-        if (cat.preferences!!["otherCats"]!!)
+        if (cat.otherCats!!)
             view.catInfoFragmentCanDealWithCats.text =
                 resources.getText(R.string.catInfoCanDealWithCats)
         else
             view.catInfoFragmentCanDealWithCats.text =
                 resources.getText(R.string.catInfoCannotDealWithCats)
 
-        if (cat.preferences!!["kids0to4"]!!)
+        if (cat.kids0to4!!)
             view.catInfoFragmentYoungKids.text =
                 resources.getText(R.string.catInfoCanBeAroundYoungChildren)
         else
             view.catInfoFragmentYoungKids.text =
                 resources.getText(R.string.catInfoCannotDealWithYoungChildren)
 
-        if (cat.preferences!!["kids5to12"]!!)
+        if (cat.kids5to12!!)
             view.catInfoFragmentPrimaryAgeKids.text =
                 resources.getText(R.string.catInfoCanBeAroundPrimaryAgeKids)
         else
             view.catInfoFragmentPrimaryAgeKids.text =
                 resources.getText(R.string.catInfoCannnotBeAroundPrimaryAgeKids)
 
-        if (cat.preferences!!["kids13to18"]!!)
+        if (cat.kids13to18!!)
             view.catInfoFragmentHighSchoolKids.text =
                 resources.getText(R.string.catInfoCanBeAroundHighSchoolkids)
         else

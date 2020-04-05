@@ -29,27 +29,50 @@ class Cat : Parcelable {
     var location: String? = ""
     var neutered: Boolean? = false
     var pictureUrl: String? = ""
-    var preferences: MutableMap<String, Boolean>? = HashMap()
+    var dogs: Boolean? = false
+    var indoors: Boolean? = false
+    var kids0to4: Boolean? = false
+    var kids13to18: Boolean? = false
+    var kids5to12: Boolean? = false
+    var otherCats: Boolean? = false
     var sex: String? = ""
     var catId: String? = ""
 
     constructor() : super()  // Needed for Firebase
     constructor(
-        catAgeMonths: Int?, catBreed: String?, catName: String?, color: String?,
-        description: String?, disabled: Boolean?, location: String?, neutered: Boolean?,
-        pictureId: String?, preferences: MutableMap<String, Boolean>?, sex: String?,
+        catAgeMonths: Int?,
+        catBreed: String?,
+        catName: String?,
+        colour: String?,
+        description: String?,
+        disabled: Boolean?,
+        location: String?,
+        neutered: Boolean?,
+        pictureUrl: String?,
+        dogs: Boolean?,
+        indoors: Boolean?,
+        kids0to4: Boolean?,
+        kids13to18: Boolean?,
+        kids5to12: Boolean?,
+        otherCats: Boolean?,
+        sex: String?,
         catId: String?
-    ) : this() {
+    ) {
         this.catAgeMonths = catAgeMonths
         this.catBreed = catBreed
         this.catName = catName
-        this.colour = color
+        this.colour = colour
         this.description = description
         this.disabled = disabled
         this.location = location
         this.neutered = neutered
-        this.pictureUrl = pictureId
-        this.preferences = preferences
+        this.pictureUrl = pictureUrl
+        this.dogs = dogs
+        this.indoors = indoors
+        this.kids0to4 = kids0to4
+        this.kids13to18 = kids13to18
+        this.kids5to12 = kids5to12
+        this.otherCats = otherCats
         this.sex = sex
         this.catId = catId
     }
@@ -66,6 +89,12 @@ class Cat : Parcelable {
         pictureUrl = parcel.readString()
         sex = parcel.readString()
         catId = parcel.readString()
+        dogs = parcel.readBoolean()
+        indoors = parcel.readBoolean()
+        kids0to4 = parcel.readBoolean()
+        kids13to18 = parcel.readBoolean()
+        kids5to12 = parcel.readBoolean()
+        otherCats = parcel.readBoolean()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -80,6 +109,12 @@ class Cat : Parcelable {
         parcel.writeString(pictureUrl)
         parcel.writeString(sex)
         parcel.writeValue(catId)
+        parcel.writeBoolean(dogs!!)
+        parcel.writeBoolean(indoors!!)
+        parcel.writeBoolean(kids0to4!!)
+        parcel.writeBoolean(kids13to18!!)
+        parcel.writeBoolean(kids5to12!!)
+        parcel.writeBoolean(otherCats!!)
     }
 
     override fun describeContents(): Int {

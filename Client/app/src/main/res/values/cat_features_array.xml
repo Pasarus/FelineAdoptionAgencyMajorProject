@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2020 Samuel Jones
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License. -->
+
+<resources>
+    <string-array name="families">
+        <item>Children</item>
+        <item>No Children</item>
+    </string-array>
+
+    <string-array name="disabled">
+        <item>Disabled</item>
+        <item>Not Disabled</item>
+    </string-array>
+
+    <string-array name="otherCats">
+        <item>Other cats welcome</item>
+        <item>No other cats</item>
+    </string-array>
+
+    <string-array name="dogs">
+        <item>Happy with Dogs</item>
+        <item>Unhappy with Dogs</item>
+    </string-array>
+
+    <string-array name="indoorsOnly">
+        <item>Indoors only</item>
+        <item>Needs outside access</item>
+    </string-array>
+
+    <string-array name="location">
+        <item>Aberystwyth Cattery</item>
+        <item>Borth Cattery</item>
+        <item>Machynlleth Cats Home</item>
+    </string-array>
+
+    <string-array name="sortBy">
+        <item>Age</item>
+        <item>Name</item>
+        <item>Recently Listed</item>
+    </string-array>
+
+    <string-array name="sortByOrdering">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+</resources>
