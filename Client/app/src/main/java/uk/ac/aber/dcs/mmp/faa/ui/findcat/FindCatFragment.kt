@@ -33,33 +33,11 @@ import uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCard
 
 class FindCatFragment : Fragment() {
 
-    private val query = FirebaseFirestore.getInstance().collection("cats").orderBy("catId", Query.Direction.ASCENDING)
-
-    private val options = FirestoreRecyclerOptions.Builder<Cat>().setQuery(query, Cat::class.java)
-        .setLifecycleOwner(this).build()
-
-    private val adapter = object : FirestoreRecyclerAdapter<Cat, CatCard>(options) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatCard {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.cat_card, parent, false)
-            return CatCard(view)
-        }
-
-        override fun onBindViewHolder(holder: CatCard, position: Int, model: Cat) {
-            holder.bind(model)
-        }
-    }
-
     private var filtersShowing = false
 
     override fun onStart() {
         super.onStart()
-        adapter.startListening()
         clearFilters(view!!)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapter.stopListening()
     }
 
     override fun onCreateView(
@@ -68,9 +46,8 @@ class FindCatFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.find_cat_fragment, container, false)
 
-        view.catRecyclerView.adapter = adapter
-
         setupTheFilterMenus(view)
+        updateRecyclerViewAdapterWithFilters(view)
 
         view.updateFilterButton.setOnClickListener {
             updateRecyclerViewAdapterWithFilters(view)
@@ -107,8 +84,6 @@ class FindCatFragment : Fragment() {
         view.familiesFilterDropDown.setText("")
         view.dogsFilterDropDown.setText("")
         view.disabledFilterDropDown.setText("")
-        view.sortByDropDown.setText("Recently Listed")
-        view.sortByOrderingDropDown.setText("Ascending")
         view.otherCatsFilterDropDown.setText("")
         view.indoorsFilterDropDown.setText("")
     }
@@ -145,7 +120,9 @@ class FindCatFragment : Fragment() {
         view.indoorsFilterDropDown.setAdapter(ArrayAdapter(context, menuItem, indoorsOnlyItems))
         view.locationFilterDropDown.setAdapter(ArrayAdapter(context, menuItem, locationItems))
         view.sortByDropDown.setAdapter(ArrayAdapter(context, menuItem, sortByItems))
+        view.sortByDropDown.setText("Recently Listed", false)
         view.sortByOrderingDropDown.setAdapter(ArrayAdapter(context, menuItem, sortByOrderingItems))
+        view.sortByOrderingDropDown.setText("Ascending", false)
     }
 
     private fun updateRecyclerViewAdapterWithFilters(view: View) {

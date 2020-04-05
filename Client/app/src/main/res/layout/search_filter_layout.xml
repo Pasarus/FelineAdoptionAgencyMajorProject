@@ -57,8 +57,7 @@
                 android:id="@+id/sortByDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
-                android:text="Recently Listed"/>
+                android:editable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,8 +75,7 @@
                 android:id="@+id/sortByOrderingDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
-                android:text="Ascending"/>
+                android:editable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
