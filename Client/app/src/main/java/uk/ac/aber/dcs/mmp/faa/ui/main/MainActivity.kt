@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navDrawerNavView, navController)
 
         defineWhereBottomNavShows()
+        defineWhereAppBarShows()
 
         // Start the DataService
         DataService.INSTANCE.initialize(this)
@@ -135,6 +136,17 @@ class MainActivity : AppCompatActivity() {
                 bottomNavigationBar.visibility = View.VISIBLE
             } else {
                 bottomNavigationBar.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun defineWhereAppBarShows() {
+        val expandedInfoFragments = setOf(R.id.catCardInfoFragment, R.id.adoptionStatusInfoViewFragment)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id in expandedInfoFragments) {
+                supportActionBar!!.hide()
+            } else {
+                supportActionBar!!.show()
             }
         }
     }

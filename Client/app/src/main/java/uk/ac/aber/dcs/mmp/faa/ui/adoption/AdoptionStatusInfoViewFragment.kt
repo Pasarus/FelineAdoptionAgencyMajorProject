@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.toObject
 import com.squareup.picasso.Picasso
@@ -80,6 +81,10 @@ class AdoptionStatusInfoViewFragment : Fragment() {
             val cancelBundle = Bundle()
             cancelBundle.putParcelable("cat", cat)
             view.findNavController().navigate(R.id.cancel_adoption_dialog, cancelBundle)
+        }
+
+        view.closeButton.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         // Setup Dark mode
