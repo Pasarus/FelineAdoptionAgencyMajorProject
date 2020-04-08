@@ -12,9 +12,9 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
+import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.ui.main.MainActivity
-import java.util.*
 import kotlin.random.Random
 
 class DatabaseListenerNotifier : Service() {
@@ -78,10 +78,8 @@ class DatabaseListenerNotifier : Service() {
                         // No error so successful listen
                         for (dc in snapshots!!.documentChanges) {
                             if (dc.type == DocumentChange.Type.MODIFIED) {
-                                val cat: Cat = dc.document.toObject()
-                                if (cat.catId?.toInt() ?: 0 > highestCatId) {
-                                    notifyOfAdoptionStatusChange(cat)
-                                }
+                                val adoptionProcess: AdoptionProcess = dc.document.toObject()
+                                notifyOfAdoptionStatusChange(adoptionProcess)
                             }
                         }
                     }
@@ -89,28 +87,33 @@ class DatabaseListenerNotifier : Service() {
         }
     }
 
-    private fun notifyOfAdoptionStatusChange(cat: Cat) {
-        val catName = cat.catName
+    private fun notifyOfAdoptionStatusChange(adoptionProcess: AdoptionProcess) {
+        adoptionProcess.cat!!.get().addOnSuccessListener {
+            document ->
+            val cat: Cat? = document.toObject()
+            if (cat != null) {
+                val catName = cat.catName
 
-        // Setup the intent of the notification i.e. open the app
-        val notifIntent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                // Setup the intent of the notification i.e. open the app
+                val notifIntent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+
+                val pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, 0)
+
+                val builder = NotificationCompat.Builder(this, ADOPTION_STATUS_CHANGE_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle("Adoption Status Change!")
+                    .setContentText("Please check your adoption status for the cat: $catName")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+
+                with(NotificationManagerCompat.from(this)) {
+                    notify(Random.nextInt(0, 99999), builder.build())
+                }
+            }
         }
-
-        val pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, 0)
-
-        val builder = NotificationCompat.Builder(this, ADOPTION_STATUS_CHANGE_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("Adoption Status Change!")
-            .setContentText("Please check your adoption status for the cat: $catName")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(this)) {
-            notify(Random.nextInt(0, 99999), builder.build())
-        }
-
     }
 
     private fun notifyOfNewCat(cat: Cat) {
@@ -137,9 +140,9 @@ class DatabaseListenerNotifier : Service() {
 
     }
 
-    override fun onUnbind(intent: Intent?): Boolean {
+    override fun onDestroy() {
+        super.onDestroy()
         catListener?.remove()
         adoptionListener?.remove()
-        return super.onUnbind(intent)
     }
 }
