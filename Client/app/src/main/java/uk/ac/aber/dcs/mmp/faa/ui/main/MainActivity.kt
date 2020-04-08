@@ -39,6 +39,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
+import uk.ac.aber.dcs.mmp.faa.services.DatabaseListenerNotifier
 
 class MainActivity : AppCompatActivity() {
 
@@ -121,6 +122,12 @@ class MainActivity : AppCompatActivity() {
             DataService.INSTANCE.syncSavedCats()
             DataService.INSTANCE.savePreferences()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val intent = Intent(this.applicationContext, DatabaseListenerNotifier::class.java)
+        startService(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
