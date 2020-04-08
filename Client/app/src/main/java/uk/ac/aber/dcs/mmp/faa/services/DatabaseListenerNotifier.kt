@@ -27,6 +27,12 @@ class DatabaseListenerNotifier : Service() {
     private var highestCatId: Int = 0
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
+        return START_STICKY
+    }
+
+    override fun onCreate() {
+        super.onCreate()
         FirebaseFirestore.getInstance().collection("cats").get().addOnSuccessListener { documents ->
             val allCats = documents.toObjects(Cat::class.java)
             for (cat in allCats) {
@@ -38,8 +44,6 @@ class DatabaseListenerNotifier : Service() {
             // With the highest cat id noted, now start the snapshot listeners
             startListeners()
         }
-        super.onStartCommand(intent, flags, startId)
-        return START_STICKY
     }
 
     override fun onBind(intent: Intent?): IBinder? {
