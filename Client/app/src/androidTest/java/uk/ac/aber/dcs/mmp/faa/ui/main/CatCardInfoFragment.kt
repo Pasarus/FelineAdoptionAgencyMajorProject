@@ -23,11 +23,10 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
@@ -38,7 +37,7 @@ import uk.ac.aber.dcs.mmp.faa.utils.waitForFireStoreCollectionRequest
 
 
 @LargeTest
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class CatCardInfoFragment {
 
     @Rule
@@ -69,15 +68,10 @@ class CatCardInfoFragment {
                 withId(R.id.catCard),
                 childAtPosition(
                     allOf(
-                        withId(R.id.catRecyclerView),
-                        childAtPosition(
-                            withClassName(`is`("android.widget.FrameLayout")),
-                            0
-                        )
+                        withId(R.id.catRecyclerView)
                     ),
                     0
-                ),
-                isDisplayed()
+                )
             )
         )
         materialCardView.perform(click())

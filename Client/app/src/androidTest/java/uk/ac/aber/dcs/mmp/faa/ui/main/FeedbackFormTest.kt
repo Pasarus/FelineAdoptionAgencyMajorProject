@@ -23,8 +23,8 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -36,7 +36,7 @@ import org.junit.runner.RunWith
 import uk.ac.aber.dcs.mmp.faa.R
 
 @LargeTest
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class FeedbackFormTest {
 
     @Rule
@@ -110,9 +110,8 @@ class FeedbackFormTest {
         imageView.check(matches(isDisplayed()))
 
         val editText = onView(
-            allOf(
                 withId(R.id.feedback)
-            )
+
         )
         editText.check(matches(isDisplayed()))
 
@@ -165,13 +164,6 @@ class FeedbackFormTest {
         val textInputEditText = onView(
             allOf(
                 withId(R.id.feedback),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.feedbackLayout),
-                        0
-                    ),
-                    0
-                ),
                 isDisplayed()
             )
         )
@@ -180,13 +172,6 @@ class FeedbackFormTest {
         val editText3 = onView(
             allOf(
                 withId(R.id.feedback), withText("Feedback text test"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.feedbackLayout),
-                        0
-                    ),
-                    0
-                ),
                 isDisplayed()
             )
         )
