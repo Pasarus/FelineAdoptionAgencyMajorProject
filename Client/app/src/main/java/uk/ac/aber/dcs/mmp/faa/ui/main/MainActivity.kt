@@ -197,6 +197,9 @@ class MainActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    /**
+     * To be called only when the nav draw has had an option clicked.
+     */
     fun navDrawOptionOnClick(view: View) {
         when (view.id) {
             R.id.navDrawSettings -> {
@@ -224,6 +227,10 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.closeDrawers()
     }
 
+    /**
+     * Launches an intent to show the authentication UI provided by FirebaseUI, it is a packaged
+     * product and will update the user stored in DataService.
+     */
     fun doLogin() {
         // Choose authentication providers
         val providers = arrayListOf(
@@ -255,6 +262,10 @@ class MainActivity : AppCompatActivity() {
         DataService.INSTANCE.savedCats.updateObserversAddBlank()
     }
 
+    /**
+     * Ensure that the nav draw shows the correct option when either showing a login or my account
+     * link.
+     */
     fun updateNavDrawLoginTextAndImage(user: FirebaseUser?) {
         if (user != null) {
             navDrawLoginText.text = "My Account"
