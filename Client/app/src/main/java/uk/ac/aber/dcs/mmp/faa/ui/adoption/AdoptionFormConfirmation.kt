@@ -31,6 +31,15 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 
+/**
+ * This is the final form, once a user clicks yes on this form then, it will cause a cascade of
+ * events that results in a registration of current adoption statuses for a current user on a
+ * current cat.
+ *
+ * Because of the nature of the underlying NoSQL database, adoptions hold links to the user and cat
+ * data that can be accessed, but does not adjust the user's information directly, or the cat's
+ * information directly.
+ */
 class AdoptionFormConfirmation : Fragment() {
 
     override fun onCreateView(

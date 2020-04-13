@@ -41,6 +41,17 @@ import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.services.DatabaseListenerNotifier
 
+/**
+ * This is the main activity, it is the host for every other screen, whilst it only has a few things
+ * that are available on all of the screens. Since the application starts on this screen, most of
+ * the apps setup starts here:
+ *
+ * - Defines the setup for the NavController for Nav Draw, App Bar, and BottomNavigationBar.
+ * - Initializes the DataService as well.
+ * - Notification Channels are defined here.
+ * - Update user data from a saved user.
+ */
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -104,6 +115,10 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * This is used to make sure that the settings button is shown correctly during darkmode, i.e.
+     * a white icon instead of black.
+     */
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         if (DataService.INSTANCE.darkMode) {
             val settingsItem = menu.findItem(R.id.actionSettingsButton)
@@ -161,8 +176,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
             R.id.actionSettingsButton -> {
-                navController.navigate(R.id.settingsFragment)
-                true
+                if (navController.currentDestination?.id != R.id.settingsFragment){
+                    navController.navigate(R.id.settingsFragment)
+                    true
+                }
+                else
+                    super.onOptionsItemSelected(item)
             }
             else -> {
                 super.onOptionsItemSelected(item)

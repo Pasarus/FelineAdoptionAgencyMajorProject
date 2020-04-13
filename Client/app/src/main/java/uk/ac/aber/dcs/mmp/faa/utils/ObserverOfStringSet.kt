@@ -15,6 +15,9 @@
 
 package uk.ac.aber.dcs.mmp.faa.utils
 
+/**
+ * In order to use the SimpleObservableStringSet you must implement this interface.
+ */
 interface ObserverOfStringSet {
     fun onObservedAdd(e: String)
     fun onObservedRemove(e: String)

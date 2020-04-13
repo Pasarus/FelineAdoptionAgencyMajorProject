@@ -28,6 +28,11 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Feedback
 import java.util.*
 
+/**
+ * This supports the sending of feedback from the app as long as a user is logged in, if the user is
+ * not logged in then it will pop up a log in screen before navigating back to this screen, after a
+ * login is either successful or cancelled.
+ */
 class FeedbackFragment : Fragment() {
 
     override fun onCreateView(

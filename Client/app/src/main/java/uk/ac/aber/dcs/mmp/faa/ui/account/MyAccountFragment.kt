@@ -33,6 +33,13 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionStatusCard
 
+/**
+ * This shows your current account information, as well as allowing you to update your address and
+ * phone number. It utilizes a recyclerview with a FirestoreRecyclerAdapter that is aimed at
+ * providing up to date information from the Firestore for your current adoption statuses.
+ *
+ * The data is displayed in EditText fields based on material design and it's implementation.
+ */
 class MyAccountFragment : Fragment() {
 
     private val query = FirebaseFirestore.getInstance().collection("adoptionProcesses")

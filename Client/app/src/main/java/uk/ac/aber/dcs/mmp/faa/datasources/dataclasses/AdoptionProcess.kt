@@ -21,6 +21,12 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
+/**
+ * This is a data class that is based entirely on the formation of data in the google firebase
+ * firestore. It is equal to that of the firestore data files inside of the collection named
+ * "adoptionProcesses" it allows for useful transport of data between fragments, and the backend
+ * database.
+ */
 class AdoptionProcess : Parcelable {
     var cat: DocumentReference? = null
     var status: Map<String, Any>? = HashMap()

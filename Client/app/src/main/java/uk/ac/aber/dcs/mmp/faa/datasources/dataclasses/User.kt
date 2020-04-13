@@ -18,6 +18,10 @@ package uk.ac.aber.dcs.mmp.faa.datasources.dataclasses
 import com.google.firebase.database.IgnoreExtraProperties
 import com.google.firebase.firestore.DocumentReference
 
+/**
+ * This functions exactly the same as the Cat, AdoptionProcesses, and Feedback classes but is
+ * implemented in a more simple fashion using the data class in Kotlin.
+ */
 @IgnoreExtraProperties
 data class User(
     var addressLineOne: String? = "",

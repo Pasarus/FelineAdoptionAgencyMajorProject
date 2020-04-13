@@ -26,6 +26,11 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
+/**
+ * This card is used in 2 places, it is used in the SavedFragment and the HomeFragment. In the
+ * HomeFragment as the Featured cat, and the SavedFragment as the item in the recycleview to show
+ * more details than the basic CatCard.
+ */
 class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val catName = itemView.catName
     private val catAge = itemView.catAge

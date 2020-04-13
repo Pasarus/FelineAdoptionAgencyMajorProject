@@ -30,6 +30,11 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 
+/**
+ * A RecyclerView.ViewHolder implementation that produces the information required for the adoption
+ * status view to be easy to read and when bind is called, it requires an AdoptionProcess object
+ * that is provided as a snapshot of the data, but is guaranteed at time of bind being called.
+ */
 class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val view: View = itemView
     private val catName: TextView = view.findViewById(R.id.adoptionStatusCardTitle)

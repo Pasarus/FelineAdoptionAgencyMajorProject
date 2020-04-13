@@ -27,6 +27,11 @@ import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 
+/**
+ * This is a small implementation of a small dialog that confirms whether or not a user would
+ * like to cancel their adoption request. This is here because user's may not wish to do this, so as
+ * a potentially destructive act it has a confirmation.
+ */
 class CancelAdoptionDialog : DialogFragment() {
 
     override fun onCreateView(

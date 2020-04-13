@@ -18,6 +18,11 @@ package uk.ac.aber.dcs.mmp.faa.datasources.dataclasses
 import android.os.Parcel
 import android.os.Parcelable
 
+/**
+ * This is a data class that is based entirely on the formation of data in the google firebase
+ * firestore. It is equal to that of the firestore data files inside of the collection named "cats"
+ * it allows for useful transport of data between fragments, and the backend database.
+ */
 class Cat : Parcelable {
 
     var catAgeMonths: Int? = 0

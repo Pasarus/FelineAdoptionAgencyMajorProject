@@ -30,6 +30,10 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
+/**
+ * This Fragment provides a static information provided at the time of the click on the cat card,
+ * the way to update the information is to navigate away and navigate back to the fragment.
+ */
 class CatCardInfoFragment : Fragment() {
 
     private var catSaved = false

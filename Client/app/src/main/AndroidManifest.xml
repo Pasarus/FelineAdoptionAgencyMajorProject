@@ -39,14 +39,6 @@
         </activity>
 
         <service
-            android:name=".services.NotificationReceiverService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <service
             android:name=".services.DatabaseListenerNotifier"
             android:exported="false" />
 

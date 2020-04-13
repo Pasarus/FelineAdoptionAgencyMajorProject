@@ -31,6 +31,12 @@ import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCard
 
+/**
+ * This is the main feature of the app, it provides real time information for what cats are
+ * currently listed for adoption, at present it provides the functionality to search and filter for
+ * specific cats based on multiple categories. It utilises a FirestoreRecyclerAdapter that is
+ * updated everytime the filters change to provide a new up to date look at the data.
+ */
 class FindCatFragment : Fragment() {
 
     private var filtersShowing = false

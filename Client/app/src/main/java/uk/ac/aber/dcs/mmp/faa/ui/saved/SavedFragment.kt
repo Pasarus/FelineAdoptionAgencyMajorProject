@@ -30,6 +30,10 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.utils.ObserverOfStringSet
 
+/**
+ * This is the fragment that shows all of the cats that have been saved. Basically it ensures that
+ * it shows the current state of saved cats using the DataService.
+ */
 class SavedFragment : Fragment(), ObserverOfStringSet {
 
     private lateinit var thisView: View

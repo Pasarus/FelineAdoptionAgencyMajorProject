@@ -41,6 +41,15 @@ import uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionStatusCard
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 import kotlin.random.Random
 
+/**
+ * The main fragment shows a featured cat that is generated using a random number that is between 1
+ * and 99 that is used to call the cat object from the database.
+ *
+ * If you are logged in as a user it will show your current adoption status below the featured cat.
+ * It will originally make a call to an adoption process that is called default, this is required
+ * because of how recycle views are required to have a adapter before they are properly drawn,
+ * the view is technically present at screen start so it is still required.
+ */
 class HomeFragment : Fragment() {
     private var featuredCatSaved = false
 
@@ -89,7 +98,7 @@ class HomeFragment : Fragment() {
         }
 
         //Set up featured cat
-        val randomInt = Random.nextInt(1, 9)
+        val randomInt = Random.nextInt(1, 99)
         val catToGet = "cat$randomInt"
         val catQuery = FirebaseFirestore.getInstance().collection("cats").document(catToGet)
         catQuery.get().addOnSuccessListener { document ->

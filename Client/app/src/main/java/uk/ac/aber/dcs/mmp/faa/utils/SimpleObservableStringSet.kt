@@ -15,6 +15,11 @@
 
 package uk.ac.aber.dcs.mmp.faa.utils
 
+/**
+ * A very similar implementation to one I have previously implemented, however now more complete and
+ * in Kotlin. The implementation for this is based on the need to notify observers when something
+ * changes inside the set.
+ */
 class SimpleObservableStringSet : HashSet<String> {
 
     private var observers: ArrayList<ObserverOfStringSet> = ArrayList()

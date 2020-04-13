@@ -31,7 +31,14 @@ import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.User
 import uk.ac.aber.dcs.mmp.faa.ui.main.MainActivity
 import uk.ac.aber.dcs.mmp.faa.utils.SimpleObservableStringSet
 
-
+/**
+ * The DataService is a universal class that is used throughout the application. The intention is
+ * to remove the need for spaghetti code that can be found in some applications. If it is to do with
+ * getting application wide data, you get it from this class. This class has a companion object,
+ * this object is aimed at allowing one specific object be accessible in each of the accesses of any
+ * data held by this object. I.e. anywhere in the app, one object holds a significant portion of data
+ * This simplifies structure immensely and allows for further maintenance and development.
+ */
 class DataService private constructor() {
     var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         set(user) {

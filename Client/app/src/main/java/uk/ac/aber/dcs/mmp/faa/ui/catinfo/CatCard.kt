@@ -30,6 +30,12 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
+/**
+ * This is the RecyclerView.ViewHolder which is the main item viewable in the find a cat tab in the
+ * application. When this is tapped, it will navigate to the CatCardInfoFragment class. This
+ * provides static data at the time of bind being called, until it is called again, by the recycler
+ * view.
+ */
 class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val view: View = itemView

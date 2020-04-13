@@ -17,6 +17,12 @@ package uk.ac.aber.dcs.mmp.faa.datasources.dataclasses
 
 import com.google.firebase.firestore.DocumentReference
 
+/**
+ * This is a data class that is based entirely on the formation of data in the google firebase
+ * firestore. It is equal to that of the firestore data files inside of the collection named
+ * "feedback". This is not at current expected to allow data retrieval but for pushing data in the
+ * correct format to the firestore.
+ */
 class Feedback {
 
     var feedback: String? = null

@@ -22,6 +22,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import uk.ac.aber.dcs.mmp.faa.R
 
+/**
+ * Basic static fragment that has some pictures and text to provide basic support for users to produce
+ */
 class HelpFragment : Fragment() {
 
     override fun onCreateView(

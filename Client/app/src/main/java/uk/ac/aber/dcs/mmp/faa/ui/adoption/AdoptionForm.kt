@@ -25,6 +25,10 @@ import kotlinx.android.synthetic.main.user_data.view.*
 import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
+/**
+ * This is the base adoption form, once the data is confirmed to be up to date, it moves on to the
+ * the AdoptionFormConfirmation.
+ */
 class AdoptionForm : Fragment() {
 
     override fun onCreateView(

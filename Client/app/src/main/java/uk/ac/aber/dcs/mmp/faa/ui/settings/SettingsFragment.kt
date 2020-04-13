@@ -24,6 +24,10 @@ import kotlinx.android.synthetic.main.settings_fragment.view.*
 import uk.ac.aber.dcs.mmp.faa.R
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
 
+/**
+ * Currently settings only shows DarkMode there are plans to ensure that the screen actually shows
+ * the planned notifications settings.
+ */
 class SettingsFragment : Fragment() {
 
     override fun onCreateView(
@@ -82,29 +86,4 @@ class SettingsFragment : Fragment() {
 
         return view
     }
-
-    private fun switchToDarkMode() {
-
-    }
-
-    private fun switchFromDarkMode() {
-
-    }
-
-    private fun turnOnAllNotifications() {
-
-    }
-
-    private fun turnOnAdoptionStatusChangeNotifications() {
-
-    }
-
-    private fun turnOnNewlyListedCatsNotifications() {
-
-    }
-
-    private fun turnOnAdoptionNewsNotifications() {
-
-    }
-
 }

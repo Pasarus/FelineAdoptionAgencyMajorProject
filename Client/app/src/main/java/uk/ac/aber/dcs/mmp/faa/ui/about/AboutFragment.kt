@@ -22,6 +22,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import uk.ac.aber.dcs.mmp.faa.R
 
+/**
+ * This is a static fragment and has no special things going on, just a basic screen providing
+ * static information.
+ */
 class AboutFragment : Fragment() {
 
     override fun onCreateView(

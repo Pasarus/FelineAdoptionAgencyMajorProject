@@ -32,6 +32,12 @@ import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.AdoptionProcess
 import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
 
+/**
+ * When an AdoptionStatusCard tapped, it shows this fragment using the same data information, that
+ * is provided to the adoption status card, the information in this card does not update when
+ * changed on the back end, however if navigated out of and back into the card information may
+ * have updated.
+ */
 class AdoptionStatusInfoViewFragment : Fragment() {
     var cat: Cat? = null
 

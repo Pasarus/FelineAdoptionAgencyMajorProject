@@ -15,6 +15,12 @@
 
 package uk.ac.aber.dcs.mmp.faa.utils
 
+/**
+ * Converts a passed integer to a string that is used to represent the age of a cat in words. If
+ * the cat is over 5 years old just return years, under 5 years but over 1, return both, exactly
+ * 1, 2, 3, 4 years old then return only years, and finally if if below 1 year old return only
+ * months.
+ */
 fun convertMonthsNumberToUsableString(months: Int?): String {
     val years = months!! / 12
     val finalMonths = months % 12

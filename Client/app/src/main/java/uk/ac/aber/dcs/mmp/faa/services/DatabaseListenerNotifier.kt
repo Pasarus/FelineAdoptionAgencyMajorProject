@@ -17,6 +17,11 @@ import uk.ac.aber.dcs.mmp.faa.datasources.dataclasses.Cat
 import uk.ac.aber.dcs.mmp.faa.ui.main.MainActivity
 import kotlin.random.Random
 
+/**
+ * This is a android service class aimed at completely implementing notifications for this
+ * application based entirely on the backend database and a set of Google Firebase Firestore
+ * database listeners.
+ */
 class DatabaseListenerNotifier : Service() {
 
     private var catListener: ListenerRegistration? = null
