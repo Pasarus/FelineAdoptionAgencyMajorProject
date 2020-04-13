@@ -29,12 +29,12 @@ import uk.ac.aber.dcs.mmp.faa.datasources.DataService
  */
 class AdoptionProcess : Parcelable {
     var cat: DocumentReference? = null
-    var status: Map<String, Any>? = HashMap()
+    var status: MutableMap<String, Any>? = HashMap()
     var user: DocumentReference? = null
 
     constructor() : super()  // Needed for Firebase
     constructor(status: Map<String, Any>, cat: Cat) : this() {
-        this.status = status
+        this.status = status.toMutableMap()
         this.cat = FirebaseFirestore.getInstance().collection("cats")
             .document("cat" + cat.catId)
 
@@ -44,11 +44,32 @@ class AdoptionProcess : Parcelable {
     }
 
     constructor(parcel: Parcel) : this() {
-        TODO("Not yet implemented")
+        status!!["pending"] = parcel.readBoolean()
+        status!!["pendingReason"] = parcel.readString() as String
+        status!!["accepted"] = parcel.readString() as String
+        status!!["rejected"] = parcel.readBoolean()
+        status!!["rejectedReason"] = parcel.readString() as String
+        user = FirebaseFirestore.getInstance().document(parcel.readString() as String)
+        cat = FirebaseFirestore.getInstance().document(parcel.readString() as String)
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("Not yet implemented")
+        if (dest != null){
+            val pending = status!!["pending"] as Boolean
+            val pendingReason = status!!["pendingReason"] as String
+            val accepted = status!!["accepted"] as Boolean
+            val rejected = status!!["rejected"] as Boolean
+            val rejectedReason = status!!["rejectedReason"] as String
+            val user = this.user.toString()
+            val cat = this.cat.toString()
+            dest.writeBoolean(pending)
+            dest.writeString(pendingReason)
+            dest.writeBoolean(accepted)
+            dest.writeBoolean(rejected)
+            dest.writeString(rejectedReason)
+            dest.writeString(user)
+            dest.writeString(cat)
+        }
     }
 
     override fun describeContents(): Int {
