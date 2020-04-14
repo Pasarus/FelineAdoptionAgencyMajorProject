@@ -69,6 +69,7 @@ class FindCatFragment : Fragment() {
                 closeFilters(view)
                 filtersShowing = false
             }
+            updateRecyclerViewAdapterWithFilters(view)
         }
 
         view.filterSearchText.setOnClickListener {
