@@ -22,6 +22,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -90,7 +91,7 @@ class HomeFragment : Fragment() {
         view.adoptionStatusRecyclerView.adapter = adapter
         layoutView = view
 
-        val white = view.resources.getColor(R.color.white, null)
+        val white = ContextCompat.getColor(context!!, R.color.white)
         // Setup DarkMode
         if (DataService.INSTANCE.darkMode) {
             view.featuredCatTitleText.setTextColor(white)
@@ -126,9 +127,8 @@ class HomeFragment : Fragment() {
                 // Setup Card Dark mode
                 if (DataService.INSTANCE.darkMode) {
                     view.savedCatCardViewLayout.setBackgroundColor(
-                        view.resources.getColor(
-                            R.color.darkCardBackground,
-                            null
+                        ContextCompat.getColor(context!!,
+                            R.color.darkCardBackground
                         )
                     )
                     view.catName.setTextColor(white)

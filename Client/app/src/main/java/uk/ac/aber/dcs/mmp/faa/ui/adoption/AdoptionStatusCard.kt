@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentReference
@@ -70,12 +71,12 @@ class AdoptionStatusCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
             view.findNavController().navigate(R.id.adoptionStatusInfoViewFragment, bundle)
         }
 
-        val white = view.resources.getColor(R.color.white, null)
+        val white = ContextCompat.getColor(view.context!!, R.color.white)
         if (DataService.INSTANCE.darkMode) {
             view.adoptionProcessCard.setBackgroundColor(
-                view.resources.getColor(
-                    R.color.darkCardBackground,
-                    null
+                ContextCompat.getColor(
+                    view.context!!,
+                    R.color.darkCardBackground
                 )
             )
             catName.setTextColor(white)

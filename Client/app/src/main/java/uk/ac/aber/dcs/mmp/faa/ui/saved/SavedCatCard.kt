@@ -17,6 +17,7 @@ package uk.ac.aber.dcs.mmp.faa.ui.saved
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -94,15 +95,15 @@ class SavedCatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Set up darkMode for card
         if (DataService.INSTANCE.darkMode) {
             itemView.savedCatCardViewLayout.setBackgroundColor(
-                itemView.resources.getColor(
-                    R.color.darkCardBackground,
-                    null
+                ContextCompat.getColor(
+                    itemView.context!!,
+                    R.color.darkCardBackground
                 )
             )
-            catName.setTextColor(itemView.resources.getColor(R.color.white, null))
-            catAge.setTextColor(itemView.resources.getColor(R.color.white, null))
-            catLocation.setTextColor(itemView.resources.getColor(R.color.white, null))
-            catDescription.setTextColor(itemView.resources.getColor(R.color.white, null))
+            catName.setTextColor(ContextCompat.getColor(itemView.context!!,R.color.white))
+            catAge.setTextColor(ContextCompat.getColor(itemView.context!!,R.color.white))
+            catLocation.setTextColor(ContextCompat.getColor(itemView.context!!,R.color.white))
+            catDescription.setTextColor(ContextCompat.getColor(itemView.context!!,R.color.white))
         }
 
         itemView.setOnClickListener {

@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -95,7 +96,9 @@ class AdoptionStatusInfoViewFragment : Fragment() {
 
         // Setup Dark mode
         if (DataService.INSTANCE.darkMode) {
-            val white = view.resources.getColor(R.color.white, null)
+            val white = ContextCompat.getColor(
+                view.context!!, R.color.white
+            )
             view.adoptionStatusInfoFragmentCatName.setTextColor(white)
             view.adoptionStatusCurrentStatus.setTextColor(white)
         }

@@ -95,7 +95,13 @@ class DataService private constructor() {
         val preferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
         settings = mutableMapOf(DARK_MODE_KEY to preferences.getBoolean(DARK_MODE_KEY, false))
 
-        if (settings.getOrDefault(DARK_MODE_KEY, false)) {
+        // getOrDefault does not work below API 24 so in order to ensure API 21, 22, and 23
+        // compatibility the logic has been brought out of the method.
+        var darkMode = settings[DARK_MODE_KEY]
+        if (darkMode == null){
+            darkMode = false
+        }
+        if (darkMode) {
             darkMode()
         } else {
             lightMode()
@@ -118,7 +124,12 @@ class DataService private constructor() {
     fun savePreferences() {
         val preferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
         val editor = preferences.edit()
-        editor.putBoolean(DARK_MODE_KEY, settings.getOrElse(DARK_MODE_KEY) { false })
+
+        var darkMode = settings[DARK_MODE_KEY]
+        if (darkMode == null){
+            darkMode = false
+        }
+        editor.putBoolean(DARK_MODE_KEY, darkMode)
         editor.apply()
     }
 

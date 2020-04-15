@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -85,7 +86,7 @@ class MyAccountFragment : Fragment() {
             findNavController().navigate(R.id.homeFragment)
         }
 
-        val white = view.resources.getColor(R.color.white, null)
+        val white = ContextCompat.getColor(context!!, R.color.white)
         if (DataService.INSTANCE.darkMode) {
             view.accountTitle.setTextColor(white)
             view.accountInformation.setTextColor(white)

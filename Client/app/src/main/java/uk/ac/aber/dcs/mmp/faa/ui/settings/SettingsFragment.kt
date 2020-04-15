@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.settings_fragment.view.*
 import uk.ac.aber.dcs.mmp.faa.R
@@ -37,16 +38,7 @@ class SettingsFragment : Fragment() {
         val view = inflater.inflate(R.layout.settings_fragment, container, false)
 
         // Setup UI for darkmode
-        if (DataService.INSTANCE.darkMode) {
-            view.darkModeLayout.setBackgroundColor(
-                view.resources.getColor(
-                    R.color.darkCardBackground,
-                    null
-                )
-            )
-            view.darkModeText.setTextColor(view.resources.getColor(R.color.white, null))
-        }
-
+        setupDarkMode(view)
 
         // Ensure settings reflects current state.
         if (DataService.INSTANCE.settings[DataService.INSTANCE.DARK_MODE_KEY]!!) {
@@ -62,6 +54,7 @@ class SettingsFragment : Fragment() {
                 DataService.INSTANCE.lightMode()
             }
             DataService.INSTANCE.settings[DataService.INSTANCE.DARK_MODE_KEY] = isChecked
+            setupDarkMode(view)
         }
 
         view.allNotificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -85,5 +78,17 @@ class SettingsFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun setupDarkMode(view: View) {
+        if (DataService.INSTANCE.darkMode) {
+            view.darkModeLayout.setBackgroundColor(
+                ContextCompat.getColor(
+                    view.context!!,
+                    R.color.darkCardBackground
+                )
+            )
+            view.darkModeText.setTextColor(ContextCompat.getColor(view.context!!, R.color.white))
+        }
     }
 }

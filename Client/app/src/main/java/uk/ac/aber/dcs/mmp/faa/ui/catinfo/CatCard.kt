@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -80,11 +81,11 @@ class CatCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         if (DataService.INSTANCE.darkMode) {
-            val white = view.resources.getColor(R.color.white, null)
+            val white = ContextCompat.getColor(itemView.context!!,R.color.white)
             itemView.catCard.setCardBackgroundColor(
-                view.resources.getColor(
-                    R.color.darkCardBackground,
-                    null
+                ContextCompat.getColor(
+                    view.context!!,
+                    R.color.darkCardBackground
                 )
             )
             catName.setTextColor(white)
