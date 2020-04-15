@@ -17,7 +17,9 @@ package uk.ac.aber.dcs.mmp.faa
 
 import junit.framework.Assert.assertEquals
 import org.junit.Test
+import uk.ac.aber.dcs.mmp.faa.utils.boolToString
 import uk.ac.aber.dcs.mmp.faa.utils.convertMonthsNumberToUsableString
+import uk.ac.aber.dcs.mmp.faa.utils.stringToBool
 
 class StringUtilsTests {
     @Test
@@ -45,5 +47,30 @@ class StringUtilsTests {
     fun below60Above12ShowsYearsAndMonth() {
         assertEquals("1 Year, 6 Months Old", convertMonthsNumberToUsableString(18))
         assertEquals("4 Years, 11 Months Old", convertMonthsNumberToUsableString(59))
+    }
+
+    @Test
+    fun boolToStringFalse() {
+        assertEquals("false", boolToString(false))
+    }
+
+    @Test
+    fun boolToStringTrue() {
+        assertEquals("true", boolToString(true))
+    }
+
+    @Test
+    fun stringToBoolTrue() {
+        assertEquals(true, stringToBool("true"))
+    }
+
+    @Test
+    fun stringToBoolFalse() {
+        assertEquals(false, stringToBool("false"))
+    }
+
+    @Test
+    fun stringToBoolRandom() {
+        assertEquals(false, stringToBool("Random string here please"))
     }
 }

@@ -20,6 +20,8 @@ import android.os.Parcelable
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import uk.ac.aber.dcs.mmp.faa.datasources.DataService
+import uk.ac.aber.dcs.mmp.faa.utils.boolToString
+import uk.ac.aber.dcs.mmp.faa.utils.stringToBool
 
 /**
  * This is a data class that is based entirely on the formation of data in the google firebase
@@ -44,10 +46,10 @@ class AdoptionProcess : Parcelable {
     }
 
     constructor(parcel: Parcel) : this() {
-        status!!["pending"] = parcel.readBoolean()
+        status!!["pending"] = stringToBool(parcel.readString() as String)
         status!!["pendingReason"] = parcel.readString() as String
-        status!!["accepted"] = parcel.readString() as String
-        status!!["rejected"] = parcel.readBoolean()
+        status!!["accepted"] = stringToBool(parcel.readString() as String)
+        status!!["rejected"] = stringToBool(parcel.readString() as String)
         status!!["rejectedReason"] = parcel.readString() as String
         user = FirebaseFirestore.getInstance().document(parcel.readString() as String)
         cat = FirebaseFirestore.getInstance().document(parcel.readString() as String)
@@ -62,10 +64,10 @@ class AdoptionProcess : Parcelable {
             val rejectedReason = status!!["rejectedReason"] as String
             val user = this.user.toString()
             val cat = this.cat.toString()
-            dest.writeBoolean(pending)
+            dest.writeString(boolToString(pending))
             dest.writeString(pendingReason)
-            dest.writeBoolean(accepted)
-            dest.writeBoolean(rejected)
+            dest.writeString(boolToString(accepted))
+            dest.writeString(boolToString(rejected))
             dest.writeString(rejectedReason)
             dest.writeString(user)
             dest.writeString(cat)

@@ -52,3 +52,18 @@ fun convertMonthsNumberToUsableString(months: Int?): String {
         }
     }
 }
+
+/**
+ * Implemented to deal with legacy stuff parceables as older APIS cannot handle writeBoolean
+ */
+fun boolToString(bool: Boolean) : String{
+    return if (bool) "true" else "false"
+}
+
+/**
+ * Implemented to deal with legacy stuff parceables as older APIS cannot handle readBoolean
+ */
+fun stringToBool(string: String) : Boolean {
+    // If not true then assumed false
+    return string == "true"
+}

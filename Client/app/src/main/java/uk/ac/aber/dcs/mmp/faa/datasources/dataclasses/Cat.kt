@@ -17,6 +17,8 @@ package uk.ac.aber.dcs.mmp.faa.datasources.dataclasses
 
 import android.os.Parcel
 import android.os.Parcelable
+import uk.ac.aber.dcs.mmp.faa.utils.boolToString
+import uk.ac.aber.dcs.mmp.faa.utils.stringToBool
 
 /**
  * This is a data class that is based entirely on the formation of data in the google firebase
@@ -94,12 +96,12 @@ class Cat : Parcelable {
         pictureUrl = parcel.readString()
         sex = parcel.readString()
         catId = parcel.readString()
-        dogs = parcel.readBoolean()
-        indoors = parcel.readBoolean()
-        kids0to4 = parcel.readBoolean()
-        kids13to18 = parcel.readBoolean()
-        kids5to12 = parcel.readBoolean()
-        otherCats = parcel.readBoolean()
+        dogs = stringToBool(parcel.readString() as String)
+        indoors = stringToBool(parcel.readString() as String)
+        kids0to4 = stringToBool(parcel.readString() as String)
+        kids13to18 = stringToBool(parcel.readString() as String)
+        kids5to12 = stringToBool(parcel.readString() as String)
+        otherCats = stringToBool(parcel.readString() as String)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -114,12 +116,12 @@ class Cat : Parcelable {
         parcel.writeString(pictureUrl)
         parcel.writeString(sex)
         parcel.writeValue(catId)
-        parcel.writeBoolean(dogs!!)
-        parcel.writeBoolean(indoors!!)
-        parcel.writeBoolean(kids0to4!!)
-        parcel.writeBoolean(kids13to18!!)
-        parcel.writeBoolean(kids5to12!!)
-        parcel.writeBoolean(otherCats!!)
+        parcel.writeString(boolToString(dogs!!))
+        parcel.writeString(boolToString(indoors!!))
+        parcel.writeString(boolToString(kids0to4!!))
+        parcel.writeString(boolToString(kids13to18!!))
+        parcel.writeString(boolToString(kids5to12!!))
+        parcel.writeString(boolToString(otherCats!!))
     }
 
     override fun describeContents(): Int {
