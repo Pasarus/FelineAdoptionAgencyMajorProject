@@ -1,59 +1,380 @@
 @startuml FelineAdoptionAgency
 
-class MainActivity {
-    - Pager m_pager
-    - HomeFragment m_homeFragment
-    - CatFinderFragment m_finderFragment
-    - SavedFragment m_savedFragment
-    - NavigationDraw m_navDraw
-    - NavigationController m_navController
-    - NavHost m_mainNavHost
+package uk.ac.aber.dcs.mmp.faa {
+    package datasources {
+        package dataclasses {
+            class AdoptionProcess {
+                - DocumentReference cat
+                - MutableMap<String, Any> status
+                - DocumentReference user
+            }
+
+            class Cat {
+                - Int catAgeMonths
+                - String catBreed
+                - String colour
+                - String catName
+                - String description
+                - Boolean disabled
+                - String location
+                - Boolean neutered
+                - String pictureUrl
+                - Boolean dogs
+                - Boolean indoors
+                - Boolean kids0to4
+                - Boolean kids13to18
+                - Boolean kids5to12
+                - Boolean otherCats
+                - String sex
+                - String catId
+            }
+
+            class Feedback {
+                - String Feedback
+                - Boolean developerReplyRequested
+                - String date
+                - DocumentReference userDocument
+            }
+
+            class User {
+                - String addressLineOne
+                - String addressLineTwo
+                - String addressLineThree
+                - String county
+                - String name
+                - String mobileNumber
+                - String postCode
+                - List<String> favouritedCats
+                - List<DocumentReference> adoptionProcesses
+            }
+        }
+
+        class DataService <<Singleton>> {
+            - FirebaseUser user
+            - FirebaseFirestore database
+            - MainActivity mainActivity
+            - SimpleObservableStringSet savedCats
+            - String DARK_MODE_KEY
+            - MutableMap settings
+            - Int onStopCalledCount
+            - DataService INSTANCE
+            - void updateSavedCatsFromUser()
+            + Boolean shouldMainActivitySyncOnStop()
+            + void initialize(MainActivity)
+            + void loadPreferences()
+            + void darkMode()
+            + void lightMode()
+            + void savePreferences()
+            + void syncSavedCats()
+            + Boolean isCatFavourite(String)
+            + void updateUserDataForView(View)
+            + void getDataForViewFromFirestore(View)
+        }
+    }
+
+    package services {
+        class DatabaseListenerNotifier <<Service>>{
+            - ListenerRegistration catListener
+            - ListenerRegistration adoptionListener
+            - String ADOPTION_STATUS_CHANGE_CHANNEL_ID
+            - String NEWLY_LISTED_CAT_CHANNEL_ID
+            - String ADOPTION_NEWS_CHANNEL_ID
+            - Int highestCatId
+            + void onCreate()
+            + Int onStartCommand()
+            - void startListeners()
+            - void notifyOfNewCat()
+            - void notifyOfAdoptionStatusChange()
+            + void onDestroy()
+        }
+    }
+
+    package ui {
+        package about {
+            class AboutFragment <<Fragment>> {
+                + void onCreateView
+            }
+        }
+
+        package account {
+            class MyAccountFragment <<Fragment>> {
+                - DocumentReference query
+                - FirestoreRecyclerOptions options
+                - FirestoreRecyclerAdapter adapter
+                + void onCreateView()
+            }
+        }
+
+        package adoption {
+            class AdoptionForm <<Fragment>> {
+                + void onCreateView()
+            }
+
+            class AdoptionFormConfirmation <<Fragment>> {
+                + void onCreateView()
+                - void updateUserWithAdoptionProcessesReference(DocumentReference)
+                - void createAdoptionProcessDocument(Cat, DocumentReference)
+            }
+
+            class AdoptionStatusCard <<RecyclerView.Viewholder>> {
+                - View view
+                - TextView catName
+                - ImageView catImage
+                - TextView adoptionInfo
+                - ImageView adoptionStatusIcon
+                - AdoptionProcess adoptionProcess
+                - Cat cat
+                + void bind(AdoptionProcess)
+                - void requestCatInfoAndBind(DocumentReference)
+            }
+
+            class AdoptionStatusInfoViewFragment <<Fragment>> {
+                - Cat cat
+                + void onCreateView()
+                - void requestCatUsingDocRef(DocumentReference, View)
+            }
+
+            class CancelAdoptionDialog <<DialogFragment>> {
+                + void onCreateView()
+            }
+        }
+
+        package catinfo {
+            class CatCard <<RecyclerView.ViewHolder>> {
+                - View view
+                - TextView catName
+                - TextView catAge
+                - TextView catLocation
+                - ImageView catPictureCard
+                - ImageView favouriteButton
+                - Boolean featuredCatSaved
+                - Cat cat
+                - void onClick()
+                + void bind(Cat)
+            }
+
+            class CatCardInfoFragment <<Fragment>> {
+                - Boolean catSaved
+                + void onCreateView()
+            }
+        }
+
+        package feedback {
+            class FeedbackFragment <<Fragment>> {
+                + void onCreateView()
+            }
+        }
+
+        package findcat{
+            class FindCatFragment <<Fragment>> {
+                - Boolean filtersShowing
+                + void onStart()
+                + void onCreateView()
+                - void clearFilters(View)
+                - void closeFilters(View)
+                - void showFilters(View)
+                - void setupTheFilterMentus(View)
+                - void updateRecyclerViewAdapterWithFilters(View)
+                - Query generateQueryBasedOnMap(Map<String, String>)
+                - Map<String, String> grabMapFromFilterObjects(View)
+            }
+        }
+
+        package help {
+            class HelpFragment <<Fragment>> {
+                + void onCreateView()
+            }
+        }
+
+        package home {
+            class HomeFragment <<Fragment>> {
+                - Boolean featuredCatSaved
+                - View layoutView
+                - DocumentReference query
+                - FirestoreRecyclerOptions options
+                - FirestoreRecyclerAdapter adapter
+                - Cat cat
+                + void onCreateView()
+                + void onResume()
+            }
+        }
+
+        package main {
+            class MainActivity <<Activity>> {
+                - NavController navController
+                - Set<Int> startDestinations
+                - Int RC_SIGN_IN
+                - String ADOPTION_STATUS_CHANGE_CHANNEL_ID
+                - String NEWLY_LISTED_CAT_CHANNEL_ID
+                - String ADOPTION_STATUS_CHANGE_CHANNEL_ID
+                + void onCreateView()
+                + Boolean onPrepareOptionsMenu()
+                + void onStop()
+                + void onStart()
+                + Boolean onCreateOptionsMenu(Menu)
+                - void defineWhereBottomNavShows()
+                - void defineWhereAppBarShows()
+                + Boolean onOptionsItemSelected(MenuItem)
+                + Boolean onSupportNavigateUp()
+                + void navDrawOptionOnClick(View)
+                + void doLogin()
+                + void onActivityResult(Int, Int, Intent)
+                + void updateNavDrawLoginTextAndImage(FirebaseUser)
+                - void createNotificationChannel(String, String, String)
+            }
+        }
+
+        package saved {
+            class SavedCatCard <<RecyclerView.ViewHolder>> {
+                - TextView catName
+                - TextView catAge
+                - TextView catLocation
+                - ImageView catImage
+                - TextView catDescription
+                - ImageView faveButtonCard
+                - Boolean catSaved
+                - Cat cat
+                + void bind(Cat)
+            }
+
+            class SavedFragment <<Fragment, ObserverOfStringSet>> {
+                - View thisView
+                + void onStart()
+                + void onCreateView()
+                - void updateRecycleView()
+                + void onObservedAdd(String)
+                + void onObservedRemove(String)
+            }
+        }
+
+        package settings {
+            class SettingsFragment <<Fragment>> {
+                + void onCreateView()
+                + void setupDarkMode(View)
+            }
+        }
+    }
+
+    package utils{
+        interface ObserverOfStringSet{
+            + void onObservedAdd(String)
+            + void onObservedRemove(String)
+        }
+
+        class SimpleObservableStringSet << HashSet<String> >> {
+            - ArrayList<ObserverOfStringSet> observers
+            + constructor()
+            + constructor(Set<String>)
+            + Boolean add(String)
+            + Boolean remove(String)
+            + void clear()
+            + addObserver(ObserverOfStringSet)
+            + removeObserver(ObserverOfStringSet)
+            + updateObserversAddBlank()
+        }
+    }
 }
 
-class HomeFragment {
-    - CatCard m_randomCat
-    - AdoptionStatusCard m_statusCard
-}
-
-class CatFinderFragment {
-    - RecyclerView m_cards
-    - LineEdit m_search
-    - Spinner m_sortBy
-    - Spinner m_filter
-}
-
-class SavedFragment {
-    - RecyclerView m_cards
-}
-
-class CatCard {
-    - ImageView m_catImage
-    - TextView m_catName
-    - TextView m_catCentre
-    - TextView m_age
-}
-
-class HelpActivity {
-    - View m_expandedView
-}
-
-class FeedbackActivity {
-    - LineEdit m_nameEdit
-    - LineEdit m_emailEdit
-    - ParagraphEdit m_feedbackEdit
-}
-
+' MainActivity connections
+MainActivity --> DataService
+MainActivity --> AboutFragment
+MainActivity --> MyAccountFragment
+MainActivity --> AdoptionForm
+MainActivity --> AdoptionStatusInfoViewFragment
+MainActivity --> DatabaseListenerNotifier
+MainActivity --> MyAccountFragment
+MainActivity --> CatCardInfoFragment
+MainActivity --> FeedbackFragment
+MainActivity --> FindCatFragment
+MainActivity --> HelpFragment
 MainActivity --> HomeFragment
-MainActivity --> CatFinderFragment
-CatFinderFragment --> CatCard
-CatCard --> CatDetailActivity
 MainActivity --> SavedFragment
-SavedFragment --> CatCard
-MainActivity --> LoginDialog
-MainActivity --> MyAccountDetails
-MainActivity --> SettingsActivity
-MainActivity --> AboutActivity
-MainActivity --> HelpActivity
-MainActivity --> FeedbackActivity
+MainActivity --> SettingsFragment
+
+' MyAccountFragment connections
+MyAccountFragment --> AdoptionProcess
+MyAccountFragment --> AdoptionStatusCard
+MyAccountFragment --> User
+
+' DataService connections
+DataService --> MainActivity
+DataService --> SimpleObservableStringSet
+
+' DatabaseListenerNotifier
+DatabaseListenerNotifier --> Cat
+DatabaseListenerNotifier --> AdoptionProcess
+
+' AdoptionForm connections
+AdoptionForm --> AdoptionFormConfirmation
+AdoptionForm --> Cat
+AdoptionForm --> User
+
+' AdoptionFormConfirmation connections
+AdoptionFormConfirmation --> Cat
+AdoptionFormConfirmation --> AdoptionProcess
+AdoptionFormConfirmation --> DataService
+
+' AdoptionStatusCard connections
+AdoptionStatusCard --> AdoptionStatusInfoViewFragment
+AdoptionStatusCard --> Cat
+AdoptionStatusCard --> AdoptionProcess
+AdoptionStatusCard --> DataService
+
+' AdoptionStatusInfoViewFragment connections
+AdoptionStatusInfoViewFragment --> AdoptionProcess
+AdoptionStatusInfoViewFragment --> CancelAdoptionDialog
+AdoptionStatusInfoViewFragment --> DataService
+
+' CatCard connections
+CatCard --> DataService
+CatCard --> Cat
+CatCard --> CatCardInfoFragment
+
+' CatCardInfoFragment
+CatCardInfoFragment --> Cat
+CatCardInfoFragment --> DataService
+
+' FindCat connections
+FindCatFragment --> CatCard
+
+' CatCard connections
+CatCard --> CatCardInfoFragment
+CatCard --> DataService
+CatCard --> Cat
+
+' CatCardInfoFragment connections
+CatCardInfoFragment --> DataService
+CatCardInfoFragment --> Cat
+CatCardInfoFragment --> AdoptionForm
+
+' FeedbackFragment connections
+FeedbackFragment --> Feedback
+
+' FindCatFragment
+FindCatFragment --> CatCard
+FindCatFragment --> DataService
+
+' HelpFragment
+
+' HomeFragment
+HomeFragment --> DataService
+HomeFragment --> AdoptionStatusCard
+HomeFragment --> SavedCatCard
+HomeFragment --> Cat
+
+' SavedCatCard
+SavedCatCard --> CatCardInfoFragment
+SavedCatCard --> DataService
+SavedCatCard --> Cat
+
+' SavedFragment
+SavedFragment --> SavedCatCard
+SavedFragment --> DataService
+
+' SettingsFragment
+SettingsFragment --> DataService
+
+' SimpleObservableStringSet
+SimpleObservableStringSet --> ObserverOfStringSet
 
 @enduml

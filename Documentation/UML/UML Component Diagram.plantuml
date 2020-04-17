@@ -1,31 +1,25 @@
 @startuml ComponentDiagram
 
 database Firebase {
-    [Authentication]
-    [Database]
-    [Database] --> [UserData]
-    [Database] --> [PublicCatAdoptionInformation]
-    [Database] ..> [Authentication]
+    [FirebaseAuthentication]
+    [Firestore]
+    [Firestore] --> [users]
+    [Firestore] --> [cats]
+    [Firestore] --> [adoptionProcesses]
+    [Firestore] --> [feedback]
+    [Firestore] --> [FirebaseAuthentication]
 }
 
 package FelineAdoptionAgencyApp {
-    node VisualAppFunctionality {
-    }
-    node DataProviderFunctionality {
-       AuthenticateUser ..> [Authentication]
-       [Authentication] ..> LocalUserCopy
-       LocalUserCopy ..> UserDataRequest
-       RequestPublicCatData ..> Database
-       UserDataRequest ..> Database
-    }
-    package DataService {
-        
-    }
+       [FirebaseAuthentication] ..> User
+       User ..> Firestore
+       User --> MakeAdoptionRequest
+       User --> Feedback
+       User --> CancelAdoptionRequest
+       CancelAdoptionRequest ..> Firestore
+       Feedback ..> Firestore
+       MakeAdoptionRequest ..> Firestore
+       Cat ..> Firestore
 }
-
-VisualAppFunctionality --> DataService
-DataService --> DataProviderFunctionality
-DataProviderFunctionality --> DataService
-DataService --> VisualAppFunctionality
 
 @enduml
