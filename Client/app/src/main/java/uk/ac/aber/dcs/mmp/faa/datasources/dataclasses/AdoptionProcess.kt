@@ -87,5 +87,4 @@ class AdoptionProcess : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
 }
