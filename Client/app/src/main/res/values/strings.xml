@@ -76,7 +76,7 @@
     <string name="catInfoIsntDisabled">This cat is not disabled</string>
     <string name="catInfoIsNeutered">This cat is Neutered</string>
     <string name="catInfoIsntNeutered">This cat is not Neutered</string>
-    <string name="pleaseConfirmUserDetails">Please confirm your user details:</string>
+    <string name="pleaseConfirmUserDetails">Please update your user details:</string>
     <string name="adopt_this_cat">Adopt this cat!</string>
     <string name="are_you_sure_you_would_like_to_adopt_catname">Are you sure you would like to adopt this cat?</string>
     <string name="yes">Yes</string>
