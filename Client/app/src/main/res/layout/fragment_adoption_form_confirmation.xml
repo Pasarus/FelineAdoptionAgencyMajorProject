@@ -55,7 +55,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/yesButton"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="56dp"
             android:text="@string/yes"
             android:textColor="@color/black"
@@ -65,7 +65,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelButton"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="56dp"
             android:text="@string/cancel"
             android:textColor="@color/black"
