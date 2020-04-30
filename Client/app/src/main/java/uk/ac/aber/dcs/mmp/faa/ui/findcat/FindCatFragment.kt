@@ -226,7 +226,7 @@ class FindCatFragment : Fragment() {
 
         val name = map["name"]
         if (name != "") {
-            query = query.startAt(name).endAt(name + "\uf8ff")
+            query = query.whereEqualTo("catName", name)
         }
 
         return query

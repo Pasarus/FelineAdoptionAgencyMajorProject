@@ -20,3 +20,10 @@ local.properties
 .idea/gradle.xml
 .idea/codeStyles/Project.xml
 Client/app/google-services.json
+Client/app/debug/app-debug.apk
+
+Client/app/debug/output.json
+
+Client/app/release/app-release.apk
+
+Client/app/release/output.json
