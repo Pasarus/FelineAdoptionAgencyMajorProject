@@ -1,0 +1,71 @@
+\chapter{Technical Requirements} \label{TECHREQUIREMENTS}
+
+\begin{itemize}
+    \item All Activities, and the app as a whole should be made using Material Design Guidelines
+    \item Using the latest Android Navigation library will allow me to integrate correct navigation easily between Activities
+    \item The home activity should display some stuff
+        \begin{itemize}
+            \item Cat of the month
+            \item First 3 saved cats if signed in, if not signed in recommend 3 cats to adopt.
+            \item If signed in also progress on your adoptions in a RecycleView at the top of the page.
+        \end{itemize}
+    \item An activity that allows a person to find a cat to adopt similar to Cats Protection's find-a-cat. This should be a list, probably a RecyclerView that has a MaterialCard that allows us to view some basic details and save, basic details include:
+        \begin{itemize}
+            \item Age
+            \item Sex
+            \item Name
+            \item Location
+            \item Cat Picture
+        \end{itemize}
+    \item Each cat found on the cat finder tool should have it's own popup Activity that displays multiple details:
+        \begin{itemize}
+            \item Cat Picture
+            \item Age
+            \item Sex
+            \item Name
+            \item Small paragraph with some details about the cat's history (Will contain disability info if present)
+            \item Breed
+            \item Location
+            \item Colour
+            \item Disabled
+            \item Cat Preferences:
+            \begin{itemize}
+                \item Likes kids - Different ages of kids (Secondary, primary, younger)
+                \item Families
+                \item Indoors
+                \item Other cats
+                \item Dogs
+            \end{itemize}
+            \item Allow a cat to be saved
+            \item Allow show of interest ("Adopt" button) needs an info icon that when tapped explains what that button does. Requires a user to login before process works. Pop up asking a user to login, if not already logged in.
+        \end{itemize}
+    \item An activity where you can display any "Saved" cats
+    \item When the adopt button is clicked on a cat (and logged in, if not ask to login), propose a home visit time for an admin to complete.
+    \item The home, saved, and cat finder tool should appear on the bottom navigation bar.
+    \item There should be a Navigation Draw which contains links to multiple activities, including the home, saved, and cat finder tool. Also it should contain a link to standalone activities:
+        \begin{itemize}
+            \item About us
+            \item Help and Feedback
+            \item Log in (Using OAuth) for users
+                \begin{itemize}
+                    \item This will be replaced with a My Account activity after login
+                \end{itemize}
+            \item Permissions for any licensed content, possibly in the About us screen
+            \item Settings
+        \end{itemize}
+    \item Toolbar, containing buttons to access the NavigationDraw, settings and up button.
+    \item User accounts should provide people with the ability to:
+        \begin{itemize}
+            \item Sync Data across devices, i.e. their saved cats
+            \item Request to adopt a cat
+            \item View their status for approval of adoption of a cat
+        \end{itemize}
+    \item The app should rely on a stable database provided by a university hosted container or other secure source, the code/schema for this database should be seperate from the code for the app, but both should be in the Git Repository alongside documentation
+    \item The database should be filled with data that has been made up.
+    \item Any used cat images should be provided with a free to use license clearly visible if required.
+    \item The app should use the icon that has been made for the occasion
+    \item Integration UI testing for each concievable workflow on each Activity in the application
+    \item All testing should be done on a separate "testing" database, no testing should be done on the "live" database, unless manually performed
+    \item All non-UI activity specific code should have unit tests associated with it.
+\end{itemize}
+

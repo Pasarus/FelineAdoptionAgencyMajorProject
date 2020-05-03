@@ -1,0 +1,146 @@
+\chapter{Evaluation}
+
+This evaluation chapter attempts to evaluate the progress made, how time was spent and whether or not the project was successful in completing all of the stories. This chapter discusses the good things in the work and the aspects for which it can be improved. This evaluation should also cover how complete the application is and how the requirements fit into the end product.
+
+\section{Requirements Completion}
+This section focuses on discussing how complete each story is from Section \ref{STORIES}. The stories are listed with the completion level detailed beneath each story in a sub-list.
+
+\begin{itemize}
+    \item Design a working prototype of the application
+    \begin{itemize}
+        \item The application has a mostly functional prototype that gives any user the ability to understand how the application should function.
+    \end{itemize}
+    
+    \item Refine the design of the prototype to ensure compliance with Material Design guidelines \cite{MATERIALDESIGNGUIDELINES}.
+    \begin{itemize}
+        \item The design was constantly refined throughout the production of the application, as discussed in Chapter \ref{IMPLEMENTATION}. The explicit design decisions that were changed were discussed in detail earlier in Section \ref{DESIGNCHANGESSECTION}, but Material Design was a heavy influence throughout the project.
+    \end{itemize}
+    
+    \item Utilise a functional Continuous Integration software (Bitrise \cite{BITRISE}) to perform routine tests and ensure the application works across multiple devices, resolutions, and API versions.
+    \begin{itemize}
+        \item Bitrise was used continuously throughout the development cycle and will continue to work outside of this project. It tests devices on each API between 21 and 29, not only those but also most of the APIs use different screen sizes to ensure that parts are functional on both flagship smartphones and cheaper alternatives.
+    \end{itemize}
+    
+    \item Stick to the multiple coding standards for Python (PEP8), Kotlin (Coding Style Guidelines) and any other languages that have been chosen on the GitHub Wiki
+    \url{https://github.com/Pasarus/FelineAdoptionAgencyMajorProject/wiki}
+    \begin{itemize}
+        \item I stuck to the PEP8 standards for all python. The Kotlin style guideline was not always stuck to as I was new to the language and the style at the start of the project, but I believe that I have stuck as close as possible with my current level of expertise in Kotlin.
+    \end{itemize}
+    
+    \item Create a Cat Finder tool in the application that allows a person to find a cat to adopt similar to Cats Protection's find-a-cat \cite{CATSPROTECTION}. This should be a list, probably a RecyclerView that has a Material\gls{Card} that allows us to view some basic details and save the cat. The Card should include Image, Name, Age, and Location with more details available on tap, opening a more information screen. This should be done in line with the Material Guidelines \cite{MATERIALDESIGNGUIDELINES}.
+    \begin{itemize}
+        \item The Cat Finder tool was fully implemented using, a RecyclerView and emulates most of the features from Cats Protection's find-a-cat. The \gls{Card} is functional and shows the Image, Name, Age, and Location of the cats, with further information available after tapping the cards, completed in line with Material Design Guidelines in all aspects except for Navigation Transitions functioning correctly.
+    \end{itemize}
+    
+    \item A tool that displays detailed \gls{Card}s that represent the data of any Cat that has been saved by a user. These \gls{Card}s should be more detailed than those created in the Cat Finder tool, as these Cats are ones of keen interest to potential Adopters and should be featured as such.
+    \begin{itemize}
+        \item The Cat Saver functionality is fully implemented, and the saved Cats are synced by the user being logged in. The \gls{Card}s are more detailed than those in the Cat Finder tool and should keep users more interested in these cats.
+    \end{itemize}
+    
+    \item Login functionality that allows a user to sync data across devices (their saved cats and user data), allow a user to adopt a cat only when logged in and view their status for approval of the adoption of a cat.
+    \begin{itemize}
+        \item Login functionality is fully implemented and is used to sync all data across multiple devices using one login account. It is implemented with Firebase Authentication.
+    \end{itemize}
+    
+    \item Utilise Google Firebase as storage for all data required by the application, with appropriate security enforced to ensure that user data is protected in line with current EU and UK data protection legislation including GDPR \cite{GDPRARTICLE1}.
+    \begin{itemize}
+        \item The methodology of system security revolves around only storing data that is crucial to process function. All data is secure and transmitted using end-to-end encryption. Data is only available with a secure login to the Firebase Firestore at present.
+    \end{itemize}
+    
+    \item Create adequate secondary screens to support the functionality of the application, including Settings, Help, Feedback, About, and My Account screens. When a user has logged in allow access to My Account otherwise request login before access is given because then data retrieval is possible.
+    \begin{itemize}
+        \item Settings is not fully implemented due to limitations from time; however, Help, Feedback, About and My Account screens are all fully functional.
+    \end{itemize}
+    
+    \item Create a sufficiently well-presented Landing/Home screen that allows a user to see their adoption statuses, and a featured cat so users can immediately see a cat, and their adoption statuses as easily as possible. Keeping a user in the app if possible if they accidentally click on it, would potentially lead to more users adopting, the user is likely to be more distracted by the immediate availability of a cute featured cat.
+    \begin{itemize}
+        \item Home screen is created and feature complete. Featured cat functionality works well showing a random cat.
+    \end{itemize}
+    
+    \item Support Android 21+ for development in an aim to make the application available to at minimum 85\% of all Android users.
+    \begin{itemize}
+        \item Android 21 to 29 is fully supported, and the application should work on all API variations in between. Confirmed via manual testing and continuous integration.
+    \end{itemize}
+    
+    \item Provide a correctly signed and as functional as possible release version of the application as an APK for Android.
+    \begin{itemize}
+        \item APK has been signed correctly and constructed, tested on physical devices. Connection to Firebase is successful due to SHA1 certificate being present based on signed Android key.
+    \end{itemize}
+    
+\end{itemize}
+
+\section{Design Decisions}
+
+Prototyping went very well, and it became invaluable during the implementation of the application. The prototype worked in the way that was hoped, and the prototype was used many times throughout the implementation sprints to guide design and influence decision making. 
+
+UX Design overall has a few flaws. While the main screens and navigation methodologies are of good quality, the sub-screens, however, do have some features that overlap or should be redesigned to look and feel nicer to navigate and use. Notably, the adoption status information and cat information screens, while the prototype looks good the end-product does not have the same feel or easy on the eyes design, with more time I would like to improve those screens, as while they are functional, they are not pleasant to view.
+
+DataService as a central function of the entire application was invaluable. It holds functionality needed throughout the application as well as holds key member variables that control the state of the application. To do this project again, I would heavily recommend the use of a Singleton class that holds an application state that is accessible without GUI components, that relates to the current application state. The DataService is used in almost all screens to some functionality, and without it, the application would not function, it, however, could, in theory, be replaced and allow the use of almost any other back-end.
+
+Firebase is the fundamental backbone of the project. Firebase provides authentication functionality, data storage, file hosting, UI integration testing and secure communication with each feature. It's implementation while not necessarily easy, the tools have great interactability which would not necessarily have been possible without Firebase, given the time constraints.
+
+The design process went overall quite well, and I believe that I followed the basic design principles I set out with. I found design was done in a waterfall fashion to a higher degree than my agile process would suggest, but that was due to the fact that Android applications require some UX prototyping before any other work can be completed.
+
+\section{Tool Suitability}
+
+GitHub is a git hosting platform with other tools for software development. It was used to great effect and became very useful, and its suitability is very high for this project. Use of the repository functionality including the wiki and Kanban project boards ensured the project could follow an agile approach, with the GitHub issues being prioritised on each sprint's project board.
+
+Bitrise is a Continuous integration platform aimed at mobile application development. It has a very user-friendly interface, and integration took about 3 minutes to set up initially. While initial integration was not sufficient and had to be expanded upon, a great base test flow was given, to begin with.
+
+Android Studio and PyCharm were the IDEs of choice when developing during this project. PyCharm was the IDE of choice for python development and worked flawlessly. Android Studio has a feature called AVM or Android Virtual Machine, and these AVMs do not run easily on AMD based processor architectures without some modifications, this is because of the way Intel has produced proprietary software for virtualisation of x86 architectures, while AMD lacks behind.
+
+Coding Standards, the PEP8 and Kotlin Lang style guides are excellent standards for writing code that is maintainable and readable by a general developer who is just starting to get used to the language. It reduces jumbled code and allows a maintainer to jump in and produce the same level of code quality as the rest of the file.
+
+Firebase was invaluable in the completion of the project and provided a solid, well tested, and free for low traffic backbone for development. Firebase is aimed towards the development of projects of this kind and was very suitable to the tasks it was used in.
+
+With regards to testing, UI instrumentation tests where the UI tests are performed on many devices were invaluable, ensuring applications do start and navigation is performed correctly on all supported API levels. The unit testing is performed only on parts of the code base that does not require Activity, and as such is somewhat limited in scope, however, the testing coverage aim is an individual test class should test every branch of code execution in the class it is testing. The tools used for this were JUnit and espresso, espresso has a test recorder that made writing UI instrumentation tests much faster.
+
+I found that by the end of the project, the tool suitability had been ironed out. I found that all of the tools that were used fit very well for their requirements in all stages of the project.
+
+\section{How to Improve}
+
+In this section, there is a discussion on how the project could have been improved if done again, including design decisions, time management, and code quality for both readability and maintainability.
+
+    \subsection{Design Decisions}
+    Ensuring broader research into tools available before designing and implementing what someone else has already done. Before I was made aware of Firebase and it's capabilities, I started to design and implement a web framework, that would, in essence, provide basic sign-in authentication, and data storage. I got far enough to have a basic RESTful API functional from my PC. Had I researched how it is done more thoroughly, I would have made the correct Design Decision earlier and saved myself work and time.
+    
+    \subsection{Time Management}
+    As the project dragged, and as with a team size of 1, I found that sticking to a ridged agile process took too much time, if I were to start again, I would do away with the sprints and adopt a Kanban only approach. While a sprint gave ample opportunity for review, the time spent reviewing and rearranging the Kanban board every sprint could have been spent on development, design, and quality assurance.
+    
+    Notably, due to the COVID19 pandemic, my ability to focus and work on my dissertation was hampered by home life. With a younger brother, mother, and partner present at the house, I found my time for work dwindled rather rapidly. I would typically when writing a lengthy report, spend much time at the university planning and writing my report, this was not possible, but I would certainly do that if I were able to do it all over again.
+    
+    While my retrospectives and personal notes on how I progressed throughout the project are useful in writing this report, I firmly believe that the development of this project should have taken place at the same time as I was writing this report. The design chapter would have been easier to write shortly after the design was completed; the design is the part of the project completed earliest; the same is true for the other chapters.
+    
+    \subsection{Pull Requests and Code Review}
+    If I were to start this project again, I would prefer to refine my workflow and replace the testing on every commit with the testing on pull requests and perform a code review of the produced code. While working in industry in a team, I found it invaluable to either look over my code again or have someone else with a fresh pair of eyes look at my code. Then when the builds have passed, I would merge the branch relating to the pull request, and this would reduce bugs and mean that the Master branch always had working code present according to the tests.
+    
+    \subsection{Automated Testing Login and Firebase Functionality}
+    One major stickler for the maintainability for this application is the lack of testing for any login required features. While Manual tests were devised and should cover these areas, if these could be performed regularly on every commit with automated tests, and functional regression would be noticed immediately. 
+    
+    Furthermore testing that involved ensuring Database viability was more limited than it should be, while due to the nature of callback tests being hard to perform a better testing methodology should have been developed to improve detection of instability and feature regression further.
+    
+    With better test coverage, increased confidence could be had in utilising programming practices such as merciless refactoring, and more structured scrum sprints.
+    
+\section{Further Development}
+
+To further development, there are a few things that would need to be worked on:
+
+\begin{itemize}
+    \item A UX design review, to ensure Material Design guidelines are followed
+    \item Actual integration with real data for an adoption charity
+    \item Refine of the filter features for the cat finder
+    \item Improve how parts of the application look where there is no data to display such as default splash screens replace RecyclerViews
+    \item Improve the Cat details screen and the Adoption status details screen
+    \item Improve text scaling for different screen sizes
+    \item Improve the form sections to ensure that all required details are given
+    \item Location functionality instead of an actual address. Confirmed later as an address by an administrator.
+    \item A separate application that is developed to ensure an administrator that can process applications and conduct appointments on time with the following features:
+    \begin{itemize}
+        \item Appointment request lists and the phone numbers to call
+        \item Form to fill in appointment times
+        \item Map integration to get to the address given using directions
+        \item Checklist for investigations into the premises/user
+        \item Ability to update the Cat list to ensure they are marked as reserved after an appointment has been confirmed.
+        \item Tracking in case of emergency while on company/charity time, only while the app is in the foreground to avoid privacy invasion.
+    \end{itemize}
+\end{itemize}

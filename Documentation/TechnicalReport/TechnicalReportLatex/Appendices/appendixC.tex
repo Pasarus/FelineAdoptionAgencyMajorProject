@@ -1,0 +1,1113 @@
+\chapter{Code Examples}
+
+% For some projects, it might be relevant to include some code extracts in an appendix. You are not expected to put all of your code here - the correct place for all of your code is in the technical submission that is made in addition to the Project Report. However, if there are some notable aspects of the code that you discuss, including that in an appendix might be useful to make it easier for your readers to access. 
+
+% As a general guide, if you are discussing short extracts of code then you are advised to include such code in the body of the report. If there is a longer extract that is relevant, then you might include it as shown in the following section. 
+
+% Only include code in the appendix if that code is discussed and referred to in the body of the report. 
+
+% \section{Random Number Generator}
+
+% The Bayes Durham Shuffle ensures that the psuedo random numbers used in the simulation are further shuffled, ensuring minimal correlation between subsequent random outputs \cite{NumericalRecipes}.
+
+% \begin{verbatim}
+%  #define IM1 2147483563
+%  #define IM2 2147483399
+%  #define AM (1.0/IM1)
+%  #define IMM1 (IM1-1)
+%  #define IA1 40014
+%  #define IA2 40692 
+%  #define IQ1 53668
+%  #define IQ2 52774
+%  #define IR1 12211
+%  #define IR2 3791
+%  #define NTAB 32
+%  #define NDIV (1+IMM1/NTAB)
+%  #define EPS 1.2e-7
+%  #define RNMX (1.0 - EPS)
+ 
+%  double ran2(long *idum)
+%  {
+%   /*---------------------------------------------------*/
+%   /* Minimum Standard Random Number Generator          */
+%   /* Taken from Numerical recipies in C                */
+%   /* Based on Park and Miller with Bays Durham Shuffle */
+%   /* Coupled Schrage methods for extra periodicity     */
+%   /* Always call with negative number to initialise    */
+%   /*---------------------------------------------------*/	
+ 
+%   int j;
+%   long k;
+%   static long idum2=123456789;
+%   static long iy=0;
+%   static long iv[NTAB];
+%   double temp;
+ 
+%   if (*idum <=0)
+%   {
+%      if (-(*idum) < 1)
+%      {
+%       *idum = 1;
+%      }else
+%      {
+%       *idum = -(*idum);
+%      }
+%      idum2=(*idum);
+%      for (j=NTAB+7;j>=0;j--)
+%      {
+%       k = (*idum)/IQ1;
+%       *idum = IA1 *(*idum-k*IQ1) - IR1*k;
+%       if (*idum < 0)
+%       {
+%          *idum += IM1;
+%       }
+%       if (j < NTAB)
+%       {
+%          iv[j] = *idum;
+%       }
+%      }
+%      iy = iv[0];	
+%   }
+%   k = (*idum)/IQ1;
+%   *idum = IA1*(*idum-k*IQ1) - IR1*k;
+%   if (*idum < 0)
+%   {
+%      *idum += IM1;
+%   }
+%   k = (idum2)/IQ2;
+%   idum2 = IA2*(idum2-k*IQ2) - IR2*k;
+%   if (idum2 < 0)
+%   {
+%      idum2 += IM2;
+%   }
+%   j = iy/NDIV;
+%   iy=iv[j] - idum2;
+%   iv[j] = *idum;
+%   if (iy < 1)
+%   {
+%      iy += IMM1;
+%   }
+%   if ((temp=AM*iy) > RNMX)
+%   {
+%      return RNMX;
+%   }else
+%   {
+%      return temp;	
+%   }
+%  }
+ 
+% \end{verbatim}
+
+\section{Data Classes} \label {DATACLASSEXAMPLE}
+
+\subsection{User}
+\begin{verbatim}
+data class User(
+    var addressLineOne: String? = "",
+    var addressLineTwo: String? = "",
+    var addressLineThree: String? = "",
+    var county: String? = "",
+    var name: String? = "",
+    var mobileNumber: String? = "",
+    var postCode: String? = "",
+    var favouritedCats: List<String>? = ArrayList(),
+    var adoptionProcesses: List<DocumentReference>? = ArrayList()
+)
+\end{verbatim}
+    
+\subsection{Feedback}
+\begin{verbatim}
+class Feedback {
+
+    var feedback: String? = null
+    var developerReplyRequested: Boolean? = null
+    var date: String? = null
+    var userDocument: DocumentReference? = null
+
+    constructor() {}
+    constructor(
+        feedback: String,
+        devReplyRequested: Boolean,
+        date: String,
+        userDocument: DocumentReference
+    ) {
+        this.feedback = feedback
+        this.developerReplyRequested = devReplyRequested
+        this.date = date
+        this.userDocument = userDocument
+    }
+}
+\end{verbatim}
+
+\subsection{Cat}
+\begin{verbatim}
+class Cat : Parcelable {
+
+    var catAgeMonths: Int? = 0
+    var catBreed: String? = ""
+    var catName: String? = ""
+    var colour: String? = ""
+    var description: String? = ""
+    var disabled: Boolean? = false
+    var location: String? = ""
+    var neutered: Boolean? = false
+    var pictureUrl: String? = ""
+    var dogs: Boolean? = false
+    var indoors: Boolean? = false
+    var kids0to4: Boolean? = false
+    var kids13to18: Boolean? = false
+    var kids5to12: Boolean? = false
+    var otherCats: Boolean? = false
+    var sex: String? = ""
+    var catId: String? = ""
+
+    constructor() : super()  // Needed for Firebase
+    constructor(
+        catAgeMonths: Int?,
+        catBreed: String?,
+        catName: String?,
+        colour: String?,
+        description: String?,
+        disabled: Boolean?,
+        location: String?,
+        neutered: Boolean?,
+        pictureUrl: String?,
+        dogs: Boolean?,
+        indoors: Boolean?,
+        kids0to4: Boolean?,
+        kids13to18: Boolean?,
+        kids5to12: Boolean?,
+        otherCats: Boolean?,
+        sex: String?,
+        catId: String?
+    ) {
+        this.catAgeMonths = catAgeMonths
+        this.catBreed = catBreed
+        this.catName = catName
+        this.colour = colour
+        this.description = description
+        this.disabled = disabled
+        this.location = location
+        this.neutered = neutered
+        this.pictureUrl = pictureUrl
+        this.dogs = dogs
+        this.indoors = indoors
+        this.kids0to4 = kids0to4
+        this.kids13to18 = kids13to18
+        this.kids5to12 = kids5to12
+        this.otherCats = otherCats
+        this.sex = sex
+        this.catId = catId
+    }
+
+    constructor(parcel: Parcel) : this() {
+        catAgeMonths = parcel.readValue(Int::class.java.classLoader) as? Int
+        catBreed = parcel.readString()
+        catName = parcel.readString()
+        colour = parcel.readString()
+        description = parcel.readString()
+        disabled = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        location = parcel.readString()
+        neutered = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        pictureUrl = parcel.readString()
+        sex = parcel.readString()
+        catId = parcel.readString()
+        dogs = stringToBool(parcel.readString() as String)
+        indoors = stringToBool(parcel.readString() as String)
+        kids0to4 = stringToBool(parcel.readString() as String)
+        kids13to18 = stringToBool(parcel.readString() as String)
+        kids5to12 = stringToBool(parcel.readString() as String)
+        otherCats = stringToBool(parcel.readString() as String)
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(catAgeMonths)
+        parcel.writeString(catBreed)
+        parcel.writeString(catName)
+        parcel.writeString(colour)
+        parcel.writeString(description)
+        parcel.writeValue(disabled)
+        parcel.writeString(location)
+        parcel.writeValue(neutered)
+        parcel.writeString(pictureUrl)
+        parcel.writeString(sex)
+        parcel.writeValue(catId)
+        parcel.writeString(boolToString(dogs!!))
+        parcel.writeString(boolToString(indoors!!))
+        parcel.writeString(boolToString(kids0to4!!))
+        parcel.writeString(boolToString(kids13to18!!))
+        parcel.writeString(boolToString(kids5to12!!))
+        parcel.writeString(boolToString(otherCats!!))
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Cat> {
+        override fun createFromParcel(parcel: Parcel): Cat {
+            return Cat(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Cat?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+\end{verbatim}
+
+\subsection{AdoptionProcess}
+\begin{verbatim}
+class AdoptionProcess : Parcelable {
+    var cat: DocumentReference? = null
+    var status: MutableMap<String, Any>? = HashMap()
+    var user: DocumentReference? = null
+
+    constructor() : super()  // Needed for Firebase
+    constructor(status: Map<String, Any>, cat: Cat) : this() {
+        this.status = status.toMutableMap()
+        this.cat = FirebaseFirestore.getInstance().collection("cats")
+            .document("cat" + cat.catId)
+
+        this.user = FirebaseFirestore.getInstance().collection("users").document(
+            DataService.INSTANCE.user!!.uid
+        )
+    }
+
+    constructor(parcel: Parcel) : this() {
+        status!!["pending"] = stringToBool(parcel.readString() as String)
+        status!!["pendingReason"] = parcel.readString() as String
+        status!!["accepted"] = stringToBool(parcel.readString() as String)
+        status!!["rejected"] = stringToBool(parcel.readString() as String)
+        status!!["rejectedReason"] = parcel.readString() as String
+        user = FirebaseFirestore.getInstance().document(parcel.readString() as String)
+        cat = FirebaseFirestore.getInstance().document(parcel.readString() as String)
+    }
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        if (dest != null){
+            val pending = status!!["pending"] as Boolean
+            val pendingReason = status!!["pendingReason"] as String
+            val accepted = status!!["accepted"] as Boolean
+            val rejected = status!!["rejected"] as Boolean
+            val rejectedReason = status!!["rejectedReason"] as String
+            val user = this.user.toString()
+            val cat = this.cat.toString()
+            dest.writeString(boolToString(pending))
+            dest.writeString(pendingReason)
+            dest.writeString(boolToString(accepted))
+            dest.writeString(boolToString(rejected))
+            dest.writeString(rejectedReason)
+            dest.writeString(user)
+            dest.writeString(cat)
+        }
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<AdoptionProcess> {
+        override fun createFromParcel(parcel: Parcel): AdoptionProcess {
+            return AdoptionProcess(parcel)
+        }
+
+        override fun newArray(size: Int): Array<AdoptionProcess?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+\end{verbatim}
+
+\section{Server Scripts}
+
+\subsection{Create Cats Script}\label{CREATECATSCRIPT}
+\begin{verbatim}
+import os
+import firebase_admin
+from google.cloud import firestore
+from json import dump, load
+from Cat import Cat
+from random import randint
+
+
+"""
+This script was designed with the intention of generating cats for my MMP 
+project continuing the Feline Adoption Agency App for Android. With that
+in mind it utilizes a backend database from Google Firestore. For 
+someone to use this script they must change 
+GOOGLE_SERVICES_ACCOUNT_KEY_LOCATION to reflect their own database.
+"""
+
+
+GOOGLE_SERVICES_ACCOUNT_KEY_LOCATION = ""
+FILE_PATH_TO_COPY_OF_CATS = "CatCopies/copy.json"
+CAT_DETAILS_DIR = "CatDetails"
+CAT_NAMES_FILE = "CatNames.json"
+CAT_BREEDS_FILE = "CatBreeds.json"
+CAT_DESCRIPTIONS_FILE = "CatDescriptions.json"
+CAT_COLOURS_FILE = "CatColours.json"
+CAT_LOCATIONS_FILE = "CatLocations.json"
+CAT_PICTURES_URLS_FILE = "CatPictureUrls.json"
+MAX_CAT_AGE_IN_MONTHS = 100
+MIN_CAT_AGE_IN_MONTHS = 0
+CAT_ID_TO_START_FROM = 10
+CAT_ID_TO_END_AT = 100
+
+
+def load_cat_breeds():
+    with open(os.path.join(CAT_DETAILS_DIR, CAT_BREEDS_FILE)) as breeds_file:
+        return load(breeds_file)
+
+
+def load_cat_descriptions():
+    with open(os.path.join(CAT_DETAILS_DIR, CAT_DESCRIPTIONS_FILE)) as \
+    descriptions_file:
+        return load(descriptions_file)
+
+
+def load_cat_names():
+    with open(os.path.join(CAT_DETAILS_DIR, CAT_NAMES_FILE)) as names_file:
+        return load(names_file)
+
+
+def load_colours():
+    with open(os.path.join(CAT_DETAILS_DIR, CAT_COLOURS_FILE)) as colours_file:
+        return load(colours_file)
+
+
+def load_locations():
+    with open(os.path.join(CAT_DETAILS_DIR, CAT_LOCATIONS_FILE)) as \
+    locations_file:
+        return load(locations_file)
+
+
+def load_picture_urls():
+    with open(os.path.join(CAT_DETAILS_DIR, CAT_PICTURES_URLS_FILE)) as \
+    url_file:
+        return load(url_file)
+
+
+def load_cats_details():
+    return load_cat_names(), load_cat_breeds(), \
+    load_cat_descriptions(), load_colours(), \
+    load_locations(), load_picture_urls()
+
+
+def generate_cats():
+    cats_list = []
+
+    cat_names, cat_breeds, cat_descriptions, colours, locations, picture_urls \
+    = load_cats_details()
+
+    true_or_false = [True, False]
+    male_or_female = [u"Male", u"Female"]
+
+    for ii in range(CAT_ID_TO_START_FROM, CAT_ID_TO_END_AT):
+        children = true_or_false[randint(0, 1)]
+        cats_list.append(Cat(
+            cat_name=cat_names[randint(0, len(cat_names) - 1)],
+            cat_breed=cat_breeds[randint(0, len(cat_breeds) - 1)],
+            description=cat_descriptions[randint(0,
+                len(cat_descriptions) - 1)],
+            cat_age_months=randint(
+                a=MIN_CAT_AGE_IN_MONTHS,
+                b=MAX_CAT_AGE_IN_MONTHS),
+            cat_id=str(ii),
+            colour=colours[randint(0, len(colours) - 1)],
+            disabled=true_or_false[randint(0, 1)],
+            neutered=true_or_false[randint(0, 1)],
+            dogs=true_or_false[randint(0, 1)],
+            indoors=true_or_false[randint(0, 1)],
+            kids0to4=children,
+            kids5to12=children,
+            kids13to18=children,
+            location=locations[randint(0, len(locations) - 1)],
+            other_cats=true_or_false[randint(0, 1)],
+            picture_url=picture_urls[randint(0, len(picture_urls) - 1)],
+            sex=male_or_female[randint(0, 1)]
+        ).to_dict())
+
+    return cats_list
+
+
+def upload_cats(cats_list):
+    # Ensure that firestore is initialized:
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \ 
+    GOOGLE_SERVICES_ACCOUNT_KEY_LOCATION
+    firebase_admin.initialize_app()
+
+    db = firestore.Client()
+
+    for ii in range(CAT_ID_TO_START_FROM, CAT_ID_TO_END_AT):
+        # Put each of the cats online in the correct file.
+        db.collection("cats").document("cat"+str(ii)) \
+        .set(cats_list[ii-CAT_ID_TO_START_FROM])
+
+
+# This is the actual script that is ran, it subsequently calls 
+# all the functions
+cats = generate_cats()
+with open(FILE_PATH_TO_COPY_OF_CATS, "w+") as file:
+    dump(cats, file)
+upload_cats(cats)
+\end{verbatim}
+
+\subsection{Remove Cats Script}\label{REMOVECATSSCRIPT}
+
+\begin{verbatim}
+"""
+This script was made when I realised I made a mistake in my cat generation
+script for all cat ids between 10 and 99. So this is designed at removing 
+those cats. With that in mind it utilizes a backend database from Google Firestore.
+For someone to use this script they must change
+GOOGLE_SERVICES_ACCOUNT_KEY_LOCATION to reflect their own database.
+"""
+import os
+
+import firebase_admin
+from google.cloud import firestore
+
+GOOGLE_SERVICES_ACCOUNT_KEY_LOCATION = ""
+CAT_ID_TO_START_FROM = 10
+CAT_ID_TO_END_AT = 100
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
+GOOGLE_SERVICES_ACCOUNT_KEY_LOCATION
+firebase_admin.initialize_app()
+
+db = firestore.Client()
+
+for ii in range(CAT_ID_TO_START_FROM, CAT_ID_TO_END_AT):
+    db.collection("cats").document("cat" + str(ii)).delete()
+\end{verbatim}
+
+\subsection{Cat Class}\label{CATCLASSSCRIPT}
+\begin{verbatim}
+class Cat(object):
+    def __init__(self, cat_age_months, cat_breed, cat_name, colour, 
+                    description, disabled, location, neutered,
+                    picture_url, dogs, indoors, kids0to4, kids13to18,
+                    kids5to12, other_cats, sex, cat_id):
+        self.cat_age_months = cat_age_months
+        self.cat_breed = cat_breed
+        self.cat_name = cat_name
+        self.colour = colour
+        self.description = description
+        self.disabled = disabled
+        self.location = location
+        self.neutered = neutered
+        self.picture_url = picture_url
+        self.dogs = dogs
+        self.indoors = indoors
+        self.kids0to4 = kids0to4
+        self.kids13to18 = kids13to18
+        self.kids5to12 = kids5to12
+        self.other_cats = other_cats
+        self.sex = sex
+        self.cat_id = cat_id
+
+    def to_dict(self):
+        return {
+            u"catAgeMonths": self.cat_age_months,
+            u"catBreed": self.cat_breed,
+            u"catName": self.cat_name,
+            u"colour": self.colour,
+            u"description": self.description,
+            u"disabled": self.disabled,
+            u"location": self.location,
+            u"neutered": self.neutered,
+            u"pictureUrl": self.picture_url,
+            u"dogs": self.dogs,
+            u"indoors": self.indoors,
+            u"kids0to4": self.kids0to4,
+            u"kids13to18": self.kids13to18,
+            u"kids5to12": self.kids5to12,
+            u"otherCats": self.other_cats,
+            u"sex": self.sex,
+            u"catId": self.cat_id
+        }
+\end{verbatim}
+
+\section{NavigationUI Navigation Graph} \label{NAVIGATIONGRAPH}
+\begin{verbatim}
+    <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2020 Samuel Jones
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License. -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.account.MyAccountFragment"
+        android:label="Account Details"
+        tools:layout="@layout/my_account_fragment" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.help.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/help_fragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/about_fragment" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.feedback.FeedbackFragment"
+        android:label="Feedback"
+        tools:layout="@layout/feedback_fragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myAccountFragment"
+            app:destination="@id/myAccountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_findCatFragment"
+            app:destination="@id/findCatFragment" />
+        <action
+            android:id=
+            "@+id/action_homeFragment_to_adoptionStatusInfoViewFragment"
+            app:destination="@id/adoptionStatusInfoViewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_catCardInfoFragment"
+            app:destination="@id/catCardInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adoptionForm"
+            app:destination="@id/adoptionForm" />
+        <action
+            android:id="@+id/action_homeFragment_to_adoptionFormConfirmation"
+            app:destination="@id/adoptionFormConfirmation" />
+        <action
+            android:id="@+id/action_homeFragment_to_cancel_adoption_dialog"
+            app:destination="@id/cancel_adoption_dialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.saved.SavedFragment"
+        android:label="Saved Cats"
+        tools:layout="@layout/saved_fragment" />
+    <fragment
+        android:id="@+id/findCatFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.findcat.FindCatFragment"
+        android:label="Find A Cat Tool"
+        tools:layout="@layout/find_cat_fragment" />
+    <fragment
+        android:id="@+id/adoptionStatusInfoViewFragment"
+    android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.
+                                    AdoptionStatusInfoViewFragment"
+        android:label="Adoption Status Info"
+        tools:layout="@layout/adoption_status_info_view_fragment" />
+    <fragment
+        android:id="@+id/catCardInfoFragment"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.catinfo.CatCardInfoFragment"
+        android:label="More Info"
+        tools:layout="@layout/cat_card_info_fragment" />
+    <fragment
+        android:id="@+id/adoptionForm"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.AdoptionForm"
+        android:label="Adoption Form"
+        tools:layout="@layout/fragment_adoption_form" />
+    <fragment
+        android:id="@+id/adoptionFormConfirmation"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.
+                                AdoptionFormConfirmation"
+        android:label="Adoption Confirmation"
+        tools:layout="@layout/fragment_adoption_form_confirmation" />
+    <dialog
+        android:id="@+id/cancel_adoption_dialog"
+        android:name="uk.ac.aber.dcs.mmp.faa.ui.adoption.CancelAdoptionDialog"
+        android:label="Adoption Cancellation confirmation"
+        tools:layout="@layout/fragment_cancel_adoption_dialog" />
+</navigation>
+\end{verbatim}
+
+\section{Firebase Filter Implementation} \label{FIRESTOREQUERYIMPLEMENTATION}
+\begin{verbatim}
+var query: Query = FirebaseFirestore.getInstance().collection("cats")
+
+val location = map["location"]
+if (location != "") {
+    query = query.whereEqualTo("location", location)
+}
+
+val families = map["families"]
+if (families != "") {
+    if (families == "Children") {
+        query = query.whereEqualTo("kids0to4", true)
+        query = query.whereEqualTo("kids5to12", true)
+        query = query.whereEqualTo("kids13to18", true)
+    } else if (families == "No Children") {
+        query = query.whereEqualTo("kids0to4", false)
+        query = query.whereEqualTo("kids5to12", false)
+        query = query.whereEqualTo("kids13to18", false)
+    }
+}
+
+val otherCats = map["otherCats"]
+if (otherCats != "") {
+    if (otherCats == "Other cats welcome") {
+        query = query.whereEqualTo("otherCats", true)
+    } else if (otherCats == "No other cats") {
+        query = query.whereEqualTo("otherCats", false)
+    }
+}
+
+val dogs = map["dogs"]
+if (dogs != "") {
+    if (dogs == "Happy with Dogs") {
+        query = query.whereEqualTo("dogs", true)
+    } else if (dogs == "Unhappy with Dogs") {
+        query = query.whereEqualTo("dogs", false)
+    }
+}
+
+val indoors = map["indoorsOnly"]
+if (indoors != "") {
+    if (indoors == "Indoors only") {
+        query = query.whereEqualTo("indoors", true)
+    } else if (indoors == "Needs outside access") {
+        query = query.whereEqualTo("indoors", false)
+    }
+}
+
+val sortBy = map["sortBy"]
+var orderByString = ""
+when (sortBy) {
+    "Name" -> {
+        orderByString = "catName"
+    }
+    "Age" -> {
+        orderByString = "catAgeMonths"
+    }
+    "Recently Listed" -> {
+        orderByString = "catId"
+    }
+}
+
+query = if (map["sortByOrdering"] == "Ascending"){
+    query.orderBy(orderByString, Query.Direction.ASCENDING)
+} else {
+    query.orderBy(orderByString, Query.Direction.DESCENDING)
+}
+
+val name = map["name"]
+if (name != "") {
+    query = query.startAt(name).endAt(name + "\uf8ff")
+}
+\end{verbatim}
+
+\section{Testing Examples} 
+The following are examples given for testing in the project.
+
+\subsection{Unit Test example} \label{Unit Test Example}
+\begin{verbatim}
+import junit.framework.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+import uk.ac.aber.dcs.mmp.faa.utils.ObserverOfStringSet
+import uk.ac.aber.dcs.mmp.faa.utils.SimpleObservableStringSet
+
+class SimpleObservableStringSetTests : ObserverOfStringSet {
+    private var addCalledCount: Int = 0
+    private var removeCalledCount: Int = 0
+    private lateinit var testSet: SimpleObservableStringSet
+
+    @Before
+    fun setUp() {
+        addCalledCount = 0
+        removeCalledCount = 0
+        testSet = SimpleObservableStringSet()
+        testSet.addObserver(this)
+    }
+
+    override fun onObservedAdd(e: String) {
+        addCalledCount += 1
+    }
+
+    override fun onObservedRemove(e: String) {
+        removeCalledCount += 1
+    }
+
+    @Test
+    fun test_notifiesObserversOnAdd() {
+        testSet.add("test1")
+        assertEquals(addCalledCount, 1)
+    }
+
+    @Test
+    fun test_notifiesObserversOnAddOfDuplicate() {
+        val test1 = "test1"
+        testSet.add(test1)
+        assertEquals(addCalledCount, 1)
+        testSet.add(test1)
+        assertEquals(addCalledCount, 2)
+    }
+
+    @Test
+    fun test_notifiesObserversOnRemove() {
+        val test1 = "test1"
+        testSet.add(test1)
+        testSet.remove(test1)
+        assertEquals(addCalledCount, 1)
+        assertEquals(removeCalledCount, 1)
+    }
+
+    @Test
+    fun test_notifiesObserversOnRemoveOfNoneExistentString() {
+        testSet.remove("test1")
+        assertEquals(removeCalledCount, 1)
+    }
+
+    @Test
+    fun test_notifiesMultipleTimesForMultipleAdds() {
+        testSet.add("test1")
+        assertEquals(addCalledCount, 1)
+        testSet.add("test2")
+        assertEquals(addCalledCount, 2)
+        testSet.add("test3")
+        assertEquals(addCalledCount, 3)
+    }
+
+    @Test
+    fun test_notifiesMultipleTimesForMultipleRemoves() {
+        val test1 = "test1"
+        val test2 = "test2"
+        val test3 = "test3"
+        testSet.add(test1)
+        assertEquals(addCalledCount, 1)
+        testSet.add(test2)
+        assertEquals(addCalledCount, 2)
+        testSet.add(test3)
+        assertEquals(addCalledCount, 3)
+        testSet.remove(test1)
+        assertEquals(removeCalledCount, 1)
+        testSet.remove(test2)
+        assertEquals(removeCalledCount, 2)
+        testSet.remove(test3)
+        assertEquals(removeCalledCount, 3)
+    }
+
+    @Test
+    fun test_notifiesOncePerItemAddedWhenAddingMultipleItemsWithAddAll() {
+        testSet.addAll(setOf("test1", "test2", "test3"))
+        assertEquals(addCalledCount, 3)
+    }
+
+    @Test
+    fun test_notifiesOncePerItemClearedWhenUsingClear() {
+        testSet.addAll(setOf("test1", "test2", "test3"))
+        assertEquals(addCalledCount, 3)
+
+        testSet.clear()
+        assertEquals(removeCalledCount, 3)
+    }
+
+    @Test
+    fun test_notifiesOncePerItemClearedWhenRemovingMultipleItemsWithRemoveAll() {
+        testSet.addAll(setOf("test1", "test2", "test3"))
+        assertEquals(addCalledCount, 3)
+
+        testSet.removeAll(setOf("test1", "test2", "test3"))
+        assertEquals(removeCalledCount, 3)
+    }
+
+    // Tests below this point are to ensure that basic set functionality
+    // is still viable via this class
+    @Test
+    fun test_setSizeOption() {
+        for (i in 1..10) {
+            testSet.add("" + i)
+            assertEquals(testSet.size, i)
+        }
+    }
+
+    @Test
+    fun test_setUniquenessIsGuarenteed() {
+        val test1 = "test1"
+        testSet.add(test1)
+        assertEquals(testSet.size, 1)
+        testSet.add(test1)
+        assertEquals(testSet.size, 1)
+
+        // Ensure the value in the set is test1
+        for (wannabeTest1 in testSet) {
+            assertEquals(wannabeTest1, test1)
+        }
+    }
+
+    @Test
+    fun test_setRetrievalViaIteratorStillWorks() {
+        val test1 = "test1"
+        testSet.add(test1)
+        for (wannabeTest1 in testSet) {
+            assertEquals(wannabeTest1, test1)
+        }
+    }
+
+    @Test
+    fun test_ensureUpdateOccursWithBlankFunction() {
+        testSet.updateObserversAddBlank()
+        assertEquals(addCalledCount, 1)
+    }
+}
+\end{verbatim}
+
+\subsection{UI Instrumentation Test example} \label{UIINSTTESTEXAMPLE}
+\begin{verbatim}
+import android.view.View
+import android.view.ViewGroup
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.rule.ActivityTestRule
+import org.hamcrest.Description
+import org.hamcrest.Matcher
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.allOf
+import org.hamcrest.TypeSafeMatcher
+import org.hamcrest.core.IsInstanceOf
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import uk.ac.aber.dcs.mmp.faa.R
+
+@LargeTest
+@RunWith(AndroidJUnit4ClassRunner::class)
+class AboutFragmentContents {
+
+    @Rule
+    @JvmField
+    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @Test
+    fun aboutFragmentContents() {
+        val appCompatImageButton = onView(
+            allOf(
+                withContentDescription("Open navigation drawer"),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.toolbar),
+                        childAtPosition(
+                            withClassName(`is`(
+                            "androidx.constraintlayout.widget.ConstraintLayout")),
+                            0
+                        )
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatImageButton.perform(click())
+
+        val appCompatTextView = onView(
+            allOf(
+                withId(R.id.navDrawAbout), withText("About"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navDrawerNavView),
+                        1
+                    ),
+                    5
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatTextView.perform(click())
+
+        val imageView = onView(
+            allOf(
+                withContentDescription("Cat Logo Material Design Icon"),
+                childAtPosition(
+                    childAtPosition(
+                        IsInstanceOf.instanceOf(
+                        android.widget.LinearLayout::class.java),
+                        6
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        imageView.check(matches(isDisplayed()))
+
+        val textView = onView(
+            allOf(
+                withText("The following icons, were made under SIL
+                Open Font License 1.1 by @Templarian on Twitter:"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
+                    ),
+                    5
+                ),
+                isDisplayed()
+            )
+        )
+        textView.check(matches(withText("The following icons, were
+        made under SIL Open Font License 1.1 by @Templarian on 
+        Twitter:")))
+
+        val textView2 = onView(
+            allOf(
+                withText("The icons created by google as part of 
+                Material Design are distributed under an Apache 2.0 License
+                (http://www.apache.org/licenses/LICENSE-2.0)."),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
+                    ),
+                    4
+                ),
+                isDisplayed()
+            )
+        )
+        textView2.check(matches(withText("The icons created by google as
+        part of Material Design are distributed under an Apache 2.0 License
+        (http://www.apache.org/licenses/LICENSE-2.0).")))
+
+        val textView3 = onView(
+            allOf(
+                withText("As part of this application certain icons have
+                been used, these Material Design based icon are created 
+                by the community and are distrubuted under SIL Open Font 
+                License 1.1 (https://opensource.org/licenses/OFL-1.1)."),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
+                    ),
+                    3
+                ),
+                isDisplayed()
+            )
+        )
+        textView3.check(matches(withText("As part of this application 
+        certain icons have been used, these Material Design based icon
+        are created by the community and are distrubuted under SIL Open
+        Font License 1.1 (https://opensource.org/licenses/OFL-1.1).")))
+
+        val textView4 = onView(
+            allOf(
+                withText("It is distributed open source at 
+                https://github.com/Pasarus/FelineAdoptionAgencyMajorProject"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
+                    ),
+                    2
+                ),
+                isDisplayed()
+            )
+        )
+        textView4.check(matches(withText("It is distributed open source 
+        at https://github.com/Pasarus/FelineAdoptionAgencyMajorProject")))
+
+        val textView5 = onView(
+            allOf(
+                withText("Whilst use of this applications source code is
+                free to everyone, the explicit copyright is owned by the 
+                sole author Samuel Jones (samjones714@gmail.com)"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        textView5.check(matches(withText("Whilst use of this applications
+        source code is free to everyone, the explicit copyright is owned 
+        by the sole author Samuel Jones (samjones714@gmail.com)")))
+
+        val textView6 = onView(
+            allOf(
+                withText("This application is meant as a demonstration of 
+                how the adoption of a cat could be fully integrated into 
+                an app via a backend database and user verification system.
+                This mobile application was created under an Apache 2.0 
+                License (https://www.apache.org/licenses/LICENSE-2.0)"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.navHostFragment),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        textView6.check(matches(withText("This application is meant as a
+        demonstration of how the adoption of a cat could be fully integrated
+        into an app via a backend database and user verification system. 
+        This mobile application was created under an Apache 2.0 License 
+        (https://www.apache.org/licenses/LICENSE-2.0)")))
+    }
+
+    private fun childAtPosition(
+        parentMatcher: Matcher<View>, position: Int
+    ): Matcher<View> {
+
+        return object : TypeSafeMatcher<View>() {
+            override fun describeTo(description: Description) {
+                description.appendText("Child at position $position in parent ")
+                parentMatcher.describeTo(description)
+            }
+
+            public override fun matchesSafely(view: View): Boolean {
+                val parent = view.parent
+                return parent is ViewGroup && parentMatcher.matches(parent)
+                        && view == parent.getChildAt(position)
+            }
+        }
+    }
+}
+\end{verbatim}

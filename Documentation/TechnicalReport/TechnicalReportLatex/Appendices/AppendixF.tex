@@ -1,0 +1,328 @@
+\chapter{Bitrise Configuration}
+
+Here I will provide the Bitrise YAML file for the configuration used, most of this file was created by Bitrise automatically \cite{BITRISE}, an unedited version is available publicly here \url{https://app.bitrise.io/app/bb27aba9fb1b6066/workflow_editor#!/yml}. Some parts of this are necessarily secret due to the nature of google services API tokens:
+
+\begin{verbatim}
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: android
+trigger_map:
+- push_branch: "*"
+  workflow: primary
+- pull_request_source_branch: "*"
+  workflow: primary
+workflows:
+  deploy:
+    description: |
+      ## How to get a signed APK
+
+      This workflow contains the **Sign APK** step. To sign your APK all
+      you have to do is to:
+
+      1. Click on **Code Signing** tab
+      1. Find the **ANDROID KEYSTORE FILE** section
+      1. Click or drop your file on the upload file field
+      1. Fill the displayed 3 input fields:
+       1. **Keystore password**
+       1. **Keystore alias**
+       1. **Private key password**
+      1. Click on **[Save metadata]** button
+
+      That's it! From now on, **Sign APK** step will receive your uploaded 
+      files.
+
+      ## To run this workflow
+
+      If you want to run this workflow manually:
+
+      1. Open the app's build list page
+      2. Click on **[Start/Schedule a Build]** button
+      3. Select **deploy** in **Workflow** dropdown input
+      4. Click **[Start Build]** button
+
+      Or if you need this workflow to be started by a GIT event:
+
+      1. Click on **Triggers** tab
+      2. Setup your desired event (push/tag/pull) and select **deploy** 
+      workflow
+      3. Click on **[Done]** and then **[Save]** buttons
+
+      The next change in your repository that matches any of your trigger map
+      event will start **deploy** workflow.
+    steps:
+    - activate-ssh-key@4.0.3:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.17: {}
+    - cache-pull@2.1.1: {}
+    - script@1.1.5:
+        title: Do anything with Script step
+    - install-missing-android-tools@2.3.7:
+        inputs:
+        - gradlew_path: "$PROJECT_LOCATION/gradlew"
+    - change-android-versioncode-and-versionname@1.1.1:
+        inputs:
+        - build_gradle_path: "$PROJECT_LOCATION/$MODULE/build.gradle"
+    - android-lint@0.9.6:
+        inputs:
+        - project_location: "$PROJECT_LOCATION"
+        - module: "$MODULE"
+        - variant: "$VARIANT"
+    - android-unit-test@1.0.0:
+        inputs:
+        - project_location: "$PROJECT_LOCATION"
+        - module: "$MODULE"
+        - variant: "$VARIANT"
+    - android-build@0.10.0:
+        inputs:
+        - project_location: "$PROJECT_LOCATION"
+        - module: "$MODULE"
+        - variant: "$VARIANT"
+    - sign-apk@1.4.1:
+        run_if: '{{getenv "BITRISEIO_ANDROID_KEYSTORE_URL" | ne ""}}'
+    - deploy-to-bitrise-io@1.9.2: {}
+    - cache-push@2.2.1: {}
+  primary:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone: {}
+    - generate-text-file:
+        inputs:
+        - file_name: Client/app/google-services.json
+        - file_content: "$GOOGLE_API_SERVICE_CONTENTS"
+    - cache-pull: {}
+    - install-missing-android-tools:
+        inputs:
+        - gradlew_path: "$PROJECT_LOCATION/Client/gradlew"
+        is_always_run: true
+    - android-unit-test:
+        inputs:
+        - project_location: "$PROJECT_LOCATION/Client"
+        - module: "$MODULE"
+        - variant: "$VARIANT"
+    - android-build-for-ui-testing:
+        inputs:
+        - variant: Debug
+        - project_location: "$BITRISE_SOURCE_DIR/Client"
+        - module: app
+    - virtual-device-testing-for-android:
+        inputs:
+        - test_devices: |-
+            Pixel2,29,en,portrait
+            Pixel2,28,en,portrait
+            Pixel2,27,en,portrait
+            Pixel2,26,en,portrait
+            NexusLowRes,25,en,portrait
+            NexusLowRes,24,en,portrait
+            NexusLowRes,23,en,portrait
+            Nexus9,22,en,portrait
+            Nexus9,21,en,portrait
+        - inst_test_targets: ''
+        - use_verbose_log: 'true'
+        - download_test_results: 'true'
+        - directories_to_pull: "$VDTESTING_DOWNLOADED_FILES_DIR"
+        - test_type: instrumentation
+    - sign-apk: {}
+    - github-status:
+        inputs:
+        - auth_token: "$GITHUB_API_TOKEN_SAM"
+    - deploy-to-bitrise-io:
+        inputs:
+        - is_enable_public_page: 'false'
+        - notify_email_list: ''
+    - deploy-to-bitrise-io:
+        inputs:
+        - deploy_path: "$VDTESTING_DOWNLOADED_FILES_DIR"
+    - cache-push: {}
+  TestingnewPrimaryWorkflow:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - clone_depth: '5'
+    - install-missing-android-tools:
+        inputs:
+        - gradlew_path: "$PROJECT_LOCATION/gradlew"
+    - android-build-for-ui-testing:
+        inputs:
+        - module: app
+        - variant: Debug
+        - arguments: "--no-build-cache"
+    - git::https://github.com/stepstone-tech/steps-avd-manager.git@core:
+        inputs:
+        - version: '27'
+        - verbose_mode: 'true'
+        - custom_hw_config: |-
+            disk.dataPartition.size=1024M
+            hw.camera.back=emulated
+            hw.camera.front=emulated
+            hw.keyboard=yes
+            hw.gpu.enabled=true
+            hw.gpu.mode=swiftshader_indirect
+            hw.ramSize=2048
+            runtime.network.latency=none
+            runtime.network.speed=full
+            showDeviceFrame=no
+            skin.dynamic=yes
+            skin.path=_no_skin
+            skin.path.backup=_no_skin
+            vm.heapSize=256
+        - custom_command_flags: "-no-window -no-audio -debug-init /
+            -no-boot-anim -no-snapshot"
+        - profile: Nexus 6P
+        - boot_wait_time: '300'
+        - emulator_channel: '0'
+        title: Create & start emulator
+    - virtual-device-testing-for-android@1.1.1:
+        inputs:
+        - inst_use_orchestrator: 'true'
+        - test_devices: |-
+            NexusLowRes,24,en,portrait
+            NexusLowRes,24,en,landscape
+            Pixel2,28,en,portrait
+            Pixel2,28,en,landscape
+        - test_type: instrumentation
+    - script:
+        timeout: 60
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            # set -e
+            # debug log
+            set -x
+            du -sh
+            df -h
+            # write your script here
+            echo "Getting emulator start log file"
+            cat out.txt || echo "no log file found"
+        is_always_run: true
+        title: Print emulator start logs
+    - wait-for-android-emulator:
+        inputs:
+        - boot_timeout: '600'
+    - script:
+        timeout: 3000
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            # set -e
+            # debug log
+            set -x
+            echo "Disabling animations"
+            adb shell settings put global window_animation_scale 0
+            adb shell settings put global transition_animation_scale 0
+            adb shell settings put global animator_duration_scale 0
+            echo "Saving logcat logs to file"
+            ( adb logcat -v threadtime & echo $! >&3 ) 3>app/build/logcat.pid /
+            | tee app/build/adb_logcat.log 2>&1 > /dev/null
+            echo "Starting Android tests!"
+            local gradleExitStatus="0"
+            ./gradlew connected${BAMBOO_EXPORT_VARIANT}AndroidTest --info / 
+            --stacktrace --no-build-cache ${BAMBOO_EXPORT_GRADLE_TASK_ADDITIONAL_PARAMS}
+            gradleExitStatus=${PIPESTATUS[0]}
+            kill -9 $(cat app/build/logcat.pid) | true
+            if [[ ${gradleExitStatus} -gt 0 ]]; then
+              echo "Build failed for some reason, please check the logs."
+              exit 1
+            fi
+        title: Run UI tests
+    - script:
+        timeout: 60
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            # set -e
+            # debug log
+            set -x
+            # write your script here
+            echo "Grabbing device screenshot"
+            adb devices -l
+            adb shell screencap -p /sdcard/screencap.png && adb / 
+                pull /sdcard/screencap.png
+            mv screencap.png "${BITRISE_DEPLOY_DIR}"
+        is_always_run: true
+        title: Grab emulator state
+    - script:
+        title: Export test artefacts
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+            # Based on 
+            # https://devcenter.bitrise.io/testing/exporting-to-test-reports-from-custom-script-steps/
+            test_run_dir="$BITRISE_TEST_RESULT_DIR/result_dir_1"
+            mkdir "$test_run_dir"
+            # Creating the test-info.json file with the name of the test 
+            # run defined:
+            echo '{"test-name":"UI test results"}' >> 
+            / "$test_run_dir/test-info.json"
+            # Exporting test artefacts:
+            cp "$BITRISE_DEPLOY_DIR/adb_logcat.log" /
+                "$test_run_dir/adb_logcat.log" /
+                || echo "No logcat file found"
+            tar -czvf "$test_run_dir/reports.tar.gz" /
+                "$BITRISE_DEPLOY_DIR/reports" /
+                || echo "No reports folder found"
+            cp "$BITRISE_DEPLOY_DIR/screencap.png" /
+                "$test_run_dir/screencap.png" /
+                 || echo "No screencap file found"
+            cd $BITRISE_DEPLOY_DIR
+            if ls outputs/androidTest-results/connected/flavors/*/* 1>
+                / /dev/null 2>&1; then
+              for i in outputs/androidTest-results/connected/flavors/*/*; /
+              do cp "$i" "$test_run_dir/$( cut -d "/" -f 6 <<< "$i" )"; done
+            fi
+            if ls reports/androidTests/connected/flavors/*/screenshots/failures/*/* /
+            1> /dev/null 2>&1; then
+              for i in /
+              reports/androidTests/connected/flavors/*/screenshots/failures/*/*; / 
+              do cp "$i" "$test_run_dir/$( cut -d "/" -f 8 <<< /
+              "$i" )#$( cut -d "/" -f 9 <<< "$i" )"; done
+            fi
+            cd $test_run_dir
+            ls -l
+        is_always_run: true
+    - script:
+        title: Remove redundant build folders
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # debug log
+            set -x
+            rm -rf app/build/generated
+            rm -rf app/build/intermediates
+            rm -rf app/build/kotlin
+            rm -rf app/build/tmp
+        is_always_run: true
+    - deploy-to-bitrise-io:
+        inputs:
+        - is_enable_public_page: 'false'
+    - git::https://github.com/stepstone-tech/steps-deploy- /
+    to-bitrise-io.git@1.6.1:
+        inputs:
+        - is_enable_public_page: 'false'
+        - is_compress: 'true'
+    description: Main workflow.
+    meta:
+      bitrise.io:
+        stack: linux-docker-android-lts
+app:
+  envs:
+  - opts:
+      is_expand: false
+    PROJECT_LOCATION: "."
+  - opts:
+      is_expand: false
+    MODULE: app
+  - opts:
+      is_expand: false
+    VARIANT: ''
+\end{verbatim}

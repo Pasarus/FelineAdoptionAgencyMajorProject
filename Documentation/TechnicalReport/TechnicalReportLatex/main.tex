@@ -1,0 +1,202 @@
+\documentclass[11pt,a4paper]{report}
+
+% Aberstwyth MMP Project Report Template for LaTeX
+%
+% Authors: Neil Taylor (nst@aber.ac.uk) and Dr. Hannah Dee (hmd1@aber.ac.uk) 
+%
+% This has been adapted from the Leeds Thesis template and the 
+% Group Project template for Computer Science in Aberystywth University.
+% 
+% All comments and suggestions welcome.
+%
+% Template designed to be used with pdflatex: it may need alteration to
+% run with a different LaTeX engine.
+%
+% Note - this is offered as a starting point for your work. You are not 
+% required to use this template and can choose to create your own document 
+% without it.
+
+% This template is suitable for students with an engineering-style project, 
+% which will be most students in the department. If your project is a research-oriented 
+% project, look at the alternative template.
+
+% To build document on the unix command line, run four commands:
+ 
+% pdflatex mmp-report
+% bibtex mmp-report
+% pdflatex mmp-report
+% pdflatex mmp-report
+
+% you will end up with mmp-report.pdf. Before submitting, add your user ID as a prefix, 
+% e.g. abc01-mmp-report.pdf 
+\usepackage{StylesAndReferences/mmp-report}
+
+% the following packages are used for citations - You only need to include one. 
+%
+% Use the cite package if you are using the numeric style (e.g. IEEEannot). 
+% Use the natbib package if you are using the author-date style (e.g. authordate2annot). 
+% Only use one of these and comment out or remove the other one. 
+\usepackage{cite}
+%\usepackage{natbib}
+\usepackage{pdflscape}
+% Setup glossaries
+\usepackage{glossaries}
+\usepackage{longtable}
+\usepackage{tabularx}
+
+\makeglossaries
+\include{glossary}
+
+%%%% Title and Section Colours %%%%
+% Modify these values to change the colours used for title, sections and subsections.
+% Each value is a range of 0-255 in RGB colourspace.
+% Idea courtesy of discussion at 
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+% and
+% https://tex.stackexchange.com/questions/75667/change-colour-on-chapter-section-headings-lyx
+% 
+% If you prefer to have black headers, then comment out the following lines
+\definecolor{mmpTitle}{RGB}{10, 85, 145}
+\definecolor{mmpSection}{RGB}{10,85,155}
+\definecolor{mmpSubsection}{RGB}{79,129,189}
+
+\chapterfont{\color{mmpTitle}}  % sets colour of chapters
+\sectionfont{\color{mmpSection}}  % sets colour of sections 
+\subsectionfont{\color{mmpSubsection}} % sets colour subsections
+\subsubsectionfont{\color{mmpSubsection}} % sets colour subsections
+
+%%%% end of Title and Section Colours %%%%
+
+
+%%%% Report Type %%%%
+%% comment/uncomment depending on the type of report you want to generate
+\reporttype{Engineering}
+%\reporttype{Research}
+%%%% end of Report Type %%%%
+
+
+\begin{document}
+
+%TC:ignore
+
+% all of the include directives below refer to tex files
+% so \include{cover} includes cover.tex - to change the content,
+% edit the tex file
+
+\pagenumbering{roman}
+
+% This is the front page
+\include{FrontMatter/cover}                        
+
+% Set up page numbering
+\pagestyle{empty}
+
+% declarations of originality 
+\include{FrontMatter/declaration}               
+
+\include{FrontMatter/acknowledgements} % Acknowledgements
+
+\include{FrontMatter/abstract}                 % Abstract
+
+\pagenumbering{roman}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0 pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\tableofcontents   
+\newpage
+\listoffigures % comment out this line if you don't have any figures / graphics
+\newpage 
+\listoftables % comment out this line if you don't have any tables
+\newpage
+
+% Set up page numbering
+\pagenumbering{arabic}
+
+\setchapterheaderfooter
+
+%TC:endignore
+
+% include the chapters
+\include{Chapters/backgroundandobjectives}
+\include{Chapters/design}
+\include{Chapters/implementation}
+\include{Chapters/qualityassurance}
+\include{Chapters/evaluation}
+% add any additional chapters here
+
+% Setup glossary
+\setemptyheader
+\addcontentsline{toc}{chapter}{Glossary}
+\printglossaries
+\clearpage
+
+%TC:ignore
+\setemptyheader
+
+\nocite{*} % include everything from the bibliography, irrespective of whether it has been referenced.
+
+% the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography. 
+\addcontentsline{toc}{chapter}{Annotated Bibliography} % Adds References to contents page
+
+%
+% example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run. 
+%\bibliographystyle{StylesAndReferences/authordate2annot}
+\bibliographystyle{StylesAndReferences/IEEEannotU}
+\renewcommand{\bibname}{Annotated Bibliography} 
+
+\bibliography{StylesAndReferences/references} % References file
+
+
+\setemptyheader
+
+\addcontentsline{toc}{chapter}{Appendices}
+\chapter*{Appendices}
+The appendices are for additional content that is useful to support the discussion in the report. It is material that is not necessarily needed in the body of the report, but its inclusion in the appendices makes it easy to access. 
+
+For example, if you have developed a Design Specification document as part of a plan-driven approach for the project, then it would be appropriate to include that document as an appendix. In the body of your report you would highlight the most interesting aspects of the design, referring your reader to the full specification for further detail.
+
+If you have taken an agile approach to developing the project, then you may be less likely to have developed a full requirements specification. Perhaps you use stories to keep track of the functionality and the 'future conversations'. It might not be relevant to include all of those in the body of your report. Instead, you might include those in an appendix. 
+
+There is a balance to be struck between what is relevant to include in the body of your report and whether additional supporting evidence is appropriate in the appendices. Speak to your supervisor or the module coordinator if you have questions about this.
+
+\pagebreak
+
+% start the appendix - sets up different numbering
+\fancypagestyle{plain}{%
+%\fancyhf{} % clear all header and footer fields
+\fancyhead[L]{Appendix\ \thechapter}
+\fancyhead[R]{\leftmark}}
+
+\appendix
+\fancyhead[L]{Appendix\ \thechapter}
+\fancyhead[R]{\leftmark}
+\fancyhead[C]{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\fancyhead[L]{Appendix\ \thechapter}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{{\thepage} of \pageref{LastPage}}
+
+% include any appendices here
+\include{Appendices/appendixA}
+\include{Appendices/appendixB}
+\include{Appendices/appendixC}
+\include{Appendices/AppendixD}
+\include{Appendices/AppendixE}
+\include{Appendices/AppendixF}
+
+\fancypagestyle{plain}{%
+   \fancyhead{} %[C]{Annotated Bibliography}
+   \fancyfoot[C]{{\thepage} of \pageref{LastPage}} % except the center
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0pt}
+}
+
+%TC:endignore
+
+\end{document}
