@@ -1,0 +1,25 @@
+@startuml Sequence Diagram Adoption Button Click
+
+User -> CatCardInfoFragment: User clicks the "Adopt this cat!" button
+CatCardInfoFragment -> DataService: Check if user is logged in
+DataService -> CatCardInfoFragment: User is logged in
+CatCardInfoFragment -> NavController: Navigate to adoptionForm
+NavController -> AdoptionForm: Navigates to AdoptionForm
+AdoptionForm -> DataService: Request current User information
+DataService -> AdoptionForm: Current user information
+AdoptionForm -> User: Wait for user input
+User -> AdoptionForm: Fills in user information and clicks "update" button
+AdoptionForm -> DataService: Update user information from view
+DataService -> AdoptionForm: User information updated
+AdoptionForm -> NavController: Navigate to AdoptionFormConfirmation
+NavController -> AdoptionFormConfirmation: Navigate to AdoptionFormConfirmation
+AdoptionFormConfirmation -> Picasso: Retrieve image from URI
+Picasso -> AdoptionFormConfirmation: Image from URI
+AdoptionFormConfirmation -> User: Wait for user respone
+User -> AdoptionFormConfirmation: Clicks yes button
+AdoptionFormConfirmation -> Firestore: Send adoptionProcesses information
+AdoptionFormConfirmation -> NavController: Navigate to HomeFragment
+NavController -> HomeFragment: Navigates to HomeFragment
+HomeFragment -> User: Wait for user input
+
+@enduml

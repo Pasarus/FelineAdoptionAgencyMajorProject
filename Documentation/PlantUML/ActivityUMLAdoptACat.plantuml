@@ -1,0 +1,26 @@
+@startuml AdoptACat
+(*) --> "Open App"
+--> "Find a cat on the find a cat activity"
+--> "Click Adopt"
+if "Logged in"
+    --> [True]"Make application to adopt viewable by admins"
+    --> "Setup home appointment"
+    --> "Wait for home appointment"
+    if "Home Appointment"
+        --> [Success] "Admins accepts application from their account on the app"
+        --> Pay admin the adoption fee
+        --> Pick up cat
+        --> (*)
+    else
+        --> [Failure] "Click Adopt"
+    Endif
+else
+    --> [False]Ask user to login
+    if "Logged in"
+        --> [True]"Make application to adopt viewable by admins"
+    else
+        --> [False]"Click Adopt"
+    Endif
+Endif
+
+@enduml

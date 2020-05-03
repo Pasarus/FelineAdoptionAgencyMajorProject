@@ -188,13 +188,14 @@ class DataService private constructor() {
 
         database.collection("users").document(user!!.uid).get().addOnSuccessListener { document ->
             if (document != null) {
-                name.setText(document.get("name").toString())
-                addressLineOne.setText(document.get("addressLineOne").toString())
-                addressLineTwo.setText(document.get("addressLineTwo").toString())
-                addressLineThree.setText(document.get("addressLineThree").toString())
-                postCode.setText(document.get("postCode").toString())
-                county.setText(document.get("county").toString())
-                phone.setText(document.get("mobileNumber").toString())
+                val user = document.toObject<User>()
+                name.setText(user?.name ?: this.user!!.displayName)
+                addressLineOne.setText(user?.addressLineOne ?: "")
+                addressLineTwo.setText(user?.addressLineTwo ?: "")
+                addressLineThree.setText(user?.addressLineThree ?: "")
+                postCode.setText(user?.postCode ?: "")
+                county.setText(user?.county ?: "")
+                phone.setText(user?.mobileNumber ?: this.user!!.phoneNumber)
             } else {
                 name.setText(user!!.displayName)
                 phone.setText(user!!.phoneNumber)
