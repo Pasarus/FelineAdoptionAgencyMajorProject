@@ -10,6 +10,8 @@ The Feline Adoption Agency app is my Major Project for the end of my Degree.
 In the root directory there are 3 folders:
 - Client
   - Where a Android Studio project is present that contains the contents of a not compiled application and all the code
+  - Open this directory in Android Studio to easily view all Code, Unit Tests and Instrumentation Tests
+  - The gradle should work correctly and a build should be feasible on a compatible computer
 - Documentation
   - Contains the Project Outline, the report images, PlantUML, prototype Copy, and the technical report folder. The technical report contains a technical report copy and the Latex used to compile the report.
 - Server
