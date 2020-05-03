@@ -20,7 +20,7 @@
     <string name="cat_finder">Cat Finder</string>
     <string name="saved_cats">Saved Cats</string>
     <string name="settings">Settings</string>
-    <string name="versionString">Version:</string>
+    <string name="versionString">Version: 1.0 (Release)</string>
     <string name="login">Login</string>
     <string name="about">About</string>
     <string name="help">Help</string>
@@ -44,7 +44,7 @@
     <string name="aboutFirstParagraph">This application is meant as a demonstration of how the adoption of a cat could be fully integrated into an app via a backend database and user verification system. This mobile application was created under an Apache 2.0 License (https://www.apache.org/licenses/LICENSE-2.0)</string>
     <string name="copyrightInformation">Whilst use of this applications source code is free to everyone, the explicit copyright is owned by the sole author Samuel Jones (samjones714@gmail.com)</string>
     <string name="openSourceLocation">It is distributed open source at https://github.com/Pasarus/FelineAdoptionAgencyMajorProject</string>
-    <string name="materialDesignPermissions">As part of this application certain icons have been used, these Material Design based icon are created by the community and are distrubuted under SIL Open Font License 1.1 (https://opensource.org/licenses/OFL-1.1).</string>
+    <string name="materialDesignPermissions">As part of this application certain icons have been used, these Material Design based icon are created by the community and are distributed under SIL Open Font License 1.1 (https://opensource.org/licenses/OFL-1.1).</string>
     <string name="materialDesignGoogleIcons">The icons created by google as part of Material Design are distributed under an Apache 2.0 License (http://www.apache.org/licenses/LICENSE-2.0).</string>
     <string name="templarianPermissions">The following icons, were made under SIL Open Font License 1.1 by @Templarian on Twitter:</string>
     <string name="cat_logo_material_design_icon">Cat Logo Material Design Icon</string>
@@ -112,7 +112,7 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="adoption_status_change_description">Notifies a user of any change to their adoptions</string>
     <string name="adoption_news_description">Any news from the adoption app that you may need to know</string>
-    <string name="newly_listed_cat_description">When a new cat is listed, recieve a notification</string>
+    <string name="newly_listed_cat_description">When a new cat is listed, receive a notification</string>
     <string name="logout">logout</string>
     <string name="search">search</string>
 </resources>
